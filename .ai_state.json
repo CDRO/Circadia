@@ -3,10 +3,10 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-07T11:35:00Z",
+  "updatedAt": "2026-09-07T12:00:00Z",
   "updatedBy": "gemini-coding-agent",
-  "currentMilestone": "M1",
-  "currentTask": "T-110",
+  "currentMilestone": "M2",
+  "currentTask": "T-201",
   "github": {
     "milestoneNumber": 2,
     "milestoneTitle": "M1 - Datenkern",
@@ -23,14 +23,14 @@
       "acceptanceVerified": true
     },
     "M1": {
-      "status": "in_progress",
+      "status": "completed",
       "startedAt": "2026-09-04T09:00:00Z",
-      "completedAt": null,
-      "acceptanceVerified": false
+      "completedAt": "2026-09-07T11:55:00Z",
+      "acceptanceVerified": true
     },
     "M2": {
-      "status": "pending",
-      "startedAt": null,
+      "status": "in_progress",
+      "startedAt": "2026-09-07T12:00:00Z",
       "completedAt": null,
       "acceptanceVerified": false
     },
@@ -455,6 +455,18 @@
       ],
       "summary": "DeriveIntervalsUseCase implementiert, Tests 1-7 gruen.",
       "problems": "Faelle 8 und 9 rot: Zeitumstellung falsch berechnet. T-107 bleibt in_progress."
+    },
+    {
+      "at": "2026-09-07T12:00:00Z",
+      "tasksCompleted": [
+        "T-107",
+        "T-108",
+        "T-109",
+        "T-110",
+        "T-005"
+      ],
+      "summary": "M1 abgeschlossen. DST Handling gefixt, Repositories und DataStore implementiert, CI workflow hinzugefuegt.",
+      "problems": ""
     }
   ],
   "masterPlanFile": "docs/artifacts/MASTER_PLAN.md"

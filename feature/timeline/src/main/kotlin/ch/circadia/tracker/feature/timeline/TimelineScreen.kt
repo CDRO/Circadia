@@ -2,6 +2,9 @@ package ch.circadia.tracker.feature.timeline
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ViewAgenda
+import androidx.compose.material.icons.filled.ViewStream
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,7 +25,18 @@ fun TimelineScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Auswertung") }
+                title = { Text("Auswertung") },
+                actions = {
+                    val state = uiState
+                    if (state is TimelineUiState.Content) {
+                        IconButton(onClick = { viewModel.setUseDoublePlot(!state.useDoublePlot) }) {
+                            Icon(
+                                imageVector = if (state.useDoublePlot) Icons.Default.ViewAgenda else Icons.Default.ViewStream,
+                                contentDescription = if (state.useDoublePlot) "Single Plot" else "Double Plot"
+                            )
+                        }
+                    }
+                }
             )
         }
     ) { padding ->

@@ -29,6 +29,8 @@ fun ActogramRenderer(
     days: List<ActogramDay>,
     modifier: Modifier = Modifier
 ) {
+    if (days.isEmpty()) return
+
     val rowHeight = 48.dp
     val labelWidth = 60.dp
     val totalHeight = rowHeight * days.size
@@ -80,7 +82,7 @@ fun ActogramRenderer(
                 
                 if (right > left) {
                     drawRect(
-                        color = Color.Black, // TODO: Use person color
+                        color = Color.Black,
                         topLeft = Offset(left, top + 8.dp.toPx()),
                         size = Size(right - left, rowHeightPx - 16.dp.toPx())
                     )
@@ -88,8 +90,15 @@ fun ActogramRenderer(
             }
         }
         
-        // Draw vertical time markers (6h, 12h, 18h)
-        listOf(0.25f, 0.5f, 0.75f).forEach { ratio ->
+        // Draw vertical time markers
+        val isDoublePlot = (days.firstOrNull()?.endTimeUtc ?: 0L) - (days.firstOrNull()?.startTimeUtc ?: 0L) > 25 * 3600 * 1000
+        val markerRatios = if (isDoublePlot) {
+            listOf(0.125f, 0.25f, 0.375f, 0.5f, 0.625f, 0.75f, 0.875f)
+        } else {
+            listOf(0.25f, 0.5f, 0.75f)
+        }
+
+        markerRatios.forEach { ratio ->
             val x = labelWidthPx + ratio * chartWidth
             drawLine(
                 color = ChartColors.Axis,

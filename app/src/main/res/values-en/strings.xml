@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Circadia</string>
+    <string name="persons_title">Persons</string>
+    <string name="persons_empty">No persons available.</string>
+    <string name="persons_add_title">Add Person</string>
+    <string name="persons_name_label">Name</string>
+    <string name="persons_save">Save</string>
+    <string name="persons_cancel">Cancel</string>
+    <string name="persons_add_desc">Add</string>
+    <string name="onboarding_welcome">Welcome to Circadia</string>
+    <string name="onboarding_name_prompt">Your Name</string>
+    <string name="onboarding_start">Start</string>
+</resources>

@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class RecordStateEventUseCaseTest {
@@ -22,6 +21,7 @@ class RecordStateEventUseCaseTest {
         override suspend fun getLatestEvent(personId: PersonId): StateEvent? = events.lastOrNull { it.personId == personId }
         override suspend fun addEvent(event: StateEvent) { events.add(event) }
         override suspend fun voidEvent(eventId: String, voidedAt: Long) {}
+        override fun getEventChain(eventId: String): Flow<List<StateEvent>> = emptyFlow()
     }
 
     private val useCase = RecordStateEventUseCase(fakeRepo, fakeClock)

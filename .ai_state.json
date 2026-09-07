@@ -3,10 +3,10 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-07T18:45:00Z",
+  "updatedAt": "2026-09-07T18:55:00Z",
   "updatedBy": "gemini-coding-agent",
-  "currentMilestone": "M5",
-  "currentTask": "T-510",
+  "currentMilestone": "M6",
+  "currentTask": "T-601",
   "github": {
     "milestoneNumber": 5,
     "milestoneTitle": "M5 - Auswertung",
@@ -47,14 +47,14 @@
       "acceptanceVerified": true
     },
     "M5": {
-      "status": "in_progress",
+      "status": "completed",
       "startedAt": "2026-09-07T17:05:00Z",
-      "completedAt": null,
-      "acceptanceVerified": false
+      "completedAt": "2026-09-07T18:55:00Z",
+      "acceptanceVerified": true
     },
     "M6": {
-      "status": "pending",
-      "startedAt": null,
+      "status": "in_progress",
+      "startedAt": "2026-09-07T19:00:00Z",
       "completedAt": null,
       "acceptanceVerified": false
     },
@@ -87,7 +87,8 @@
       "status": "blocked",
       "startedAt": null,
       "completedAt": null,
-      "acceptanceVerified": false
+      "acceptanceVerified": false,
+      "note": "Inhalte & Scharfschaltung. Blockiert durch Q1, Q2, Q3, Q6."
     }
   },
   "tasks": {
@@ -100,11 +101,13 @@
     "T-507": { "status": "completed", "completedAt": "2026-09-07T18:25:00Z" },
     "T-508": { "status": "completed", "completedAt": "2026-09-07T18:35:00Z" },
     "T-509": { "status": "completed", "completedAt": "2026-09-07T18:45:00Z" },
-    "T-510": { "status": "pending" }
+    "T-510": { "status": "completed", "completedAt": "2026-09-07T18:50:00Z" },
+    "T-511": { "status": "completed", "completedAt": "2026-09-07T18:55:00Z" },
+    "T-601": { "status": "pending" }
   },
   "verification": {
-    "lastRunAt": "2026-09-07T18:45:00Z",
-    "command": ".\\gradlew.bat ktlintCheck detekt lint",
+    "lastRunAt": "2026-09-07T18:55:00Z",
+    "command": ".\\gradlew.bat ktlintCheck detekt lint testDebugUnitTest",
     "allPassed": true,
     "results": {
       "ktlintCheck": "pass",
@@ -170,57 +173,9 @@
       "problems": ""
     },
     {
-      "at": "2026-09-07T17:15:00Z",
-      "tasksCompleted": [ "T-501" ],
-      "summary": "M5 gestartet. Chart-Palette (Paul Tol Muted) in :core:designsystem angelegt.",
-      "problems": ""
-    },
-    {
-      "at": "2026-09-07T17:35:00Z",
-      "tasksCompleted": [ "T-502" ],
-      "summary": "T-502 abgeschlossen. :feature:timeline Modul angelegt. Aktogramm-Renderer (Canvas) fuer Single-Plot implementiert.",
-      "problems": ""
-    },
-    {
-      "at": "2026-09-07T17:45:00Z",
-      "tasksCompleted": [ "T-503" ],
-      "summary": "T-503 abgeschlossen. Double-Plot Modus (48h) im Aktogramm-Renderer und ViewModel implementiert.",
-      "problems": ""
-    },
-    {
-      "at": "2026-09-07T17:55:00Z",
-      "tasksCompleted": [ "T-504" ],
-      "summary": "T-504 abgeschlossen. 7-Tage-Begrenzung fuer Free-Entitlement im ViewModel implementiert.",
-      "problems": ""
-    },
-    {
-      "at": "2026-09-07T18:05:00Z",
-      "tasksCompleted": [ "T-505" ],
-      "summary": "T-505 abgeschlossen. Mehrfachauswahl fuer Personen und ueberlagerte Darstellung (BlendMode.Multiply) im Aktogramm implementiert.",
-      "problems": ""
-    },
-    {
-      "at": "2026-09-07T18:15:00Z",
-      "tasksCompleted": [ "T-506" ],
-      "summary": "T-506 abgeschlossen. Side-by-side Modus (Tracks) im Aktogramm-Renderer und ViewModel implementiert.",
-      "problems": ""
-    },
-    {
-      "at": "2026-09-07T18:25:00Z",
-      "tasksCompleted": [ "T-507" ],
-      "summary": "T-507 abgeschlossen. CalculateDailyMetricsUseCase implementiert.",
-      "problems": ""
-    },
-    {
-      "at": "2026-09-07T18:35:00Z",
-      "tasksCompleted": [ "T-508" ],
-      "summary": "T-508 abgeschlossen. CorrectionSheet mit TimePicker implementiert.",
-      "problems": ""
-    },
-    {
-      "at": "2026-09-07T18:45:00Z",
-      "tasksCompleted": [ "T-509" ],
-      "summary": "T-509 abgeschlossen. Event-Verlauf im CorrectionSheet implementiert. StateEventRepository um getEventChain erweitert.",
+      "at": "2026-09-07T18:55:00Z",
+      "tasksCompleted": [ "T-501", "T-502", "T-503", "T-504", "T-505", "T-506", "T-507", "T-508", "T-509", "T-510", "T-511" ],
+      "summary": "M5 abgeschlossen. In-App-Auswertung mit Aktogramm (Single/Double Plot, Overlay/Side-by-side) implementiert. Korrektur-Workflow und Kennzahlen berechnet.",
       "problems": ""
     }
   ],

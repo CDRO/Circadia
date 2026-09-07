@@ -19,6 +19,7 @@ interface StateEventRepository {
     suspend fun getLatestEvent(personId: PersonId): StateEvent?
     suspend fun addEvent(event: StateEvent)
     suspend fun voidEvent(eventId: String, voidedAt: Long)
+    fun getEventChain(eventId: String): Flow<List<StateEvent>>
 }
 
 interface WidgetBindingRepository {

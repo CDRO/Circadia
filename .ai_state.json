@@ -3,10 +3,10 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-07T18:35:00Z",
+  "updatedAt": "2026-09-07T18:45:00Z",
   "updatedBy": "gemini-coding-agent",
   "currentMilestone": "M5",
-  "currentTask": "T-509",
+  "currentTask": "T-510",
   "github": {
     "milestoneNumber": 5,
     "milestoneTitle": "M5 - Auswertung",
@@ -99,10 +99,11 @@
     "T-506": { "status": "completed", "completedAt": "2026-09-07T18:15:00Z" },
     "T-507": { "status": "completed", "completedAt": "2026-09-07T18:25:00Z" },
     "T-508": { "status": "completed", "completedAt": "2026-09-07T18:35:00Z" },
-    "T-509": { "status": "pending" }
+    "T-509": { "status": "completed", "completedAt": "2026-09-07T18:45:00Z" },
+    "T-510": { "status": "pending" }
   },
   "verification": {
-    "lastRunAt": "2026-09-07T18:35:00Z",
+    "lastRunAt": "2026-09-07T18:45:00Z",
     "command": ".\\gradlew.bat ktlintCheck detekt lint",
     "allPassed": true,
     "results": {
@@ -213,7 +214,13 @@
     {
       "at": "2026-09-07T18:35:00Z",
       "tasksCompleted": [ "T-508" ],
-      "summary": "T-508 abgeschlossen. CorrectionSheet mit TimePicker implementiert. Logik fuer CORRECTION-Events und Voiding in ViewModel integriert. Interval clickable gemacht.",
+      "summary": "T-508 abgeschlossen. CorrectionSheet mit TimePicker implementiert.",
+      "problems": ""
+    },
+    {
+      "at": "2026-09-07T18:45:00Z",
+      "tasksCompleted": [ "T-509" ],
+      "summary": "T-509 abgeschlossen. Event-Verlauf im CorrectionSheet implementiert. StateEventRepository um getEventChain erweitert.",
       "problems": ""
     }
   ],

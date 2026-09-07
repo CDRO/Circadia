@@ -185,10 +185,12 @@ class TimelineViewModel @Inject constructor(
                 note = note
             )
             stateEventRepository.addEvent(correction)
-            // Void the original event (P2: append-only, but we mark as voided)
             stateEventRepository.voidEvent(interval.startEventId, System.currentTimeMillis())
         }
     }
+
+    fun getEventHistory(eventId: String): Flow<List<StateEvent>> =
+        stateEventRepository.getEventChain(eventId)
 }
 
 private data class DataSnapshot(

@@ -4,6 +4,7 @@ import android.app.TimePickerDialog
 import android.text.format.DateFormat
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ViewAgenda
 import androidx.compose.material.icons.filled.ViewColumn
@@ -21,6 +22,7 @@ import java.time.Instant
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -114,8 +116,11 @@ fun TimelineScreen(
             onDismissRequest = { selectedInterval = null },
             sheetState = sheetState
         ) {
+            val history by viewModel.getEventHistory(selectedInterval!!.startEventId).collectAsState(initial = emptyList())
+            
             CorrectionSheetContent(
                 interval = selectedInterval!!,
+                history = history,
                 onDismiss = { selectedInterval = null },
                 onSave = { time, note ->
                     viewModel.saveCorrection(selectedInterval!!, time, note)
@@ -129,6 +134,7 @@ fun TimelineScreen(
 @Composable
 fun CorrectionSheetContent(
     interval: Interval,
+    history: List<StateEvent>,
     onDismiss: () -> Unit,
     onSave: (Long, String?) -> Unit
 ) {
@@ -164,6 +170,15 @@ fun CorrectionSheetContent(
             label = { Text("Notiz") },
             modifier = Modifier.fillMaxWidth()
         )
+        
+        if (history.size > 1) {
+            Spacer(modifier = Modifier.height(24.dp))
+            Text("Verlauf:", style = MaterialTheme.typography.titleSmall)
+            history.forEach { event ->
+                val time = Instant.ofEpochMilli(event.occurredAtUtcMillis).atZone(ZoneId.of(event.timeZoneId)).format(DateTimeFormatter.ofPattern("HH:mm"))
+                Text("- $time (${event.source}) ${event.note ?: ""}", style = MaterialTheme.typography.bodySmall)
+            }
+        }
         
         Spacer(modifier = Modifier.height(32.dp))
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {

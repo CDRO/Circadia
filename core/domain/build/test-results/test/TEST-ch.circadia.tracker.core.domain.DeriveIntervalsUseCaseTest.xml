@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ch.circadia.tracker.core.domain.DeriveIntervalsUseCaseTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-09-07T08:43:47.017Z" hostname="TIZIANGAMINLAPT" time="0.073">
+  <properties/>
+  <testcase name="einzelnes Event ergibt offenes Intervall()" classname="ch.circadia.tracker.core.domain.DeriveIntervalsUseCaseTest" time="0.022"/>
+  <testcase name="Intervall ueber Mitternacht bleibt zusammen()" classname="ch.circadia.tracker.core.domain.DeriveIntervalsUseCaseTest" time="0.005"/>
+  <testcase name="Intervall ueber Sommerzeitumstellung behaelt echte Dauer()" classname="ch.circadia.tracker.core.domain.DeriveIntervalsUseCaseTest" time="0.004"/>
+  <testcase name="Reise über Zeitzonen zwischen zwei Events behaelt echte Dauer()" classname="ch.circadia.tracker.core.domain.DeriveIntervalsUseCaseTest" time="0.01"/>
+  <testcase name="Korrektur ersetzt Original ohne es zu loeschen()" classname="ch.circadia.tracker.core.domain.DeriveIntervalsUseCaseTest" time="0.001"/>
+  <testcase name="zwei gleiche Zustaende ergeben ein Intervall()" classname="ch.circadia.tracker.core.domain.DeriveIntervalsUseCaseTest" time="0.0"/>
+  <testcase name="rueckdatiertes Event wird korrekt einsortiert()" classname="ch.circadia.tracker.core.domain.DeriveIntervalsUseCaseTest" time="0.001"/>
+  <testcase name="Intervall ueber Winterzeitumstellung behaelt echte Dauer()" classname="ch.circadia.tracker.core.domain.DeriveIntervalsUseCaseTest" time="0.001"/>
+  <testcase name="leere Eventliste ergibt leeres Ergebnis()" classname="ch.circadia.tracker.core.domain.DeriveIntervalsUseCaseTest" time="0.002"/>
+  <testcase name="Zwei Events in derselben Minute haben deterministische Reihenfolge()" classname="ch.circadia.tracker.core.domain.DeriveIntervalsUseCaseTest" time="0.0"/>
+  <testcase name="voidedes Event wird ignoriert()" classname="ch.circadia.tracker.core.domain.DeriveIntervalsUseCaseTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

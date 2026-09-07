@@ -3,9 +3,7 @@ package ch.circadia.tracker.feature.timeline
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.circadia.tracker.core.domain.*
-import ch.circadia.tracker.core.model.Interval
-import ch.circadia.tracker.core.model.Person
-import ch.circadia.tracker.core.model.PersonId
+import ch.circadia.tracker.core.model.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
@@ -20,7 +18,8 @@ sealed interface TimelineUiState {
         val persons: List<Person>,
         val selectedPersonIds: Set<PersonId>,
         val actogramDays: List<ActogramDay>,
-        val useDoublePlot: Boolean
+        val useDoublePlot: Boolean,
+        val isLimited: Boolean
     ) : TimelineUiState
     data object Empty : TimelineUiState
     data class Error(val message: String) : TimelineUiState
@@ -32,6 +31,7 @@ class TimelineViewModel @Inject constructor(
     private val personRepository: PersonRepository,
     private val stateEventRepository: StateEventRepository,
     private val settingsRepository: SettingsRepository,
+    private val entitlementRepository: EntitlementRepository,
     private val deriveIntervalsUseCase: DeriveIntervalsUseCase
 ) : ViewModel() {
 
@@ -41,9 +41,10 @@ class TimelineViewModel @Inject constructor(
         personRepository.getPersons(),
         _selectedPersonIds,
         settingsRepository.getDayBoundary(),
-        settingsRepository.getUseDoublePlot()
-    ) { persons, selectedIds, dayBoundary, useDoublePlot ->
-        DataSnapshot(persons, selectedIds, dayBoundary, useDoublePlot)
+        settingsRepository.getUseDoublePlot(),
+        entitlementRepository.current()
+    ) { persons, selectedIds, dayBoundary, useDoublePlot, entitlement ->
+        DataSnapshot(persons, selectedIds, dayBoundary, useDoublePlot, entitlement)
     }.flatMapLatest { snapshot ->
         if (snapshot.persons.isEmpty()) {
             flowOf(TimelineUiState.Empty)
@@ -53,13 +54,19 @@ class TimelineViewModel @Inject constructor(
             
             stateEventRepository.getEvents(personId).map { events ->
                 val intervals = deriveIntervalsUseCase(events, System.currentTimeMillis())
-                val days = prepareActogramDays(intervals, snapshot.dayBoundary, snapshot.useDoublePlot)
+                var days = prepareActogramDays(intervals, snapshot.dayBoundary, snapshot.useDoublePlot)
+                
+                val isLimited = snapshot.entitlement.source == EntitlementSource.FREE
+                if (isLimited) {
+                    days = days.take(7)
+                }
                 
                 TimelineUiState.Content(
                     persons = snapshot.persons,
                     selectedPersonIds = effectiveSelectedIds,
                     actogramDays = days,
-                    useDoublePlot = snapshot.useDoublePlot
+                    useDoublePlot = snapshot.useDoublePlot,
+                    isLimited = isLimited
                 )
             }
         }
@@ -125,5 +132,6 @@ private data class DataSnapshot(
     val persons: List<Person>,
     val selectedPersonIds: Set<PersonId>,
     val dayBoundary: java.time.LocalTime,
-    val useDoublePlot: Boolean
+    val useDoublePlot: Boolean,
+    val entitlement: Entitlement
 )

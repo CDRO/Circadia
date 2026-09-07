@@ -53,6 +53,23 @@ fun TimelineScreen(
                             onPersonSelected = { viewModel.selectPerson(it.id) }
                         )
                         
+                        if (state.isLimited) {
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(8.dp),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                                )
+                            ) {
+                                Text(
+                                    text = "Kostenlose Version: Nur die letzten 7 Tage sichtbar.",
+                                    modifier = Modifier.padding(16.dp),
+                                    style = MaterialTheme.typography.bodySmall
+                                )
+                            }
+                        }
+                        
                         LazyColumn(modifier = Modifier.fillMaxSize()) {
                             item {
                                 ActogramRenderer(days = state.actogramDays)

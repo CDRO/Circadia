@@ -27,7 +27,8 @@ data class ActogramDay(
 @Composable
 fun ActogramRenderer(
     days: List<ActogramDay>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    zoom: Float = 1f // T-504: prepared for zooming
 ) {
     if (days.isEmpty()) return
 
@@ -42,7 +43,7 @@ fun ActogramRenderer(
             .fillMaxWidth()
             .height(totalHeight)
     ) {
-        val width = size.width
+        val width = size.width * zoom
         val rowHeightPx = rowHeight.toPx()
         val labelWidthPx = labelWidth.toPx()
         val chartWidth = width - labelWidthPx

@@ -5,8 +5,8 @@
   "backlogFile": "docs/artifacts/TASKS.md",
   "updatedAt": "2026-09-07T12:00:00Z",
   "updatedBy": "gemini-coding-agent",
-  "currentMilestone": "M2",
-  "currentTask": "T-201",
+  "currentMilestone": "M3",
+  "currentTask": "T-301",
   "github": {
     "milestoneNumber": 2,
     "milestoneTitle": "M1 - Datenkern",
@@ -29,14 +29,14 @@
       "acceptanceVerified": true
     },
     "M2": {
-      "status": "in_progress",
+      "status": "completed",
       "startedAt": "2026-09-07T12:00:00Z",
-      "completedAt": null,
-      "acceptanceVerified": false
+      "completedAt": "2026-09-07T12:10:00Z",
+      "acceptanceVerified": true
     },
     "M3": {
-      "status": "pending",
-      "startedAt": null,
+      "status": "in_progress",
+      "startedAt": "2026-09-07T12:15:00Z",
       "completedAt": null,
       "acceptanceVerified": false
     },
@@ -212,6 +212,26 @@
     },
     "T-010": {
       "status": "pending"
+    },
+    "T-201": {
+      "status": "completed",
+      "completedAt": "2026-09-07T12:10:00Z"
+    },
+    "T-202": {
+      "status": "completed",
+      "completedAt": "2026-09-07T12:10:00Z"
+    },
+    "T-203": {
+      "status": "completed",
+      "completedAt": "2026-09-07T12:10:00Z"
+    },
+    "T-204": {
+      "status": "completed",
+      "completedAt": "2026-09-07T12:10:00Z"
+    },
+    "T-205": {
+      "status": "completed",
+      "completedAt": "2026-09-07T12:10:00Z"
     }
   },
   "verification": {
@@ -466,6 +486,18 @@
         "T-005"
       ],
       "summary": "M1 abgeschlossen. DST Handling gefixt, Repositories und DataStore implementiert, CI workflow hinzugefuegt.",
+      "problems": ""
+    },
+    {
+      "at": "2026-09-07T12:15:00Z",
+      "tasksCompleted": [
+        "T-201",
+        "T-202",
+        "T-203",
+        "T-204",
+        "T-205"
+      ],
+      "summary": "M2 abgeschlossen. Personenverwaltung und Onboarding UI implementiert. DesignSystem und Compose-Support hinzugefuegt.",
       "problems": ""
     }
   ],

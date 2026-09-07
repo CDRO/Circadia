@@ -37,6 +37,7 @@ data class Interval(
     val isOpen: Boolean,
     val startZoneId: String,
     val endZoneId: String,
+    val startEventId: String
 )
 
 enum class EntitlementSource { FREE, SUBSCRIPTION, RESEARCH }
@@ -44,4 +45,14 @@ enum class EntitlementSource { FREE, SUBSCRIPTION, RESEARCH }
 data class Entitlement(
     val source: EntitlementSource,
     val validUntilUtcMillis: Long?,
+)
+
+data class DailyMetrics(
+    val personId: PersonId,
+    val date: java.time.LocalDate,
+    val totalSleepMillis: Long,
+    val sleepEpisodes: Int,
+    val maxAwakeMillis: Long,
+    val sleepStartUtcMillis: Long?,
+    val sleepEndUtcMillis: Long?
 )

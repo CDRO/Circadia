@@ -38,6 +38,12 @@ interface StateEventDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertEvent(event: StateEventEntity)
 
+    @Query("SELECT * FROM state_events WHERE id = :eventId")
+    suspend fun getEvent(eventId: String): StateEventEntity?
+
+    @Query("SELECT * FROM state_events WHERE person_id = :personId")
+    fun getAllEvents(personId: String): Flow<List<StateEventEntity>>
+
     @Query("UPDATE state_events SET voided_at = :voidedAt WHERE id = :eventId")
     suspend fun voidEvent(eventId: String, voidedAt: Long)
 }

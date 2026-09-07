@@ -19,6 +19,7 @@ interface StateEventRepository {
     suspend fun getLatestEvent(personId: PersonId): StateEvent?
     suspend fun addEvent(event: StateEvent)
     suspend fun voidEvent(eventId: String, voidedAt: Long)
+    fun getEventChain(eventId: String): Flow<List<StateEvent>>
 }
 
 interface WidgetBindingRepository {
@@ -37,4 +38,6 @@ interface SettingsRepository {
     suspend fun setDayBoundary(time: java.time.LocalTime)
     fun getUseDoublePlot(): Flow<Boolean>
     suspend fun setUseDoublePlot(use: Boolean)
+    fun getUseSideBySide(): Flow<Boolean>
+    suspend fun setUseSideBySide(use: Boolean)
 }

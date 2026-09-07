@@ -4,8 +4,7 @@ import ch.circadia.tracker.core.database.StateEventDao
 import ch.circadia.tracker.core.domain.StateEventRepository
 import ch.circadia.tracker.core.model.PersonId
 import ch.circadia.tracker.core.model.StateEvent
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 class OfflineStateEventRepository(
     private val stateEventDao: StateEventDao
@@ -24,5 +23,23 @@ class OfflineStateEventRepository(
 
     override suspend fun voidEvent(eventId: String, voidedAt: Long) {
         stateEventDao.voidEvent(eventId, voidedAt)
+    }
+
+    override fun getEventChain(eventId: String): Flow<List<StateEvent>> = flow {
+        // Fetch the initial event to know the personId
+        val initialEvent = stateEventDao.getEvent(eventId)?.toDomain() ?: return@flow
+        
+        stateEventDao.getAllEvents(initialEvent.personId.value).map { list ->
+            val all = list.map { it.toDomain() }
+            val chain = mutableListOf<StateEvent>()
+            
+            var current: StateEvent? = all.find { it.id == eventId }
+            while (current != null) {
+                chain.add(current)
+                val nextId = current.supersedesEventId
+                current = if (nextId != null) all.find { it.id == nextId } else null
+            }
+            chain.toList()
+        }.collect { emit(it) }
     }
 }

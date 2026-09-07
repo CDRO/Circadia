@@ -11,13 +11,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import ch.circadia.tracker.core.model.Person
 import ch.circadia.tracker.core.designsystem.R as DesignR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonsScreen(
-    viewModel: PersonsViewModel
+    viewModel: PersonsViewModel = hiltViewModel()
 ) {
     val persons by viewModel.persons.collectAsState()
     var showDialog by remember { mutableStateOf(false) }

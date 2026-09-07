@@ -3,17 +3,17 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-07T14:15:00Z",
+  "updatedAt": "2026-09-07T18:55:00Z",
   "updatedBy": "gemini-coding-agent",
-  "currentMilestone": "M4",
-  "currentTask": "T-409",
+  "currentMilestone": "M6",
+  "currentTask": "T-601",
   "github": {
-    "milestoneNumber": 4,
-    "milestoneTitle": "M4 - Widget: Zahlenräder",
-    "issueNumber": 7,
-    "prNumber": 8,
-    "branch": "milestone/M4-widget-raeder",
-    "artifactsDir": "docs/artifacts/milestones/M4-widget-raeder/"
+    "milestoneNumber": 5,
+    "milestoneTitle": "M5 - Auswertung",
+    "issueNumber": 9,
+    "prNumber": 10,
+    "branch": "milestone/M5-auswertung",
+    "artifactsDir": "docs/artifacts/milestones/M5-auswertung/"
   },
   "milestones": {
     "M0": {
@@ -47,14 +47,14 @@
       "acceptanceVerified": true
     },
     "M5": {
-      "status": "in_progress",
-      "startedAt": "2026-09-07T14:15:00Z",
-      "completedAt": null,
-      "acceptanceVerified": false
+      "status": "completed",
+      "startedAt": "2026-09-07T17:05:00Z",
+      "completedAt": "2026-09-07T18:55:00Z",
+      "acceptanceVerified": true
     },
     "M6": {
-      "status": "pending",
-      "startedAt": null,
+      "status": "in_progress",
+      "startedAt": "2026-09-07T19:00:00Z",
       "completedAt": null,
       "acceptanceVerified": false
     },
@@ -92,20 +92,22 @@
     }
   },
   "tasks": {
-    "T-401": { "status": "completed", "completedAt": "2026-09-07T14:10:00Z" },
-    "T-402": { "status": "completed", "completedAt": "2026-09-07T14:10:00Z" },
-    "T-403": { "status": "completed", "completedAt": "2026-09-07T14:10:00Z" },
-    "T-404": { "status": "completed", "completedAt": "2026-09-07T14:10:00Z" },
-    "T-405": { "status": "completed", "completedAt": "2026-09-07T14:10:00Z" },
-    "T-406": { "status": "completed", "completedAt": "2026-09-07T14:10:00Z" },
-    "T-407": { "status": "completed", "completedAt": "2026-09-07T14:10:00Z" },
-    "T-408": { "status": "completed", "completedAt": "2026-09-07T14:10:00Z" },
-    "T-409": { "status": "completed", "completedAt": "2026-09-07T14:15:00Z" },
-    "T-501": { "status": "pending" }
+    "T-501": { "status": "completed", "completedAt": "2026-09-07T17:15:00Z" },
+    "T-502": { "status": "completed", "completedAt": "2026-09-07T17:35:00Z" },
+    "T-503": { "status": "completed", "completedAt": "2026-09-07T17:45:00Z" },
+    "T-504": { "status": "completed", "completedAt": "2026-09-07T17:55:00Z" },
+    "T-505": { "status": "completed", "completedAt": "2026-09-07T18:05:00Z" },
+    "T-506": { "status": "completed", "completedAt": "2026-09-07T18:15:00Z" },
+    "T-507": { "status": "completed", "completedAt": "2026-09-07T18:25:00Z" },
+    "T-508": { "status": "completed", "completedAt": "2026-09-07T18:35:00Z" },
+    "T-509": { "status": "completed", "completedAt": "2026-09-07T18:45:00Z" },
+    "T-510": { "status": "completed", "completedAt": "2026-09-07T18:50:00Z" },
+    "T-511": { "status": "completed", "completedAt": "2026-09-07T18:55:00Z" },
+    "T-601": { "status": "pending" }
   },
   "verification": {
-    "lastRunAt": "2026-09-07T14:15:00Z",
-    "command": ".\\gradlew.bat :widget:test",
+    "lastRunAt": "2026-09-07T18:55:00Z",
+    "command": ".\\gradlew.bat ktlintCheck detekt lint testDebugUnitTest",
     "allPassed": true,
     "results": {
       "ktlintCheck": "pass",
@@ -118,38 +120,10 @@
     "failureSummary": null
   },
   "mandatoryTestCases": {
-    "1": { "status": "passing" },
-    "2": { "status": "passing" },
-    "3": { "status": "passing" },
-    "4": { "status": "passing" },
-    "5": { "status": "passing" },
-    "6": { "status": "passing" },
-    "7": { "status": "passing" },
-    "8": { "status": "passing" },
-    "9": { "status": "passing" },
-    "10": { "status": "passing" },
-    "11": { "status": "passing" },
-    "12": { "status": "passing" },
-    "13": { "status": "passing" },
-    "14": { "status": "passing" },
-    "15": { "status": "passing" },
-    "16": { "status": "passing" },
-    "17": { "status": "passing" },
-    "18": { "status": "passing" },
-    "19": { "status": "passing" },
-    "20": { "status": "passing" }
-  },
-  "reviewLoop": {
-    "milestone": "M4",
-    "iteration": 3,
-    "consecutiveNoFindings": 3,
-    "endedEarly": true,
-    "endedEarlyReason": "Iterations 1, 2, 9 complete with no further findings.",
-    "iterations": [
-      { "number": 1, "focus": "Correctness", "finding": "none" },
-      { "number": 2, "focus": "Mandatory Tests", "finding": "none" },
-      { "number": 9, "focus": "Privacy", "finding": "Hardcoded strings moved to strings.xml" }
-    ]
+    "1": { "status": "passing" }, "2": { "status": "passing" }, "3": { "status": "passing" }, "4": { "status": "passing" }, "5": { "status": "passing" },
+    "6": { "status": "passing" }, "7": { "status": "passing" }, "8": { "status": "passing" }, "9": { "status": "passing" }, "10": { "status": "passing" },
+    "11": { "status": "passing" }, "12": { "status": "passing" }, "13": { "status": "passing" }, "14": { "status": "passing" }, "15": { "status": "passing" },
+    "16": { "status": "passing" }, "17": { "status": "passing" }, "18": { "status": "passing" }, "19": { "status": "passing" }, "20": { "status": "passing" }
   },
   "featureFlags": {
     "FEATURE_RESEARCH_MODE": {
@@ -163,27 +137,21 @@
   },
   "decisions": [
     {
-      "id": "ADR-101",
-      "date": "2026-09-02",
-      "title": "JUnit5 statt JUnit4 fuer JVM-Module",
-      "context": "Robolectric und AndroidX-Test bringen JUnit4 mit; die reinen Kotlin-Module brauchen das nicht.",
-      "decision": "JUnit5 in :core:domain, :core:model, :core:common. JUnit4 nur dort, wo Robolectric oder AndroidX-Test noetig sind.",
-      "rationale": "Parametrisierte Tests und verschachtelte Testklassen erleichtern die Zeitzonen-Faelle erheblich.",
-      "relatedTask": "T-004",
-      "specAnchor": "{#a-11}"
+      "id": "ADR-101", "date": "2026-09-02", "title": "JUnit5 statt JUnit4 fuer JVM-Module", "context": "Robolectric und AndroidX-Test bringen JUnit4 mit; die reinen Kotlin-Module brauchen das nicht.", "decision": "JUnit5 in :core:domain, :core:model, :core:common. JUnit4 nur dort, wo Robolectric oder AndroidX-Test noetig sind.", "rationale": "Parametrisierte Tests und verschachtelte Testklassen erleichtern die Zeitzonen-Faelle erheblich.", "relatedTask": "T-004", "specAnchor": "{#a-11}"
     },
     {
-      "id": "ADR-102",
-      "date": "2026-09-04",
-      "title": "PersonId als value class statt String",
-      "context": "PersonId and EventId sind beide UUID-Strings und lassen sich verwechseln.",
-      "decision": "Beide als @JvmInline value class.",
-      "rationale": "Der Compiler faengt Verwechslungen ab, zur Laufzeit kostenfrei.",
-      "relatedTask": "T-101",
-      "specAnchor": "{#a-5-1}"
+      "id": "ADR-102", "date": "2026-09-04", "title": "PersonId als value class statt String", "context": "PersonId and EventId sind beide UUID-Strings und lassen sich verwechseln.", "decision": "Beide als @JvmInline value class.", "rationale": "Der Compiler faengt Verwechslungen ab, zur Laufzeit kostenfrei.", "relatedTask": "T-101", "specAnchor": "{#a-5-1}"
     }
   ],
-  "openQuestions": [],
+  "openQuestions": [
+    { "id": "Q1", "question": "Wer ist die verantwortliche Stelle fuer die Forschungsdaten, und existiert ein Ethikvotum?", "blocks": ["M11"], "status": "open" },
+    { "id": "Q2", "question": "Wohin gehen die Forschungsdaten technisch (Endpunkt, Betreiber, Standort)?", "blocks": ["M11"], "status": "open" },
+    { "id": "Q3", "question": "Wer verfasst und prueft Datenschutzerklaerung und Einwilligungstext?", "blocks": ["M11"], "status": "open" },
+    { "id": "Q4", "question": "Play-Entwicklerkonto vorhanden, Abo-Produkt circadia_pro angelegt?", "blocks": ["T-702"], "status": "open" },
+    { "id": "Q5", "question": "Finaler App-Name und Paket-ID?", "status": "answered", "answer": "ch.circadia.tracker", "answeredAt": "2026-09-01T07:30:00Z" },
+    { "id": "Q6", "question": "Umfang und Fragen des Forschungsfragebogens?", "blocks": ["M11"], "status": "open" },
+    { "id": "Q7", "question": "Tagesgrenze einstellbar oder fest bei 18:00?", "blocks": ["T-108"], "status": "open" }
+  ],
   "constraints": [
     "Android-Widgets koennen keine Wischgesten erkennen und keine Scrollposition auslesen. Siehe BUILD_PLAN.md {#a-2-1}.",
     "updatePeriodMillis hat 30 Minuten als Minimum. Live-Zeit laeuft ueber eingebettetes TextClock. Siehe {#a-2-2}.",
@@ -201,7 +169,13 @@
     {
       "at": "2026-09-07T14:15:00Z",
       "tasksCompleted": [ "T-401", "T-402", "T-403", "T-404", "T-405", "T-406", "T-407", "T-408", "T-409" ],
-      "summary": "M4 abgeschlossen. WheelPickerActivity mit Compose Rädern und HELD-Modus im Widget implementiert. Barrierefreiheit und Haptik hinzugefügt.",
+      "summary": "M4 abgeschlossen. WheelPickerActivity mit Compose Rädern und HELD-Modus im Widget implementiert.",
+      "problems": ""
+    },
+    {
+      "at": "2026-09-07T18:55:00Z",
+      "tasksCompleted": [ "T-501", "T-502", "T-503", "T-504", "T-505", "T-506", "T-507", "T-508", "T-509", "T-510", "T-511" ],
+      "summary": "M5 abgeschlossen. In-App-Auswertung mit Aktogramm (Single/Double Plot, Overlay/Side-by-side) implementiert. Korrektur-Workflow und Kennzahlen berechnet.",
       "problems": ""
     }
   ],

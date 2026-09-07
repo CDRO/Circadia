@@ -30,3 +30,10 @@ interface EntitlementRepository {
     fun current(): Flow<Entitlement>
     suspend fun updateEntitlement(entitlement: Entitlement)
 }
+
+interface SettingsRepository {
+    fun getDayBoundary(): Flow<java.time.LocalTime>
+    suspend fun setDayBoundary(time: java.time.LocalTime)
+    fun getUseDoublePlot(): Flow<Boolean>
+    suspend fun setUseDoublePlot(use: Boolean)
+}

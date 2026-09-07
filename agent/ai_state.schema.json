@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://circadia.local/schemas/ai_state.schema.json",
+  "title": "Circadia Agent State",
+  "description": "Persistenter Zustand des Coding-Agenten. Wird nach JEDEM abgeschlossenen oder blockierten Task geschrieben. Einzige Quelle der Wahrheit fuer den Fortschritt.",
+  "type": "object",
+  "required": ["schemaVersion", "project", "updatedAt", "currentMilestone", "currentTask", "milestones", "tasks"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 1 },
+    "project": { "type": "string" },
+    "specFile": { "type": "string", "default": "BUILD_PLAN.md" },
+    "backlogFile": { "type": "string", "default": "TASKS.md" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "updatedBy": { "type": "string", "description": "Agentenkennung oder Modellname" },
+
+    "currentMilestone": {
+      "type": "string",
+      "pattern": "^M(1[01]|[0-9])$"
+    },
+    "currentTask": {
+      "type": ["string", "null"],
+      "pattern": "^T-[0-9]{3,4}$",
+      "description": "Genau ein Task darf in_progress sein. null = zwischen zwei Tasks."
+    },
+
+    "milestones": {
+      "type": "object",
+      "description": "Schluessel = Meilenstein-ID (M0..M11)",
+      "patternProperties": {
+        "^M(1[01]|[0-9])$": {
+          "type": "object",
+          "required": ["status"],
+          "additionalProperties": false,
+          "properties": {
+            "status": { "enum": ["pending", "in_progress", "blocked", "completed"] },
+            "startedAt": { "type": ["string", "null"], "format": "date-time" },
+            "completedAt": { "type": ["string", "null"], "format": "date-time" },
+            "acceptanceVerified": { "type": "boolean", "default": false },
+            "note": { "type": "string" }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "tasks": {
+      "type": "object",
+      "description": "Schluessel = Task-ID aus TASKS.md, z.B. T-107",
+      "patternProperties": {
+        "^T-[0-9]{3,4}$": {
+          "type": "object",
+          "required": ["status"],
+          "additionalProperties": false,
+          "properties": {
+            "status": { "enum": ["pending", "in_progress", "blocked", "completed", "skipped"] },
+            "startedAt": { "type": ["string", "null"], "format": "date-time" },
+            "completedAt": { "type": ["string", "null"], "format": "date-time" },
+            "commit": { "type": ["string", "null"], "description": "Kurz-SHA des Commits" },
+            "filesTouched": { "type": "array", "items": { "type": "string" } },
+            "testsAdded": { "type": "array", "items": { "type": "string" } },
+            "blockedReason": { "type": ["string", "null"] },
+            "blockedBy": {
+              "type": "array",
+              "items": { "type": "string", "pattern": "^(T-[0-9]{3,4}|Q[0-9]+)$" }
+            },
+            "attempts": { "type": "integer", "minimum": 0, "default": 0 },
+            "note": { "type": "string" }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "verification": {
+      "type": "object",
+      "description": "Ergebnis des letzten Verifikations-Gates. Ein Task gilt nur mit allPassed=true als erledigt.",
+      "additionalProperties": false,
+      "properties": {
+        "lastRunAt": { "type": ["string", "null"], "format": "date-time" },
+        "command": { "type": "string" },
+        "allPassed": { "type": "boolean" },
+        "results": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ktlintCheck": { "enum": ["pass", "fail", "skipped"] },
+            "detekt": { "enum": ["pass", "fail", "skipped"] },
+            "lint": { "enum": ["pass", "fail", "skipped"] },
+            "unitTests": { "enum": ["pass", "fail", "skipped"] },
+            "screenshotTests": { "enum": ["pass", "fail", "skipped"] },
+            "instrumentedTests": { "enum": ["pass", "fail", "skipped"] }
+          }
+        },
+        "failureSummary": { "type": ["string", "null"] }
+      }
+    },
+
+    "mandatoryTestCases": {
+      "type": "object",
+      "description": "Die 36 Pflichtfaelle aus BUILD_PLAN.md {#a-11-2}. Schluessel = Fallnummer als String.",
+      "patternProperties": {
+        "^([1-9]|[12][0-9]|3[0-6])$": {
+          "type": "object",
+          "required": ["status"],
+          "additionalProperties": false,
+          "properties": {
+            "status": { "enum": ["missing", "written", "passing"] },
+            "testName": { "type": "string" },
+            "file": { "type": "string" }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "decisions": {
+      "type": "array",
+      "description": "Vom Agenten getroffene Entscheidungen. Append-only, nie loeschen. Nummerierung ab ADR-100, damit es keine Kollision mit den festgelegten ADR-001..ADR-006 aus BUILD_PLAN.md {#a-4} gibt.",
+      "items": {
+        "type": "object",
+        "required": ["id", "date", "title", "decision", "rationale"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^ADR-[0-9]{3}$" },
+          "date": { "type": "string", "format": "date" },
+          "title": { "type": "string" },
+          "context": { "type": "string" },
+          "decision": { "type": "string" },
+          "rationale": { "type": "string" },
+          "alternativesRejected": { "type": "array", "items": { "type": "string" } },
+          "supersedes": { "type": ["string", "null"], "pattern": "^ADR-[0-9]{3}$" },
+          "relatedTask": { "type": ["string", "null"], "pattern": "^T-[0-9]{3,4}$" },
+          "specAnchor": { "type": ["string", "null"], "description": "z.B. {#a-4-2}" }
+        }
+      }
+    },
+
+    "openQuestions": {
+      "type": "array",
+      "description": "Fragen, die nur ein Mensch beantworten kann. Blockieren die genannten Tasks.",
+      "items": {
+        "type": "object",
+        "required": ["id", "question", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^Q[0-9]+$" },
+          "question": { "type": "string" },
+          "proposedAnswer": { "type": ["string", "null"], "description": "Vorschlag des Agenten, falls vorhanden" },
+          "blocks": { "type": "array", "items": { "type": "string" } },
+          "status": { "enum": ["open", "answered", "obsolete"] },
+          "answer": { "type": ["string", "null"] },
+          "answeredAt": { "type": ["string", "null"], "format": "date-time" }
+        }
+      }
+    },
+
+    "featureFlags": {
+      "type": "object",
+      "description": "Zustand der Feature-Schalter aus BUILD_PLAN.md {#a-8-4}. Der Agent aendert einen Standardwert NIE eigenmaechtig - das passiert nur in dem Task, der den Schalter scharfschaltet.",
+      "patternProperties": {
+        "^[A-Z_]+$": {
+          "type": "object",
+          "required": ["default"],
+          "additionalProperties": false,
+          "properties": {
+            "default": { "type": "boolean", "description": "Wert in allen Buildtypen" },
+            "overridableInDebug": { "type": "boolean" },
+            "gradleProperty": { "type": "string" },
+            "placeholdersPending": { "type": "boolean", "description": "true = Inhalte sind noch Platzhalter, Scharfschalten ist gesperrt" },
+            "removedByTask": { "type": ["string", "null"], "pattern": "^T-[0-9]{3,4}$" },
+            "note": { "type": "string" }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "constraints": {
+      "type": "array",
+      "description": "Plattformgrenzen, die immer wieder relevant sind. Nur lesen, nicht wegdiskutieren.",
+      "items": { "type": "string" }
+    },
+
+    "sessionLog": {
+      "type": "array",
+      "description": "Kurzprotokoll je Sitzung. Maximal 50 Eintraege, aelteste zuerst entfernen.",
+      "items": {
+        "type": "object",
+        "required": ["at", "summary"],
+        "additionalProperties": false,
+        "properties": {
+          "at": { "type": "string", "format": "date-time" },
+          "tasksCompleted": { "type": "array", "items": { "type": "string" } },
+          "summary": { "type": "string" },
+          "problems": { "type": "string" }
+        }
+      }
+    }
+  }
+}

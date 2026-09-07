@@ -1,0 +1,748 @@
+<title>Circadia Bauplan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  --bg:#F5F4F0; --surface:#FFFFFF; --surface-2:#EDECE7;
+  --ink:#14161F; --ink-2:#454B5C; --muted:#6E748A;
+  --line:#DCDAD3; --line-strong:#C4C1B8;
+  --sun:#B26A11; --sun-soft:#F2DDBB; --sun-ink:#7A470A;
+  --moon:#3D4E96; --moon-soft:#D2D8F0; --moon-ink:#2C3A73;
+  --warn-bg:#FBEEDC; --warn-line:#E0BC7E;
+  --shadow:0 1px 2px rgba(20,22,31,.05), 0 8px 24px -16px rgba(20,22,31,.28);
+  --f-display:"Fraunces",Georgia,"Times New Roman",serif;
+  --f-body:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --wrap:100ch; --prose:70ch;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101219; --surface:#181B24; --surface-2:#20242F;
+    --ink:#E9E7E1; --ink-2:#BFC3CF; --muted:#8A90A4;
+    --line:#2A2E3A; --line-strong:#3A3F4F;
+    --sun:#E5A54E; --sun-soft:#423114; --sun-ink:#F0C98A;
+    --moon:#93A3EC; --moon-soft:#242A46; --moon-ink:#B7C2F5;
+    --warn-bg:#2B2314; --warn-line:#5C4720;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101219; --surface:#181B24; --surface-2:#20242F;
+  --ink:#E9E7E1; --ink-2:#BFC3CF; --muted:#8A90A4;
+  --line:#2A2E3A; --line-strong:#3A3F4F;
+  --sun:#E5A54E; --sun-soft:#423114; --sun-ink:#F0C98A;
+  --moon:#93A3EC; --moon-soft:#242A46; --moon-ink:#B7C2F5;
+  --warn-bg:#2B2314; --warn-line:#5C4720;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--f-body); font-size:16.5px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--moon-soft); color:var(--ink)}
+a{color:inherit; text-underline-offset:3px; text-decoration-color:var(--line-strong)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--moon); outline-offset:3px; border-radius:2px}
+
+.page{max-width:var(--wrap); margin:0 auto; padding:0 clamp(18px,5vw,56px) 96px}
+.prose{max-width:var(--prose)}
+
+/* ---------- Kopfbereich ---------- */
+header.masthead{padding:clamp(40px,8vw,84px) 0 0}
+.eyebrow{
+  font-family:var(--f-mono); font-size:11.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted);
+}
+h1{
+  font-family:var(--f-display); font-weight:600;
+  font-size:clamp(2.6rem,6.4vw,4.5rem); line-height:1.02;
+  letter-spacing:-.02em; text-wrap:balance; margin:.28em 0 0;
+  font-variation-settings:"SOFT" 20,"WONK" 1;
+}
+h1 .thin{font-weight:400; font-style:italic; color:var(--ink-2)}
+.standfirst{
+  max-width:56ch; margin-top:1.1rem; font-size:1.16rem; color:var(--ink-2);
+  text-wrap:pretty;
+}
+.meta{
+  display:flex; flex-wrap:wrap; gap:6px 10px; margin-top:22px;
+  font-family:var(--f-mono); font-size:11.5px; letter-spacing:.04em;
+}
+.meta span{
+  border:1px solid var(--line); background:var(--surface);
+  padding:4px 9px; border-radius:2px; color:var(--ink-2);
+}
+
+/* ---------- Aktogramm ---------- */
+.acto-block{margin:clamp(34px,6vw,56px) 0 0}
+.acto{
+  border-top:1px solid var(--line-strong); border-bottom:1px solid var(--line-strong);
+  padding:14px 0; display:flex; flex-direction:column; gap:2px;
+}
+.acto-row{display:grid; grid-template-columns:repeat(96,1fr); height:9px}
+.acto-row i{grid-column:span var(--n)}
+.acto-row i.s{background:var(--moon)}
+.acto-row i.w{background:var(--sun-soft)}
+:root[data-theme="dark"] .acto-row i.w{background:var(--surface-2)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .acto-row i.w{background:var(--surface-2)}}
+.acto-axis{
+  display:flex; justify-content:space-between; margin-top:8px;
+  font-family:var(--f-mono); font-size:10.5px; color:var(--muted); letter-spacing:.06em;
+}
+.acto-cap{
+  margin-top:12px; font-size:.86rem; color:var(--muted); max-width:64ch;
+}
+.key{display:inline-flex; align-items:center; gap:6px; margin-right:14px}
+.key b{width:11px; height:11px; display:inline-block; border-radius:1px}
+.key.sleep b{background:var(--moon)} .key.wake b{background:var(--sun-soft); border:1px solid var(--line-strong)}
+:root[data-theme="dark"] .key.wake b{background:var(--surface-2); border-color:var(--line-strong)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .key.wake b{background:var(--surface-2)}}
+
+/* ---------- Struktur ---------- */
+main{display:block}
+section{padding-top:clamp(48px,7vw,80px); scroll-margin-top:24px}
+.sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:18px}
+.sec-num{
+  font-family:var(--f-mono); font-size:12px; color:var(--sun);
+  letter-spacing:.1em; padding-top:.35em; flex:none;
+}
+h2{
+  font-family:var(--f-display); font-weight:600; letter-spacing:-.015em;
+  font-size:clamp(1.55rem,3.2vw,2.15rem); line-height:1.12; margin:0;
+  text-wrap:balance;
+}
+h3{
+  font-size:1.02rem; font-weight:700; letter-spacing:-.005em;
+  margin:2.1em 0 .5em; color:var(--ink);
+}
+p{margin:0 0 1.05em}
+.prose > p:last-child{margin-bottom:0}
+ul{margin:0 0 1.05em; padding-left:1.15em}
+li{margin:.3em 0}
+li::marker{color:var(--muted)}
+strong{font-weight:600}
+code{
+  font-family:var(--f-mono); font-size:.86em; background:var(--surface-2);
+  border:1px solid var(--line); padding:.08em .34em; border-radius:3px;
+  overflow-wrap:anywhere;
+}
+
+/* ---------- Hinweiskasten ---------- */
+.note{
+  border:1px solid var(--warn-line); background:var(--warn-bg);
+  border-radius:3px; padding:20px 22px; margin:26px 0;
+}
+.note .tag{
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--sun-ink); display:block; margin-bottom:8px;
+}
+:root[data-theme="dark"] .note .tag{color:var(--sun)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .note .tag{color:var(--sun)}}
+.note p:last-child{margin-bottom:0}
+
+/* ---------- Widget-Mockup ---------- */
+.mock-wrap{
+  display:grid; grid-template-columns:minmax(0,1fr); gap:22px;
+  margin:28px 0 8px; align-items:start;
+}
+@media (min-width:780px){ .mock-wrap{grid-template-columns:268px minmax(0,1fr); gap:34px} }
+.widget{
+  background:var(--surface); border:1px solid var(--line); border-radius:14px;
+  padding:14px 16px 16px; box-shadow:var(--shadow); width:268px; max-width:100%;
+}
+.widget .who{font-size:12px; color:var(--muted); font-weight:600; letter-spacing:.01em}
+.wheels{display:flex; align-items:center; justify-content:center; gap:8px; margin:12px 0 6px}
+.wheel{
+  position:relative; width:74px; height:86px; overflow:hidden; border-radius:7px;
+  background:var(--surface-2); border:1px solid var(--line);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  font-family:var(--f-mono); font-variant-numeric:tabular-nums;
+}
+.wheel .g{color:var(--muted); opacity:.42; font-size:15px; line-height:1.5}
+.wheel .v{font-size:28px; font-weight:600; color:var(--ink); line-height:1.35}
+.wheel::before,.wheel::after{
+  content:""; position:absolute; left:0; right:0; height:26px; pointer-events:none;
+}
+.wheel::before{top:0; background:linear-gradient(var(--surface-2),transparent)}
+.wheel::after{bottom:0; background:linear-gradient(transparent,var(--surface-2))}
+.notch{
+  position:absolute; left:0; right:0; top:50%; transform:translateY(-50%);
+  height:38px; border-top:1px solid var(--line-strong); border-bottom:1px solid var(--line-strong);
+}
+.colon{font-family:var(--f-mono); font-size:24px; color:var(--muted)}
+.wlabels{display:flex; justify-content:center; gap:34px; font-family:var(--f-mono); font-size:10px; color:var(--muted); letter-spacing:.08em}
+.wbtns{display:flex; gap:8px; margin-top:14px}
+.wbtn{
+  flex:1; border-radius:8px; padding:9px 0; text-align:center; font-size:13px;
+  font-weight:600; border:1px solid var(--line);
+}
+.wbtn.sun{background:var(--sun-soft); color:var(--sun-ink); border-color:var(--sun)}
+:root[data-theme="dark"] .wbtn.sun{color:var(--sun-ink)}
+.wbtn.moon.off{background:transparent; color:var(--muted); opacity:.55}
+.mock-notes{font-size:.93rem; color:var(--ink-2)}
+.mock-notes dl{display:grid; grid-template-columns:auto 1fr; gap:8px 14px; margin:0}
+.mock-notes dt{font-family:var(--f-mono); font-size:11px; color:var(--sun); letter-spacing:.06em; padding-top:.25em; white-space:nowrap}
+.mock-notes dd{margin:0}
+
+/* ---------- Zustandsautomat ---------- */
+.fsm{
+  border:1px solid var(--line); background:var(--surface); border-radius:3px;
+  padding:20px 22px; margin:24px 0; overflow-x:auto;
+}
+.fsm pre{
+  margin:0; font-family:var(--f-mono); font-size:12.5px; line-height:1.75;
+  color:var(--ink-2); white-space:pre;
+}
+
+/* ---------- Tabellen ---------- */
+.tw{overflow-x:auto; margin:22px 0; border:1px solid var(--line); border-radius:3px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.91rem; min-width:520px}
+th,td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+thead th{
+  font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); font-weight:500; background:var(--surface-2); white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:0}
+td.id{font-family:var(--f-mono); font-size:12px; color:var(--moon); white-space:nowrap; font-weight:500}
+td.num{font-variant-numeric:tabular-nums}
+.pill{
+  display:inline-block; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.05em;
+  padding:2px 7px; border-radius:99px; border:1px solid var(--line-strong); color:var(--ink-2);
+  white-space:nowrap;
+}
+.pill.free{border-color:var(--line-strong)}
+.pill.pro{border-color:var(--moon); color:var(--moon); background:var(--moon-soft)}
+.pill.block{border-color:var(--warn-line); background:var(--warn-bg); color:var(--sun-ink)}
+:root[data-theme="dark"] .pill.block{color:var(--sun)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pill.block{color:var(--sun)}}
+
+/* ---------- ADR-Karten ---------- */
+.adrs{display:grid; gap:1px; background:var(--line); border:1px solid var(--line); margin:24px 0; border-radius:3px; overflow:hidden}
+@media (min-width:760px){ .adrs{grid-template-columns:1fr 1fr} }
+.adr{background:var(--surface); padding:20px 22px}
+.adr .k{font-family:var(--f-mono); font-size:11px; letter-spacing:.1em; color:var(--sun)}
+.adr h4{margin:.5em 0 .5em; font-size:1rem; font-weight:700; line-height:1.3}
+.adr p{font-size:.92rem; color:var(--ink-2); margin:0 0 .7em}
+.adr p:last-child{margin-bottom:0}
+.adr .why{color:var(--muted); font-size:.88rem}
+
+/* ---------- Modulliste ---------- */
+.mods{display:grid; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:3px; margin:22px 0; overflow:hidden}
+@media (min-width:640px){ .mods{grid-template-columns:1fr 1fr} }
+@media (min-width:980px){ .mods{grid-template-columns:1fr 1fr 1fr} }
+.mod{background:var(--surface); padding:13px 16px}
+.mod b{font-family:var(--f-mono); font-size:12px; font-weight:500; color:var(--moon); display:block; margin-bottom:3px}
+.mod span{font-size:.86rem; color:var(--ink-2)}
+
+/* ---------- Dateiliste ---------- */
+.files{display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:3px; margin:22px 0; overflow:hidden}
+.file{background:var(--surface); padding:15px 18px; display:grid; gap:3px 16px; grid-template-columns:1fr}
+@media (min-width:700px){ .file{grid-template-columns:220px 1fr; align-items:baseline} }
+.file b{font-family:var(--f-mono); font-size:12.5px; font-weight:500; color:var(--ink)}
+.file span{font-size:.9rem; color:var(--ink-2)}
+
+/* ---------- Fuss ---------- */
+footer{
+  margin-top:clamp(56px,8vw,96px); padding-top:24px; border-top:1px solid var(--line);
+  font-size:.86rem; color:var(--muted); display:flex; flex-wrap:wrap; gap:8px 24px;
+  justify-content:space-between;
+}
+footer .fm{font-family:var(--f-mono); font-size:11px; letter-spacing:.05em}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<div class="page">
+
+<header class="masthead">
+  <div class="eyebrow">Bauplan · Version 1.0 · für einen Coding-Agenten</div>
+  <h1>Circadia<br><span class="thin">Schlaf-Wach-Tracker</span></h1>
+  <p class="standfirst">
+    Eine Android-App, deren wichtigste Oberfläche ein Homescreen-Widget ist: zwei Zahlenräder
+    wie am Schloss eines Aktenkoffers, eine Sonne, ein Mond. Zwei Taps, und eine Schlafphase
+    ist erfasst.
+  </p>
+  <div class="meta">
+    <span>Kotlin · Compose · Glance</span>
+    <span>C++ / NDK für den Rechenkern</span>
+    <span>Room · Hilt · Play&nbsp;Billing&nbsp;9</span>
+    <span>API 26–37</span>
+    <span>12 Meilensteine</span>
+    <span>~100 Tasks</span>
+  </div>
+
+  <div class="acto-block">
+    <div class="acto">
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:23"></i><i class="s" style="--n:16"></i><i class="w" style="--n:32"></i><i class="s" style="--n:16"></i><i class="w" style="--n:9"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:23"></i><i class="s" style="--n:16"></i><i class="w" style="--n:33"></i><i class="s" style="--n:14"></i><i class="w" style="--n:10"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:24"></i><i class="s" style="--n:14"></i><i class="w" style="--n:16"></i><i class="s" style="--n:2"></i><i class="w" style="--n:16"></i><i class="s" style="--n:14"></i><i class="w" style="--n:10"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:6"></i><i class="s" style="--n:2"></i><i class="w" style="--n:16"></i><i class="s" style="--n:14"></i><i class="w" style="--n:33"></i><i class="s" style="--n:16"></i><i class="w" style="--n:9"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:23"></i><i class="s" style="--n:16"></i><i class="w" style="--n:33"></i><i class="s" style="--n:14"></i><i class="w" style="--n:10"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:24"></i><i class="s" style="--n:14"></i><i class="w" style="--n:35"></i><i class="s" style="--n:14"></i><i class="w" style="--n:9"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:25"></i><i class="s" style="--n:14"></i><i class="w" style="--n:34"></i><i class="s" style="--n:13"></i><i class="w" style="--n:10"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:25"></i><i class="s" style="--n:13"></i><i class="w" style="--n:34"></i><i class="s" style="--n:14"></i><i class="w" style="--n:10"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:24"></i><i class="s" style="--n:14"></i><i class="w" style="--n:15"></i><i class="s" style="--n:2"></i><i class="w" style="--n:17"></i><i class="s" style="--n:13"></i><i class="w" style="--n:11"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:5"></i><i class="s" style="--n:2"></i><i class="w" style="--n:17"></i><i class="s" style="--n:13"></i><i class="w" style="--n:36"></i><i class="s" style="--n:15"></i><i class="w" style="--n:8"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:25"></i><i class="s" style="--n:15"></i><i class="w" style="--n:32"></i><i class="s" style="--n:15"></i><i class="w" style="--n:9"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:24"></i><i class="s" style="--n:15"></i><i class="w" style="--n:34"></i><i class="s" style="--n:16"></i><i class="w" style="--n:7"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:25"></i><i class="s" style="--n:16"></i><i class="w" style="--n:33"></i><i class="s" style="--n:14"></i><i class="w" style="--n:8"></i></div>
+      <div class="acto-row" aria-hidden="true"><i class="w" style="--n:26"></i><i class="s" style="--n:14"></i><i class="w" style="--n:34"></i><i class="s" style="--n:15"></i><i class="w" style="--n:7"></i></div>
+    </div>
+    <div class="acto-axis">
+      <span>12:00</span><span>00:00</span><span>12:00</span><span>00:00</span><span>12:00</span>
+    </div>
+    <p class="acto-cap" style="margin-top:14px">
+      <span class="key sleep"><b></b>Schlaf</span><span class="key wake"><b></b>Wach</span>
+    </p>
+    <p class="acto-cap" style="margin-top:6px">
+      Doppelt aufgetragenes Aktogramm, 14 Tage, jede Zeile 48 Stunden — die Standarddarstellung
+      der Chronobiologie und die Hauptansicht der App. Eine wandernde Einschlafzeit wird darin
+      zur schrägen Linie statt zu abgeschnittenen Balken am Rand.
+    </p>
+  </div>
+</header>
+
+<main>
+
+<section id="constraint">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Die Einschränkung, die alles bestimmt</h2></div>
+  <div class="prose">
+    <p>
+      Android-Homescreen-Widgets werden über <code>RemoteViews</code> in den Prozess des
+      Launchers gerendert. Glance ist eine Compose-artige Fassade darüber, unterliegt aber
+      denselben Grenzen. Ein Widget kann Klicks empfangen, Schalter umlegen und Listen nativ
+      scrollen lassen. Es kann <strong>keine Wischgesten abfangen und keine Scrollposition
+      auslesen</strong>.
+    </p>
+    <div class="note">
+      <span class="tag">Konsequenz für die Anforderung</span>
+      <p>
+        „Sobald ein Wischgesten-Scrollen auf den Zahlenrädern erfolgt, wird die Zeit manuell
+        angepasst" ist wortwörtlich nicht umsetzbar. Der Bauplan löst es über eine transparente
+        Overlay-Activity, die aussieht wie das aufgeklappte Widget und echtes Fling-Scrollen mit
+        Rastung und Haptik bietet. Für Nutzende ist der Unterschied ein zusätzlicher Tap auf das
+        Rad — danach ist die Geste identisch.
+      </p>
+    </div>
+    <p>
+      Die zweite Grenze: <code>updatePeriodMillis</code> hat 30 Minuten als Minimum, und exakte
+      Minutenalarme sind seit Android&nbsp;12 eingeschränkt und im Play-Review für eine Schlaf-App
+      riskant. Der Ausweg ist ein eingebettetes <code>TextClock</code> — die Plattform hält die
+      angezeigte Zeit selbst aktuell, ohne Alarm, ohne Wakelock, ohne Berechtigung.
+    </p>
+  </div>
+</section>
+
+<section id="widget">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Das Widget</h2></div>
+  <div class="mock-wrap">
+    <div class="widget">
+      <div class="who">Lena</div>
+      <div class="wheels">
+        <div class="wheel">
+          <div class="notch"></div>
+          <div class="g">06</div><div class="v">07</div><div class="g">08</div>
+        </div>
+        <div class="colon">:</div>
+        <div class="wheel">
+          <div class="notch"></div>
+          <div class="g">41</div><div class="v">42</div><div class="g">43</div>
+        </div>
+      </div>
+      <div class="wlabels"><span>STUNDE</span><span>MINUTE</span></div>
+      <div class="wbtns">
+        <div class="wbtn sun">☀ Wach</div>
+        <div class="wbtn moon off">☾ Schlaf</div>
+      </div>
+    </div>
+    <div class="mock-notes">
+      <dl>
+        <dt>Name</dt>
+        <dd>Jedes Widget ist beim Platzieren genau einer Person zugeordnet. Der Name steht klein oben links.</dd>
+        <dt>Räder</dt>
+        <dd>Im Ruhezustand zeigt die Mitte die laufende Systemzeit; die Nachbarziffern sind dekorativ, weil sie nicht mitlaufen könnten.</dd>
+        <dt>Buttons</dt>
+        <dd>Der Zustand wird aus dem letzten gespeicherten Ereignis der Person abgeleitet, nicht im Widget gehalten — sonst laufen zwei Widgets derselben Person auseinander. Frisch platziert sind beide aktiv.</dd>
+        <dt>Ausgegraut</dt>
+        <dd>Bleibt klickbar und zeigt einen Hinweis. Ein toter Bereich im Widget fühlt sich kaputt an.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <h3>Zeitmodus</h3>
+  <div class="fsm">
+<pre>          Tap auf Rad  →  Overlay  →  Wert bestätigt
+  LIVE ─────────────────────────────────────────────────────►  HELD
+    ▲                                                            │
+    │            60 s abgelaufen   ODER   Sonne/Mond gedrückt    │
+    └────────────────────────────────────────────────────────────┘</pre>
+  </div>
+  <div class="prose">
+    <p>
+      Der Haltezustand dauert exakt 60 Sekunden. Umgesetzt wird er über einen Zeitstempel im
+      Widget-Zustand plus einen einmaligen, <em>inexakten</em> Alarm. Entscheidend: jeder
+      Render prüft zusätzlich selbst, ob die Haltezeit abgelaufen ist. Damit ist der Alarm
+      nur eine Optimierung und keine Korrektheitsbedingung — ein verspätet feuernder Alarm
+      kann die Anzeige nicht falsch machen.
+    </p>
+  </div>
+
+  <h3>Erstes Platzieren ohne angelegte Person</h3>
+  <div class="fsm">
+<pre>Widget auf den Homescreen gezogen
+  │
+  ├─ WidgetConfigActivity startet, setzt sofort RESULT_CANCELED
+  │
+  ├─ Personen vorhanden?
+  │     ├─ NEIN → Namenserfassung, Tastatur offen, ein Feld, ein Button
+  │     │          Abbruch → RESULT_CANCELED bleibt → System entfernt das Widget
+  │     └─ JA   → Personenauswahl
+  │
+  └─ Bestätigt → Zuordnung speichern → RESULT_OK(appWidgetId) → fertig</pre>
+  </div>
+  <div class="prose">
+    <p>
+      Die Konfigurations-Activity <em>ist</em> die App. Damit erfüllt sich die Anforderung
+      „öffnet automatisch die App und führt direkt in die Namenserfassung" ohne jeden Sonderfall.
+    </p>
+  </div>
+</section>
+
+<section id="adr">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Fünf Entscheidungen, die feststehen</h2></div>
+  <div class="adrs">
+    <div class="adr">
+      <div class="k">ADR-001</div>
+      <h4>Event-Sourcing statt gespeicherter Zyklen</h4>
+      <p>Gespeichert werden nur Zeitpunkte mit Zustand. Schlaf- und Wachintervalle werden zur Laufzeit abgeleitet, nie persistiert.</p>
+      <p class="why">Ein Intervall hat zwei Enden, die zu verschiedenen Zeiten entstehen — das erzeugt halboffene Zeilen, Wettläufe zwischen Widget und App und kaputte Daten bei jeder nachträglichen Korrektur. Ein Append-only-Log kennt keinen dieser Zustände.</p>
+    </div>
+    <div class="adr">
+      <div class="k">ADR-002</div>
+      <h4>Zahlenräder als Overlay, nicht im Widget</h4>
+      <p>Ein Tap auf ein Rad öffnet eine transparente Activity mit echtem Fling-Scrollen, Rastung und haptischem Tick pro Ziffer.</p>
+      <p class="why">RemoteViews liefern keine Wischgesten. Die verworfene Alternative — eine scrollende Liste direkt im Widget — bräuchte ebenfalls einen Tap zur Auswahl, rendert unruhiger und lässt sich nicht zuverlässig auf die aktuelle Zeit zurückscrollen.</p>
+    </div>
+    <div class="adr">
+      <div class="k">ADR-003</div>
+      <h4>Live-Zeit über eingebettetes TextClock</h4>
+      <p>Im Ruhezustand rendert die Plattform den Zeitwert selbst. Im Haltezustand tritt statischer Text an seine Stelle.</p>
+      <p class="why">Minutengenau, ohne Alarm, ohne Akkukosten, ohne Berechtigung. Der Preis sind dekorative statt echte Nachbarziffern im Ruhezustand — sichtbar nur dort, wo ohnehin nichts ausgewählt wird.</p>
+    </div>
+    <div class="adr">
+      <div class="k">ADR-004</div>
+      <h4>UTC-Zeitstempel plus Zonen-ID</h4>
+      <p>Jedes Ereignis speichert beides: Millisekunden seit Epoch und die IANA-Zeitzone.</p>
+      <p class="why">Ohne Zone lässt sich „die Nacht vom 3. auf den 4." nach einem Zeitzonenwechsel nicht rekonstruieren; ohne UTC ist keine Dauer berechenbar. Zeitumstellungen erzeugen Tage mit 23 und mit 25 Stunden — die Auswertung muss das aushalten, und zwei Pflichttests beweisen es.</p>
+    </div>
+    <div class="adr">
+      <div class="k">ADR-007</div>
+      <h4>Forschungsmodus gebaut, aber ausgeschaltet</h4>
+      <p>Die gesamte Logik entsteht früh, hinter einem lokalen Build-Schalter, gegen Platzhalter-Inhalte. Version 1.0 geht ohne sichtbaren Forschungsmodus in den Store.</p>
+      <p class="why">Anonymisierung, Warteschlange und Widerruf sind der heikelste Code im Projekt und sollen nicht in der Schlussphase entstehen. Was fehlt, sind Texte und ein Endpunkt — die kommen von Menschen. Solange der Schalter aus ist, wird nichts erhoben und nichts hochgeladen, und das Data-Safety-Formular für v1.0 beschreibt wahrheitsgemäß keine Weitergabe.</p>
+    </div>
+    <div class="adr" style="grid-column:1/-1">
+      <div class="k">ADR-005</div>
+      <h4>Freischaltung als eigener Domänenbegriff</h4>
+      <p>Die App fragt nie „hat gekauft?", sondern immer nach der aktuellen Freischaltung — mit Quelle (<code>FREE</code>, <code>SUBSCRIPTION</code>, <code>RESEARCH</code>) und Ablaufdatum.</p>
+      <p class="why">Abo und Forschungsteilnahme führen über zwei völlig verschiedene Wege zur selben Funktionsfreischaltung. Nur eine gemeinsame Abstraktion verhindert, dass sich die Zugriffslogik an zwanzig Stellen im Code verzweigt.</p>
+    </div>
+  </div>
+</section>
+
+<section id="arch">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Module</h2></div>
+  <div class="prose">
+    <p>
+      Clean Architecture in drei Ringen, als Gradle-Multi-Modul-Projekt. Die Domäne ist reines
+      Kotlin ohne Android-Abhängigkeiten und damit vollständig auf der JVM testbar.
+      Feature-Module kennen einander nicht; Navigation zwischen ihnen läuft über <code>:app</code>.
+    </p>
+  </div>
+  <div class="mods">
+    <div class="mod"><b>:core:model</b><span>Datenklassen, Enums, ID-Typen</span></div>
+    <div class="mod"><b>:core:common</b><span>Clock-Abstraktion, Dispatcher, Zeitzonen</span></div>
+    <div class="mod"><b>:core:domain</b><span>UseCases, Intervall-Ableitung, Analytik</span></div>
+    <div class="mod"><b>:core:database</b><span>Room, DAOs, Migrationen</span></div>
+    <div class="mod"><b>:core:datastore</b><span>Einstellungen, Freischaltungs-Cache</span></div>
+    <div class="mod"><b>:core:data</b><span>Repository-Implementierungen</span></div>
+    <div class="mod"><b>:core:native</b><span>C++-Kern: Rhythmus-Analytik, Rasterisierung</span></div>
+    <div class="mod"><b>:core:designsystem</b><span>Theme, Palette, Icons</span></div>
+    <div class="mod"><b>:core:billing</b><span>Play-Billing-Wrapper</span></div>
+    <div class="mod"><b>:widget</b><span>Glance-Widget, Konfiguration, Rad-Overlay</span></div>
+    <div class="mod"><b>:feature:persons</b><span>Personen, Onboarding</span></div>
+    <div class="mod"><b>:feature:timeline</b><span>Aktogramm, Vergleich, Korrektur</span></div>
+    <div class="mod"><b>:feature:export</b><span>CSV- und JSON-Export</span></div>
+    <div class="mod"><b>:feature:paywall</b><span>Abo, Umfrage, Einwilligung</span></div>
+    <div class="mod"><b>:app</b><span>Navigation, DI, Einstiegspunkt</span></div>
+  </div>
+</section>
+
+<section id="native">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Performance-kritische Komponenten in C++</h2></div>
+  <div class="prose">
+    <p>
+      Zwei Teile der App werden <strong>nicht in Kotlin gebaut, sondern in C++</strong>: die
+      Rhythmus-Analytik und die Rasterisierung des Aktogramms. Beide arbeiten auf einem
+      minutengerasterten Zustandsvektor — ein Jahr sind rund 525&nbsp;600 Punkte, die
+      Vergleichsansicht mehrerer Personen ein Vielfaches davon — und beide laufen beim Scrollen
+      und Zoomen, also im 16-Millisekunden-Frame-Budget. In Kotlin bedeutet das Autoboxing,
+      Allokationsdruck und GC-Pausen genau dann, wenn die Hauptansicht flüssig sein muss.
+    </p>
+  </div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Komponente</th><th>Ort</th></tr></thead>
+      <tbody>
+        <tr><td>SRI, Interdaily Stability, Intradaily Variability, gleitende Mittel, Autokorrelation</td><td><span class="pill pro">C++</span></td></tr>
+        <tr><td>Rasterisierung und Downsampling des Aktogramms beim Zoomen über Jahre</td><td><span class="pill pro">C++</span></td></tr>
+        <tr><td>Aggregation über den gesamten Aufzeichnungszeitraum</td><td><span class="pill pro">C++</span></td></tr>
+        <tr><td>Intervall-Ableitung, UI, Datenbank, Billing, alles Ereignisgetriebene</td><td><span class="pill free">Kotlin</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">
+    <span class="tag">Die Regel, die alles andere trägt</span>
+    <p>
+      <strong>Erst messen, dann portieren.</strong> Kein Kotlin-Code wandert nach C++, ohne dass
+      ein Benchmark vorher belegt, dass er das Budget reißt — mehr als 8&nbsp;ms für etwas, das
+      pro Frame läuft, oder mehr als 250&nbsp;ms für eine Interaktionsantwort. Die Messung gehört
+      in die Commit-Nachricht. Optimierung ohne Messung steht auf der Verbotsliste.
+    </p>
+  </div>
+  <div class="prose">
+    <p>
+      Die JNI-Grenze ist teuer, also gibt es <em>einen</em> Aufruf pro Auswertung statt einen pro
+      Datenpunkt, und übergeben werden primitive Arrays oder direkte Puffer, niemals Objektgraphen.
+      Der C++-Kern selbst ist plattformfrei — keine JNI-Typen außerhalb der dünnen Fassade — und
+      wird mit GoogleTest auf dem Host getestet, ohne Gerät und ohne Emulator.
+    </p>
+    <p>
+      Zu jeder nativen Funktion bleibt eine <strong>Kotlin-Referenzimplementierung</strong> bestehen.
+      Sie darf langsam sein; sie ist die Wahrheit, an der die schnelle Fassung gemessen wird, und
+      sie ist der Fallback, wenn das Laden der nativen Bibliothek fehlschlägt. Vier der
+      zweiunddreißig Pflichttestfälle prüfen genau diese Parität und diesen Fallback.
+    </p>
+    <p>
+      Dazu kommt die Hygiene, die C++ verlangt und Kotlin nicht braucht: C++20 mit
+      <code>-Werror</code>, keine rohen <code>new</code>/<code>delete</code>, ASan und UBSan in CI,
+      alle nativen Bibliotheken auf 16-KB-Speicherseiten ausgerichtet gelinkt — Pflicht für
+      Play-Uploads — und Auslieferung als App Bundle mit ABI-Splits, weil native Bibliotheken das
+      Paket sonst vervielfachen.
+    </p>
+  </div>
+</section>
+
+<section id="analysis">
+  <div class="sec-head"><span class="sec-num">06</span><h2>Auswertung</h2></div>
+  <div class="prose">
+    <p>
+      Die kostenlose Stufe zeigt sieben Tage und exportiert die <strong>vollständigen</strong>
+      Rohdaten — der Export ist bewusst nicht eingeschränkt. Die bezahlte Stufe öffnet die
+      unbegrenzte Historie und Kennzahlen aus der Schlafforschung.
+    </p>
+  </div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Kennzahl</th><th>Stufe</th><th>Herkunft</th></tr></thead>
+      <tbody>
+        <tr><td>Gesamtschlafzeit, Episodenzahl, längste Wachphase</td><td><span class="pill free">frei</span></td><td>—</td></tr>
+        <tr><td>Einschlaf- und Aufwachzeit der Hauptepisode</td><td><span class="pill free">frei</span></td><td>—</td></tr>
+        <tr><td>Schlafmitte (Mid-Sleep)</td><td><span class="pill pro">Pro</span></td><td>MCTQ, Roenneberg&nbsp;et&nbsp;al.</td></tr>
+        <tr><td>Chronotyp MSF<sub>sc</sub></td><td><span class="pill pro">Pro</span></td><td>Roenneberg&nbsp;et&nbsp;al., 2004&nbsp;/&nbsp;2007</td></tr>
+        <tr><td>Sozialer Jetlag</td><td><span class="pill pro">Pro</span></td><td>Wittmann&nbsp;et&nbsp;al., 2006</td></tr>
+        <tr><td>Sleep Regularity Index</td><td><span class="pill pro">Pro</span></td><td>Phillips&nbsp;et&nbsp;al., 2017</td></tr>
+        <tr><td>Interdaily Stability, Intradaily Variability</td><td><span class="pill pro">Pro</span></td><td>Van&nbsp;Someren&nbsp;et&nbsp;al.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">
+    <span class="tag">Ehrlichkeit gegenüber Nutzenden</span>
+    <p>
+      Diese Kennzahlen sind für Aktigraphie- und Tagebuchdaten definiert. Selbstberichtete
+      Zeitpunkte sind gröber und lückenhafter. Jede Pro-Kennzahl bekommt deshalb Definition,
+      Quelle und Genauigkeitsvorbehalt zum Ausklappen, und jede hat eine Mindestdatenmenge —
+      darunter wird sie ausgegraut, nie geschätzt. Keine medizinischen Aussagen, keine
+      wertenden Formulierungen.
+    </p>
+  </div>
+</section>
+
+<section id="money">
+  <div class="sec-head"><span class="sec-num">07</span><h2>Zwei Wege zur Vollversion</h2></div>
+  <div class="prose">
+    <p>
+      <strong>CHF 5.– pro Jahr</strong> über ein Play-Abo — das ist der Teil, der mit Version 1.0
+      ausgeliefert wird. Dazu kommt später ein Jahr gratis für die Teilnahme
+      an der Forschung: Aufklärung im Volltext, Umfrage, dann eine <em>gestufte</em> Einwilligung —
+      Umfrageantworten und Schlafdaten separat erteilbar und separat widerrufbar.
+    </p>
+    <p>
+      Vor jedem Upload läuft die Anonymisierung: kein Name, keine Personen-, Geräte- oder
+      Account-Kennung, sondern ein rein lokal zugeordnetes Pseudonym; Zeitstempel auf fünf
+      Minuten gerundet, Datumsangaben als Wochentag plus Tagesoffset, Zeitzone nur als
+      Offset-Gruppe. Ein Test beweist, dass kein Klarname im Ergebnis vorkommt.
+    </p>
+    <p>
+      Schlafdaten sind Gesundheitsdaten. Es gelten revDSG und DSGVO parallel, die
+      Rechtsgrundlage ist ausdrückliche Einwilligung, und der Widerruf muss auch offline
+      funktionieren. Die App implementiert die technischen Voraussetzungen; die juristischen
+      Texte sind ausdrücklich <em>kein</em> Agenten-Task.
+    </p>
+  </div>
+</section>
+
+<section id="flag">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Der Schalter, hinter dem die Forschung wartet</h2></div>
+  <div class="prose">
+    <p>
+      Der Forschungsmodus wird in M8 vollständig gebaut — Umfrage-Motor, gestufte Einwilligung,
+      Anonymisierung, Warteschlange mit Wiederholungsstrategie, Widerruf — und ist trotzdem in
+      Version 1.0 nirgends zu sehen. Er liegt hinter einem einzigen Schalter, der im Build fest
+      auf <code>false</code> steht. Kein Server, keine Fernsteuerung, keine zusätzliche
+      Abhängigkeit; nur der Debug-Build lässt sich über eine Gradle-Property übersteuern.
+    </p>
+    <p>
+      Das ist keine Bequemlichkeit, sondern der Punkt: solange der Schalter aus ist, wird nichts
+      erhoben, nichts gespeichert, nichts hochgeladen — und das Data-Safety-Formular für
+      Version&nbsp;1.0 beschreibt wahrheitsgemäß <strong>keine</strong> Datenweitergabe. Ein
+      halbfertiger Forschungsmodus, den man bloss „nicht bewirbt", wäre genau hier eine Falle.
+    </p>
+  </div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Baustein</th><th>M8 — Logik</th><th>M11 — Inhalt</th></tr></thead>
+      <tbody>
+        <tr><td>Umfrage-Motor</td><td><span class="pill pro">fertig</span> inhaltsagnostisch, liest JSON</td><td>endgültiger Fragebogen</td></tr>
+        <tr><td>Aufklärung &amp; Einwilligung</td><td><span class="pill pro">fertig</span> Struktur, Versionierung, Hash</td><td>juristisch freigegebener Text</td></tr>
+        <tr><td>Anonymisierung</td><td><span class="pill pro">fertig</span> und testbar bewiesen</td><td>—</td></tr>
+        <tr><td>Upload</td><td><span class="pill pro">fertig</span> gegen einen Noop-Endpunkt</td><td>echter Endpunkt, TLS, Auth</td></tr>
+        <tr><td>Widerruf &amp; Löschung</td><td><span class="pill pro">fertig</span> inkl. Offline-Warteschlange</td><td>Löschbestätigung end-to-end</td></tr>
+        <tr><td>„Alle meine Daten löschen"</td><td><span class="pill free">nicht hinter dem Schalter</span></td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">
+    <span class="tag">Die Sicherung</span>
+    <p>
+      Ein Pflichttest schlägt fehl, sobald der Schalter an ist <em>und</em> ein Inhalt noch als
+      Entwurf markiert ist oder der Endpunkt noch der Platzhalter. Damit kann kein
+      Platzhalter-Einwilligungstext in einen Produktivbuild geraten — ein Text, unter dem jemand
+      echte Gesundheitsdaten freigäbe, wäre keine gültige Einwilligung. Diese Sicherung
+      abzuschwächen steht auf der Verbotsliste; entschärft wird sie in genau einem Task, dem, der
+      den Schalter scharfstellt und danach entfernt.
+    </p>
+  </div>
+</section>
+
+<section id="milestones">
+  <div class="sec-head"><span class="sec-num">09</span><h2>Meilensteine</h2></div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>#</th><th>Meilenstein</th><th>Abnahme</th></tr></thead>
+      <tbody>
+        <tr><td class="id">M0</td><td>Gerüst</td><td>Multi-Modul-Projekt baut, CI grün, leere App startet</td></tr>
+        <tr><td class="id">M1</td><td>Datenkern</td><td>Room-Schema v1, Intervall-Ableitung mit elf Pflichttests</td></tr>
+        <tr><td class="id">M2</td><td>Personen &amp; Onboarding</td><td>Personen verwaltbar, Namenserfassung liefert ein Ergebnis</td></tr>
+        <tr><td class="id">M3</td><td>Widget: Basis</td><td>Platzierbar, Live-Zeit, Ereigniserfassung, Zero-State</td></tr>
+        <tr><td class="id">M4</td><td>Widget: Räder</td><td>Fling-Auswahl, 60-Sekunden-Halten, Barrierefreiheit</td></tr>
+        <tr><td class="id">M5</td><td>Auswertung</td><td>Aktogramm, Vergleich, Korrektur von Einträgen</td></tr>
+        <tr><td class="id">M6</td><td>Export</td><td>CSV und JSON, verlustfreier Roundtrip</td></tr>
+        <tr><td class="id">M7</td><td>Monetarisierung</td><td>Abo, Freischaltungslogik, Offline-Kulanz</td></tr>
+        <tr><td class="id">M11</td><td>Forschung: Technik &amp; Logik</td><td>Umfrage-Motor, Einwilligung, Anonymisierung, Widerruf — Schalter aus</td></tr>
+        <tr><td class="id">M9</td><td>Pro-Analytik</td><td>Alle Kennzahlen belegt und mit Vorbehalt beschriftet</td></tr>
+        <tr><td class="id">M10</td><td>Release-Härtung v1.0</td><td>i18n, Barrierefreiheit, Data Safety ohne Weitergabe, Test-Track</td></tr>
+        <tr><td class="id">M11</td><td>Forschung: Inhalte <span class="pill block">blockiert</span></td><td>Texte, Fragebogen, echter Endpunkt, Schalter an → v1.1</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p>
+      M3 und M4 sind bewusst getrennt: ein Widget mit laufender Systemzeit und funktionierenden
+      Buttons ist bereits ein benutzbares Produkt. Die Räder sind eine Verbesserung, kein Blocker.
+      Alles bis einschließlich M10 lässt sich ohne eine einzige menschliche Entscheidung durchbauen —
+      M11 ist der einzige Meilenstein, der auf Antworten von außen wartet.
+    </p>
+  </div>
+</section>
+
+<section id="gates">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Wie der Agent arbeitet</h2></div>
+  <div class="prose">
+    <p>
+      Genau ein Task ist gleichzeitig offen. Nach jedem Task läuft das Verifikations-Gate —
+      <code>ktlintCheck</code>, <code>detekt</code>, <code>lint</code>, Unit-Tests. Ist auch nur
+      eines rot, gilt der Task als blockiert, nicht als erledigt. Tests abzuschalten oder
+      Lint-Regeln herabzustufen, um einen Build grün zu bekommen, steht auf der Verbotsliste.
+    </p>
+    <p>
+      Achtundzwanzig Pflichttestfälle sind namentlich vorgegeben — die Stellen, an denen
+      Schlaf-Tracker erfahrungsgemäß kaputtgehen: das Intervall über die Winterzeitumstellung,
+      das rückdatierte Ereignis, der verspätet feuernde Alarm, zwei Widgets derselben Person,
+      der Semikolon im Personennamen beim CSV-Export.
+    </p>
+    <p>
+      Wo der Bauplan schweigt, gilt: kleine Umsetzungsfrage selbst entscheiden und begründen —
+      Frage an einer Architekturentscheidung oder Modulgrenze nicht selbst entscheiden, sondern
+      blockieren und formulieren. Ein blockierter Task mit klarer Frage ist mehr wert als ein
+      erledigter Task mit falscher Annahme.
+    </p>
+  </div>
+</section>
+
+<section id="files">
+  <div class="sec-head"><span class="sec-num">11</span><h2>Das Paket</h2></div>
+  <div class="files">
+    <div class="file"><b>BUILD_PLAN.md</b><span>Die Spezifikation. Architektur, Datenmodell, Widget-Konzept, Recht, 28 Pflichttestfälle. Jeder Abschnitt hat eine stabile Anker-ID.</span></div>
+    <div class="file"><b>TASKS.md</b><span>Das Backlog. Elf Meilensteine, rund neunzig Tasks mit Abhängigkeiten, Aufwandsklasse und Verweis in die Spezifikation.</span></div>
+    <div class="file"><b>agent/GEMINI_RULES_ADDENDUM.md</b><span>Zum Anhängen an die bestehende <code>.geminirules</code>: Arbeitszyklus, vierzehn Verbote, Codekonventionen, Commit-Format, Grenzen des Agenten.</span></div>
+    <div class="file"><b>agent/ai_state.schema.json</b><span>JSON-Schema für <code>.ai_state.json</code>: Meilensteine, Tasks, Verifikationsergebnisse, Pflichttestfälle, Entscheidungen, offene Fragen.</span></div>
+    <div class="file"><b>agent/ai_state.example.json</b><span>Ausgefülltes Beispiel mitten in M1, mit einem blockierten Task und zwei Agenten-Entscheidungen. Als Startpunkt kopierbar.</span></div>
+  </div>
+  <div class="prose">
+    <p>
+      Die Verweise laufen ausschließlich über Anker-IDs wie <code>{#a-5-3}</code>, nie über
+      Überschriftentexte. Damit bleibt das Verweisnetz intakt, wenn das Dokument übersetzt oder
+      umformuliert wird — Codebezeichner, Pfade und IDs sind als nicht übersetzbar markiert.
+    </p>
+  </div>
+</section>
+
+<section id="open">
+  <div class="sec-head"><span class="sec-num">12</span><h2>Was ein Mensch entscheiden muss</h2></div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>#</th><th>Frage</th><th>Blockiert</th></tr></thead>
+      <tbody>
+        <tr><td class="id">Q1</td><td>Verantwortliche Stelle für die Forschungsdaten, Ethikvotum vorhanden?</td><td class="num">M11</td></tr>
+        <tr><td class="id">Q2</td><td>Wohin gehen die Forschungsdaten technisch — Endpunkt, Betreiber, Standort?</td><td class="num">M11</td></tr>
+        <tr><td class="id">Q3</td><td>Wer verfasst und prüft Datenschutzerklärung und Einwilligungstext?</td><td class="num">M11, M10</td></tr>
+        <tr><td class="id">Q4</td><td>Play-Entwicklerkonto, Abo-Produkt, Auszahlungsprofil eingerichtet?</td><td class="num">M7</td></tr>
+        <tr><td class="id">Q5</td><td>Finaler App-Name und Paket-ID — nach dem ersten Upload unveränderlich.</td><td class="num">M0</td></tr>
+        <tr><td class="id">Q6</td><td>Umfang und Fragen des Forschungsfragebogens.</td><td class="num">M11</td></tr>
+        <tr><td class="id">Q7</td><td>Tagesgrenze für die Auswertung einstellbar oder fest bei 18:00?</td><td class="num">M5</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p>
+      Vier dieser Fragen blockieren nur die <em>Scharfschaltung</em> des Forschungsmodus, nicht seinen Bau.
+      Bewusst nicht im Umfang: automatische Schlaferkennung über Sensoren, Cloud-Synchronisation,
+      Wear&nbsp;OS, Health&nbsp;Connect, Erinnerungen, Nutzerkonten. Jede dieser Erweiterungen
+      braucht eine eigene Entscheidung.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>Circadia — Bauplan für einen Schlaf-Wach-Zyklus-Tracker</span>
+  <span class="fm">v1.0 · de · Anker-IDs stabil</span>
+</footer>
+
+</div>

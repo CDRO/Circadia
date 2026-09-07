@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 1,
+  "project": "circadia",
+  "specFile": "BUILD_PLAN.md",
+  "backlogFile": "TASKS.md",
+  "updatedAt": "2026-09-06T09:14:00Z",
+  "updatedBy": "gemini-coding-agent",
+  "currentMilestone": "M1",
+  "currentTask": "T-107",
+  "milestones": {
+    "M0": {
+      "status": "completed",
+      "startedAt": "2026-09-01T08:00:00Z",
+      "completedAt": "2026-09-03T16:20:00Z",
+      "acceptanceVerified": true
+    },
+    "M1": {
+      "status": "in_progress",
+      "startedAt": "2026-09-04T09:00:00Z",
+      "completedAt": null,
+      "acceptanceVerified": false
+    },
+    "M2": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "acceptanceVerified": false
+    },
+    "M3": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "acceptanceVerified": false
+    },
+    "M4": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "acceptanceVerified": false
+    },
+    "M5": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "acceptanceVerified": false
+    },
+    "M6": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "acceptanceVerified": false
+    },
+    "M7": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "acceptanceVerified": false
+    },
+    "M8": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "acceptanceVerified": false,
+      "note": "Technik & Logik gegen Platzhalter, Schalter aus. Nicht blockiert."
+    },
+    "M9": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "acceptanceVerified": false
+    },
+    "M10": {
+      "status": "pending",
+      "startedAt": null,
+      "completedAt": null,
+      "acceptanceVerified": false
+    },
+    "M11": {
+      "status": "blocked",
+      "startedAt": null,
+      "completedAt": null,
+      "acceptanceVerified": false,
+      "note": "Inhalte & Scharfschaltung. Blockiert durch Q1, Q2, Q3, Q6."
+    }
+  },
+  "tasks": {
+    "T-001": {
+      "status": "completed",
+      "completedAt": "2026-09-01T11:30:00Z",
+      "commit": "a1b2c3d",
+      "filesTouched": [
+        "settings.gradle.kts",
+        "gradle/libs.versions.toml",
+        "build-logic/"
+      ]
+    },
+    "T-002": {
+      "status": "completed",
+      "completedAt": "2026-09-01T15:10:00Z",
+      "commit": "d4e5f6a",
+      "testsAdded": [
+        "ModuleDependencyRulesTest"
+      ]
+    },
+    "T-003": {
+      "status": "completed",
+      "completedAt": "2026-09-02T09:40:00Z",
+      "commit": "b7c8d9e"
+    },
+    "T-004": {
+      "status": "completed",
+      "completedAt": "2026-09-02T14:00:00Z",
+      "commit": "e1f2a3b"
+    },
+    "T-005": {
+      "status": "completed",
+      "completedAt": "2026-09-02T16:25:00Z",
+      "commit": "c4d5e6f"
+    },
+    "T-006": {
+      "status": "completed",
+      "completedAt": "2026-09-03T12:00:00Z",
+      "commit": "f7a8b9c"
+    },
+    "T-007": {
+      "status": "completed",
+      "completedAt": "2026-09-03T14:15:00Z",
+      "commit": "a9b0c1d",
+      "testsAdded": [
+        "FakeClockTest",
+        "TimeZoneHelperTest"
+      ]
+    },
+    "T-008": {
+      "status": "completed",
+      "completedAt": "2026-09-03T16:20:00Z",
+      "commit": "d2e3f4a"
+    },
+    "T-101": {
+      "status": "completed",
+      "completedAt": "2026-09-04T10:30:00Z",
+      "commit": "b5c6d7e"
+    },
+    "T-102": {
+      "status": "completed",
+      "completedAt": "2026-09-04T14:50:00Z",
+      "commit": "e8f9a0b",
+      "filesTouched": [
+        "core/database/schemas/1.json"
+      ]
+    },
+    "T-103": {
+      "status": "completed",
+      "completedAt": "2026-09-05T11:00:00Z",
+      "commit": "c1d2e3f",
+      "testsAdded": [
+        "PersonDaoTest",
+        "StateEventDaoTest"
+      ]
+    },
+    "T-104": {
+      "status": "completed",
+      "completedAt": "2026-09-05T12:20:00Z",
+      "commit": "f4a5b6c"
+    },
+    "T-105": {
+      "status": "completed",
+      "completedAt": "2026-09-05T16:40:00Z",
+      "commit": "a7b8c9d"
+    },
+    "T-106": {
+      "status": "completed",
+      "completedAt": "2026-09-06T08:50:00Z",
+      "commit": "d0e1f2a"
+    },
+    "T-107": {
+      "status": "in_progress",
+      "startedAt": "2026-09-06T09:00:00Z",
+      "attempts": 1,
+      "note": "Faelle 1-7 gruen. Faelle 8/9 (Sommer-/Winterzeit) rot: Dauer 1 h zu kurz, weil in DayBucketing mit plusDays statt mit ZonedDateTime gerechnet wurde."
+    },
+    "T-108": {
+      "status": "pending"
+    },
+    "T-109": {
+      "status": "pending"
+    },
+    "T-110": {
+      "status": "pending"
+    },
+    "T-009": {
+      "status": "pending"
+    },
+    "T-010": {
+      "status": "pending"
+    }
+  },
+  "verification": {
+    "lastRunAt": "2026-09-06T09:12:00Z",
+    "command": "./gradlew ktlintCheck detekt lint testDebugUnitTest",
+    "allPassed": false,
+    "results": {
+      "ktlintCheck": "pass",
+      "detekt": "pass",
+      "lint": "pass",
+      "unitTests": "fail",
+      "screenshotTests": "skipped",
+      "instrumentedTests": "skipped"
+    },
+    "failureSummary": "DeriveIntervalsUseCaseTest: 2 von 11 rot (Faelle 8 und 9, Zeitumstellung)."
+  },
+  "mandatoryTestCases": {
+    "1": {
+      "status": "passing",
+      "testName": "leere Eventliste ergibt leeres Ergebnis",
+      "file": "core/domain/src/test/.../DeriveIntervalsUseCaseTest.kt"
+    },
+    "2": {
+      "status": "passing",
+      "testName": "einzelnes Event ergibt offenes Intervall",
+      "file": "core/domain/src/test/.../DeriveIntervalsUseCaseTest.kt"
+    },
+    "3": {
+      "status": "passing",
+      "testName": "zwei gleiche Zustaende ergeben ein Intervall",
+      "file": "core/domain/src/test/.../DeriveIntervalsUseCaseTest.kt"
+    },
+    "4": {
+      "status": "passing",
+      "testName": "rueckdatiertes Event wird korrekt einsortiert",
+      "file": "core/domain/src/test/.../DeriveIntervalsUseCaseTest.kt"
+    },
+    "5": {
+      "status": "passing",
+      "testName": "voidetes Event wird ignoriert",
+      "file": "core/domain/src/test/.../DeriveIntervalsUseCaseTest.kt"
+    },
+    "6": {
+      "status": "passing",
+      "testName": "Korrektur ersetzt Original ohne es zu loeschen",
+      "file": "core/domain/src/test/.../DeriveIntervalsUseCaseTest.kt"
+    },
+    "7": {
+      "status": "passing",
+      "testName": "Intervall ueber Mitternacht bleibt zusammen",
+      "file": "core/domain/src/test/.../DeriveIntervalsUseCaseTest.kt"
+    },
+    "8": {
+      "status": "written",
+      "testName": "Intervall ueber Sommerzeitumstellung behaelt echte Dauer",
+      "file": "core/domain/src/test/.../DeriveIntervalsUseCaseTest.kt"
+    },
+    "9": {
+      "status": "written",
+      "testName": "Intervall ueber Winterzeitumstellung behaelt echte Dauer",
+      "file": "core/domain/src/test/.../DeriveIntervalsUseCaseTest.kt"
+    },
+    "10": {
+      "status": "missing"
+    },
+    "11": {
+      "status": "missing"
+    }
+  },
+  "featureFlags": {
+    "FEATURE_RESEARCH_MODE": {
+      "default": false,
+      "overridableInDebug": true,
+      "gradleProperty": "researchMode",
+      "placeholdersPending": true,
+      "removedByTask": "T-1105",
+      "note": "Forschungsmodus. Inhalte sind bis M11 Platzhalter; Testfall 35 verhindert das Scharfschalten."
+    }
+  },
+  "decisions": [
+    {
+      "id": "ADR-101",
+      "date": "2026-09-02",
+      "title": "JUnit5 statt JUnit4 fuer JVM-Module",
+      "context": "Robolectric und AndroidX-Test bringen JUnit4 mit; die reinen Kotlin-Module brauchen das nicht.",
+      "decision": "JUnit5 in :core:domain, :core:model, :core:common. JUnit4 nur dort, wo Robolectric oder AndroidX-Test noetig sind.",
+      "rationale": "Parametrisierte Tests und verschachtelte Testklassen erleichtern die Zeitzonen-Faelle erheblich.",
+      "alternativesRejected": [
+        "Ueberall JUnit4 fuer Einheitlichkeit"
+      ],
+      "supersedes": null,
+      "relatedTask": "T-004",
+      "specAnchor": "{#a-11}"
+    },
+    {
+      "id": "ADR-102",
+      "date": "2026-09-04",
+      "title": "PersonId als value class statt String",
+      "context": "PersonId und EventId sind beide UUID-Strings und lassen sich verwechseln.",
+      "decision": "Beide als @JvmInline value class.",
+      "rationale": "Der Compiler faengt Verwechslungen ab, zur Laufzeit kostenfrei.",
+      "alternativesRejected": [
+        "Rohe Strings mit Namenskonvention"
+      ],
+      "supersedes": null,
+      "relatedTask": "T-101",
+      "specAnchor": "{#a-5-1}"
+    }
+  ],
+  "openQuestions": [
+    {
+      "id": "Q1",
+      "question": "Wer ist die verantwortliche Stelle fuer die Forschungsdaten, und existiert ein Ethikvotum?",
+      "proposedAnswer": null,
+      "blocks": [
+        "M11",
+        "T-1102"
+      ],
+      "status": "open",
+      "answer": null,
+      "answeredAt": null
+    },
+    {
+      "id": "Q2",
+      "question": "Wohin gehen die Forschungsdaten technisch (Endpunkt, Betreiber, Standort)?",
+      "proposedAnswer": "Vorschlag: Schweizer Hosting, REST-Endpunkt mit mTLS, bis zur Klaerung wird nur die lokale Warteschlange implementiert.",
+      "blocks": [
+        "M11",
+        "T-1103"
+      ],
+      "status": "open",
+      "answer": null,
+      "answeredAt": null
+    },
+    {
+      "id": "Q3",
+      "question": "Wer verfasst und prueft Datenschutzerklaerung und Einwilligungstext?",
+      "proposedAnswer": null,
+      "blocks": [
+        "M11",
+        "T-1102",
+        "T-1104"
+      ],
+      "status": "open",
+      "answer": null,
+      "answeredAt": null
+    },
+    {
+      "id": "Q4",
+      "question": "Play-Entwicklerkonto vorhanden, Abo-Produkt circadia_pro angelegt?",
+      "proposedAnswer": null,
+      "blocks": [
+        "T-702",
+        "T-1007"
+      ],
+      "status": "open",
+      "answer": null,
+      "answeredAt": null
+    },
+    {
+      "id": "Q5",
+      "question": "Finaler App-Name und Paket-ID?",
+      "proposedAnswer": "ch.circadia.tracker",
+      "blocks": [
+        "T-1005"
+      ],
+      "status": "answered",
+      "answer": "ch.circadia.tracker bestaetigt",
+      "answeredAt": "2026-09-01T07:30:00Z"
+    },
+    {
+      "id": "Q6",
+      "question": "Umfang und Fragen des Forschungsfragebogens?",
+      "proposedAnswer": null,
+      "blocks": [
+        "M11",
+        "T-1101"
+      ],
+      "status": "open",
+      "answer": null,
+      "answeredAt": null
+    },
+    {
+      "id": "Q7",
+      "question": "Tagesgrenze einstellbar oder fest bei 18:00?",
+      "proposedAnswer": "Einstellbar, Default 18:00. Kostet wenig und rettet Schichtarbeitende.",
+      "blocks": [
+        "T-108"
+      ],
+      "status": "open",
+      "answer": null,
+      "answeredAt": null
+    }
+  ],
+  "constraints": [
+    "Android-Widgets koennen keine Wischgesten erkennen und keine Scrollposition auslesen. Siehe BUILD_PLAN.md {#a-2-1}.",
+    "updatePeriodMillis hat 30 Minuten als Minimum. Live-Zeit laeuft ueber eingebettetes TextClock. Siehe {#a-2-2}.",
+    "SCHEDULE_EXACT_ALARM und USE_EXACT_ALARM sind verboten. Siehe {#a-9-2}.",
+    "Play Billing mindestens Version 8, im Projekt 9.x. Siehe {#a-8-1}.",
+    "Room: kein fallbackToDestructiveMigration, Schemadateien werden eingecheckt. Siehe {#a-5-2}.",
+    "Performance-kritische Komponenten werden in C++ gebaut (:core:native, ADR-006) - aber erst nach einem Benchmark-Beleg. Siehe BUILD_PLAN.md {#a-3-4}.",
+    "Alle nativen .so muessen auf 16-KB-Speicherseiten ausgerichtet gelinkt sein. CI prueft das.",
+    "Der Forschungsmodus liegt hinter FEATURE_RESEARCH_MODE=false und wird gegen Platzhalter-Inhalte gebaut. Schalter niemals eigenmaechtig umlegen. Siehe BUILD_PLAN.md {#a-4-7} und {#a-8-4}.",
+    "Testfall 35 verhindert, dass ein Platzhalter-Einwilligungstext in einen Produktivbuild geraet. Diese Sicherung wird nur in T-1105 entschaerft."
+  ],
+  "sessionLog": [
+    {
+      "at": "2026-09-03T16:30:00Z",
+      "tasksCompleted": [
+        "T-006",
+        "T-007",
+        "T-008"
+      ],
+      "summary": "M0 abgeschlossen, CI gruen, leere App startet.",
+      "problems": ""
+    },
+    {
+      "at": "2026-09-05T17:00:00Z",
+      "tasksCompleted": [
+        "T-103",
+        "T-104",
+        "T-105"
+      ],
+      "summary": "Room-Schicht und Repositories fertig, DAO-Tests gruen.",
+      "problems": ""
+    },
+    {
+      "at": "2026-09-06T09:14:00Z",
+      "tasksCompleted": [
+        "T-106"
+      ],
+      "summary": "DeriveIntervalsUseCase implementiert, Tests 1-7 gruen.",
+      "problems": "Faelle 8 und 9 rot: Zeitumstellung falsch berechnet. T-107 bleibt in_progress."
+    }
+  ]
+}

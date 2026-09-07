@@ -1,0 +1,18 @@
+{
+  "environment": {
+    "os": "Windows",
+    "terminal": "PowerShell",
+    "syntax_restriction": "Never use && or ||. Execute all commands as separate, single lines."
+  },
+  "workflow_rules": {
+    "target_review_loops": 10,
+    "milestones_folder_path": "docs/artifacts/milestones"
+  },
+  "current_state": {
+    "active_milestone_file": "51_Advanced_Sampler",
+    "current_step": "Review Loop",
+    "loop_iteration": 9,
+    "last_action_completed": "Review loop 9/10: Polished WaveformEditor UI and added localized strings for all 31 locales.",
+    "next_immediate_action": "Review loop 10/10: Add unit tests for SamplePlayer reverse/trim logic and final build verification."
+  }
+}

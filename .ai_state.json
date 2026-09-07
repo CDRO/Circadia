@@ -3,10 +3,10 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-07T10:45:00Z",
+  "updatedAt": "2026-09-07T10:55:00Z",
   "updatedBy": "gemini-coding-agent",
   "currentMilestone": "M1",
-  "currentTask": "T-109",
+  "currentTask": "T-110",
   "github": {
     "milestoneNumber": 2,
     "milestoneTitle": "M1 - Datenkern",
@@ -197,7 +197,11 @@
       ]
     },
     "T-109": {
-      "status": "pending"
+      "status": "completed",
+      "completedAt": "2026-09-07T10:55:00Z",
+      "testsAdded": [
+        "RecordStateEventUseCaseTest"
+      ]
     },
     "T-110": {
       "status": "pending"

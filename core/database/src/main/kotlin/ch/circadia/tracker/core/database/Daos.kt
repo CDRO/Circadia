@@ -14,6 +14,9 @@ interface PersonDao {
     @Query("SELECT * FROM persons WHERE id = :id")
     fun getPerson(id: String): Flow<PersonEntity?>
 
+    @Query("SELECT * FROM persons WHERE id = :id")
+    suspend fun getPersonSync(id: String): PersonEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPerson(person: PersonEntity)
 

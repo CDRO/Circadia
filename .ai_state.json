@@ -6,7 +6,7 @@
   "updatedAt": "2026-09-07T12:00:00Z",
   "updatedBy": "gemini-coding-agent",
   "currentMilestone": "M3",
-  "currentTask": "T-301",
+  "currentTask": "T-306",
   "github": {
     "milestoneNumber": 2,
     "milestoneTitle": "M1 - Datenkern",
@@ -232,6 +232,29 @@
     "T-205": {
       "status": "completed",
       "completedAt": "2026-09-07T12:10:00Z"
+    },
+    "T-301": {
+      "status": "completed",
+      "completedAt": "2026-09-07T12:15:00Z"
+    },
+    "T-302": {
+      "status": "completed",
+      "completedAt": "2026-09-07T12:15:00Z"
+    },
+    "T-303": {
+      "status": "completed",
+      "completedAt": "2026-09-07T12:15:00Z"
+    },
+    "T-304": {
+      "status": "completed",
+      "completedAt": "2026-09-07T12:15:00Z"
+    },
+    "T-305": {
+      "status": "completed",
+      "completedAt": "2026-09-07T12:15:00Z"
+    },
+    "T-306": {
+      "status": "pending"
     }
   },
   "verification": {

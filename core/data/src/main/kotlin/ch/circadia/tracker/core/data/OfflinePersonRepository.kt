@@ -18,6 +18,9 @@ class OfflinePersonRepository(
         it?.toDomain()
     }
 
+    override suspend fun getPersonSync(id: PersonId): Person? = 
+        personDao.getPersonSync(id.value)?.toDomain()
+
     override suspend fun savePerson(person: Person) {
         personDao.insertPerson(person.toEntity())
     }

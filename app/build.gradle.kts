@@ -1,15 +1,16 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("circadia.hilt")
 }
 
 android {
     namespace = "ch.schmidlins.circadia"
-    compileSdk = 37
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "ch.circadia.tracker"
         minSdk = 26
-        targetSdk = 37
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 

@@ -1,0 +1,37 @@
+package ch.circadia.tracker.core.datastore
+
+import androidx.datastore.core.DataStore
+import ch.circadia.tracker.core.domain.SettingsRepository
+import java.time.LocalTime
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+
+class DataStoreSettingsRepository(
+    private val dataStore: DataStore<SettingsProto>
+) : SettingsRepository {
+
+    override fun getDayBoundary(): Flow<LocalTime> = dataStore.data.map {
+        LocalTime.of(it.dayBoundaryHour, it.dayBoundaryMinute)
+    }
+
+    override suspend fun setDayBoundary(time: LocalTime) {
+        dataStore.updateData {
+            it.toBuilder()
+                .setDayBoundaryHour(time.hour)
+                .setDayBoundaryMinute(time.minute)
+                .build()
+        }
+    }
+
+    override fun getUseDoublePlot(): Flow<Boolean> = dataStore.data.map {
+        it.useDoublePlot
+    }
+
+    override suspend fun setUseDoublePlot(use: Boolean) {
+        dataStore.updateData {
+            it.toBuilder()
+                .setUseDoublePlot(use)
+                .build()
+        }
+    }
+}

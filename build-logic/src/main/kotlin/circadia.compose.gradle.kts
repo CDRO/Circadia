@@ -9,4 +9,6 @@ project.dependencies.apply {
     add("implementation", "androidx.compose.ui:ui")
     add("implementation", "androidx.compose.ui:ui-tooling-preview")
     add("implementation", "androidx.compose.material3:material3")
+    add("implementation", "androidx.compose.foundation:foundation")
+    add("implementation", "androidx.compose.foundation:foundation-layout")
 }

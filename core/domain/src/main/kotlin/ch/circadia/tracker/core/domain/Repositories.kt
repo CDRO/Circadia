@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface PersonRepository {
     fun getPersons(): Flow<List<Person>>
     fun getPerson(id: PersonId): Flow<Person?>
+    suspend fun getPersonSync(id: PersonId): Person?
     suspend fun savePerson(person: Person)
     suspend fun deletePerson(id: PersonId)
 }

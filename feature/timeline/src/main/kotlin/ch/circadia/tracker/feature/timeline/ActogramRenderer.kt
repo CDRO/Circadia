@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
@@ -17,18 +18,23 @@ import ch.circadia.tracker.core.model.SleepState
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+data class ColoredInterval(
+    val interval: Interval,
+    val color: Color
+)
+
 data class ActogramDay(
     val date: LocalDate,
     val startTimeUtc: Long,
     val endTimeUtc: Long,
-    val intervals: List<Interval>
+    val coloredIntervals: List<ColoredInterval>
 )
 
 @Composable
 fun ActogramRenderer(
     days: List<ActogramDay>,
     modifier: Modifier = Modifier,
-    zoom: Float = 1f // T-504: prepared for zooming
+    zoom: Float = 1f
 ) {
     if (days.isEmpty()) return
 
@@ -73,22 +79,26 @@ fun ActogramRenderer(
                 strokeWidth = 1f
             )
 
-            // Draw intervals
-            day.intervals.filter { it.state == SleepState.ASLEEP }.forEach { interval ->
-                val startRatio = (interval.startUtcMillis - day.startTimeUtc).toFloat() / (day.endTimeUtc - day.startTimeUtc)
-                val endRatio = (interval.endUtcMillis - day.startTimeUtc).toFloat() / (day.endTimeUtc - day.startTimeUtc)
-                
-                val left = labelWidthPx + startRatio.coerceIn(0f, 1f) * chartWidth
-                val right = labelWidthPx + endRatio.coerceIn(0f, 1f) * chartWidth
-                
-                if (right > left) {
-                    drawRect(
-                        color = Color.Black,
-                        topLeft = Offset(left, top + 8.dp.toPx()),
-                        size = Size(right - left, rowHeightPx - 16.dp.toPx())
-                    )
+            // Draw intervals with Multiply blend mode
+            day.coloredIntervals
+                .filter { it.interval.state == SleepState.ASLEEP }
+                .forEach { colored ->
+                    val interval = colored.interval
+                    val startRatio = (interval.startUtcMillis - day.startTimeUtc).toFloat() / (day.endTimeUtc - day.startTimeUtc)
+                    val endRatio = (interval.endUtcMillis - day.startTimeUtc).toFloat() / (day.endTimeUtc - day.startTimeUtc)
+                    
+                    val left = labelWidthPx + startRatio.coerceIn(0f, 1f) * chartWidth
+                    val right = labelWidthPx + endRatio.coerceIn(0f, 1f) * chartWidth
+                    
+                    if (right > left) {
+                        drawRect(
+                            color = colored.color.copy(alpha = 0.6f),
+                            topLeft = Offset(left, top + 8.dp.toPx()),
+                            size = Size(right - left, rowHeightPx - 16.dp.toPx()),
+                            blendMode = BlendMode.Multiply
+                        )
+                    }
                 }
-            }
         }
         
         // Draw vertical time markers

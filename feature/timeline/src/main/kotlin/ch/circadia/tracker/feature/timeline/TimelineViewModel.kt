@@ -2,6 +2,7 @@ package ch.circadia.tracker.feature.timeline
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ch.circadia.tracker.core.designsystem.ChartColors
 import ch.circadia.tracker.core.domain.*
 import ch.circadia.tracker.core.model.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -50,11 +51,23 @@ class TimelineViewModel @Inject constructor(
             flowOf(TimelineUiState.Empty)
         } else {
             val effectiveSelectedIds = snapshot.selectedPersonIds.ifEmpty { setOf(snapshot.persons.first().id) }
-            val personId = effectiveSelectedIds.first()
             
-            stateEventRepository.getEvents(personId).map { events ->
-                val intervals = deriveIntervalsUseCase(events, System.currentTimeMillis())
-                var days = prepareActogramDays(intervals, snapshot.dayBoundary, snapshot.useDoublePlot)
+            val personFlows = effectiveSelectedIds.map { personId ->
+                stateEventRepository.getEvents(personId).map { events ->
+                    val color = snapshot.persons.find { it.id == personId }?.colorSeed?.let {
+                        ChartColors.colorForSeed(it)
+                    } ?: ChartColors.Palette.first()
+                    
+                    deriveIntervalsUseCase(events, System.currentTimeMillis()).map { 
+                        ColoredInterval(it, color)
+                    }
+                }
+            }
+            
+            combine(personFlows) { allColoredIntervalsList ->
+                val allColoredIntervals = allColoredIntervalsList.flatMap { it }
+                
+                var days = prepareActogramDays(allColoredIntervals, snapshot.dayBoundary, snapshot.useDoublePlot)
                 
                 val isLimited = snapshot.entitlement.source == EntitlementSource.FREE
                 if (isLimited) {
@@ -73,19 +86,19 @@ class TimelineViewModel @Inject constructor(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), TimelineUiState.Loading)
 
     private fun prepareActogramDays(
-        intervals: List<Interval>, 
+        coloredIntervals: List<ColoredInterval>, 
         dayBoundary: java.time.LocalTime,
         useDoublePlot: Boolean
     ): List<ActogramDay> {
-        if (intervals.isEmpty()) return emptyList()
+        if (coloredIntervals.isEmpty()) return emptyList()
         
         val bucketing = DayBucketing(dayBoundary)
         val zoneId = ZoneId.systemDefault().id
         
         val days = mutableListOf<ActogramDay>()
         
-        val firstStart = intervals.first().startUtcMillis
-        val lastEnd = intervals.last().endUtcMillis
+        val firstStart = coloredIntervals.minOf { it.interval.startUtcMillis }
+        val lastEnd = coloredIntervals.maxOf { it.interval.endUtcMillis }
         
         var currentBucketStart = bucketing.getDayBucketStart(firstStart, zoneId)
         val finalEnd = bucketing.getDayBucketStart(lastEnd, zoneId)
@@ -98,8 +111,8 @@ class TimelineViewModel @Inject constructor(
                 bucket1End
             }
             
-            val dayIntervals = intervals.filter { 
-                it.startUtcMillis < rowEnd && it.endUtcMillis > currentBucketStart
+            val dayIntervals = coloredIntervals.filter { 
+                it.interval.startUtcMillis < rowEnd && it.interval.endUtcMillis > currentBucketStart
             }
             
             days.add(
@@ -107,7 +120,7 @@ class TimelineViewModel @Inject constructor(
                     date = Instant.ofEpochMilli(currentBucketStart).atZone(ZoneId.of(zoneId)).toLocalDate(),
                     startTimeUtc = currentBucketStart,
                     endTimeUtc = rowEnd,
-                    intervals = dayIntervals
+                    coloredIntervals = dayIntervals
                 )
             )
             
@@ -117,8 +130,13 @@ class TimelineViewModel @Inject constructor(
         return days.reversed()
     }
 
-    fun selectPerson(personId: PersonId) {
-        _selectedPersonIds.value = setOf(personId)
+    fun togglePersonSelection(personId: PersonId) {
+        val current = _selectedPersonIds.value
+        _selectedPersonIds.value = if (personId in current) {
+            if (current.size > 1) current - personId else current // Keep at least one
+        } else {
+            current + personId
+        }
     }
 
     fun setUseDoublePlot(use: Boolean) {

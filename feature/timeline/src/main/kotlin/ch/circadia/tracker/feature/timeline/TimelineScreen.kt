@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ch.circadia.tracker.core.model.Person
+import ch.circadia.tracker.core.model.PersonId
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,7 +51,7 @@ fun TimelineScreen(
                         PersonSelector(
                             persons = state.persons,
                             selectedIds = state.selectedPersonIds,
-                            onPersonSelected = { viewModel.selectPerson(it.id) }
+                            onPersonToggle = { viewModel.togglePersonSelection(it.id) }
                         )
                         
                         if (state.isLimited) {
@@ -85,18 +86,20 @@ fun TimelineScreen(
 @Composable
 fun PersonSelector(
     persons: List<Person>,
-    selectedIds: Set<ch.circadia.tracker.core.model.PersonId>,
-    onPersonSelected: (Person) -> Unit
+    selectedIds: Set<PersonId>,
+    onPersonToggle: (Person) -> Unit
 ) {
     ScrollableTabRow(
         selectedTabIndex = persons.indexOfFirst { it.id in selectedIds }.coerceAtLeast(0),
-        edgePadding = 16.dp
+        edgePadding = 16.dp,
+        divider = {}
     ) {
         persons.forEach { person ->
-            Tab(
+            FilterChip(
                 selected = person.id in selectedIds,
-                onClick = { onPersonSelected(person) },
-                text = { Text(person.displayName) }
+                onClick = { onPersonToggle(person) },
+                label = { Text(person.displayName) },
+                modifier = Modifier.padding(horizontal = 4.dp)
             )
         }
     }

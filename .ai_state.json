@@ -3,10 +3,10 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-07T17:55:00Z",
+  "updatedAt": "2026-09-07T18:05:00Z",
   "updatedBy": "gemini-coding-agent",
   "currentMilestone": "M5",
-  "currentTask": "T-505",
+  "currentTask": "T-506",
   "github": {
     "milestoneNumber": 5,
     "milestoneTitle": "M5 - Auswertung",
@@ -68,7 +68,8 @@
       "status": "pending",
       "startedAt": null,
       "completedAt": null,
-      "acceptanceVerified": false
+      "acceptanceVerified": false,
+      "note": "Technik & Logik gegen Platzhalter, Schalter aus. Nicht blockiert."
     },
     "M9": {
       "status": "pending",
@@ -94,10 +95,11 @@
     "T-502": { "status": "completed", "completedAt": "2026-09-07T17:35:00Z" },
     "T-503": { "status": "completed", "completedAt": "2026-09-07T17:45:00Z" },
     "T-504": { "status": "completed", "completedAt": "2026-09-07T17:55:00Z" },
-    "T-505": { "status": "pending" }
+    "T-505": { "status": "completed", "completedAt": "2026-09-07T18:05:00Z" },
+    "T-506": { "status": "pending" }
   },
   "verification": {
-    "lastRunAt": "2026-09-07T17:55:00Z",
+    "lastRunAt": "2026-09-07T18:05:00Z",
     "command": ".\\gradlew.bat ktlintCheck detekt lint",
     "allPassed": true,
     "results": {
@@ -185,6 +187,12 @@
       "at": "2026-09-07T17:55:00Z",
       "tasksCompleted": [ "T-504" ],
       "summary": "T-504 abgeschlossen. 7-Tage-Begrenzung fuer Free-Entitlement im ViewModel implementiert. UI-Hinweis bei Limitierung hinzugefuegt.",
+      "problems": ""
+    },
+    {
+      "at": "2026-09-07T18:05:00Z",
+      "tasksCompleted": [ "T-505" ],
+      "summary": "T-505 abgeschlossen. Mehrfachauswahl fuer Personen und ueberlagerte Darstellung (BlendMode.Multiply) im Aktogramm implementiert.",
       "problems": ""
     }
   ],

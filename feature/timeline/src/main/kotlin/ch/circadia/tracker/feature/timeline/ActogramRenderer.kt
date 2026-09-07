@@ -1,16 +1,19 @@
 package ch.circadia.tracker.feature.timeline
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import ch.circadia.tracker.core.designsystem.ChartColors
 import ch.circadia.tracker.core.model.*
@@ -34,6 +37,7 @@ data class ActogramDay(
 fun ActogramRenderer(
     days: List<ActogramDay>,
     selectedPersonIds: List<PersonId>,
+    onIntervalClick: (Interval) -> Unit,
     useSideBySide: Boolean = false,
     modifier: Modifier = Modifier,
     zoom: Float = 1f
@@ -50,6 +54,44 @@ fun ActogramRenderer(
         modifier = modifier
             .fillMaxWidth()
             .height(totalHeight)
+            .pointerInput(days, selectedPersonIds, useSideBySide, zoom) {
+                detectTapGestures { offset ->
+                    val rowHeightPx = rowHeight.toPx()
+                    val labelWidthPx = labelWidth.toPx()
+                    val chartWidth = size.width * zoom - labelWidthPx
+                    
+                    val rowIndex = (offset.y / rowHeightPx).toInt()
+                    if (rowIndex in days.indices) {
+                        val day = days[rowIndex]
+                        val top = rowIndex * rowHeightPx
+                        
+                        day.coloredIntervals
+                            .filter { it.interval.state == SleepState.ASLEEP }
+                            .forEachIndexed { _, colored ->
+                                val interval = colored.interval
+                                val startRatio = (interval.startUtcMillis - day.startTimeUtc).toFloat() / (day.endTimeUtc - day.startTimeUtc)
+                                val endRatio = (interval.endUtcMillis - day.startTimeUtc).toFloat() / (day.endTimeUtc - day.startTimeUtc)
+                                
+                                val left = labelWidthPx + startRatio.coerceIn(0f, 1f) * chartWidth
+                                val right = labelWidthPx + endRatio.coerceIn(0f, 1f) * chartWidth
+                                
+                                val rectTop = if (useSideBySide) {
+                                    val pIndex = selectedPersonIds.indexOf(interval.personId)
+                                    top + 8.dp.toPx() + pIndex * 24.dp.toPx()
+                                } else {
+                                    top + 8.dp.toPx()
+                                }
+                                val rectHeight = if (useSideBySide) 16.dp.toPx() else rowHeightPx - 16.dp.toPx()
+                                
+                                val rect = Rect(left, rectTop, right, rectTop + rectHeight)
+                                if (rect.contains(offset)) {
+                                    onIntervalClick(interval)
+                                    return@detectTapGestures
+                                }
+                            }
+                    }
+                }
+            }
     ) {
         val width = size.width * zoom
         val rowHeightPx = rowHeight.toPx()

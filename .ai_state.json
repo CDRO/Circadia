@@ -3,10 +3,10 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-07T18:25:00Z",
+  "updatedAt": "2026-09-07T18:35:00Z",
   "updatedBy": "gemini-coding-agent",
   "currentMilestone": "M5",
-  "currentTask": "T-508",
+  "currentTask": "T-509",
   "github": {
     "milestoneNumber": 5,
     "milestoneTitle": "M5 - Auswertung",
@@ -98,10 +98,11 @@
     "T-505": { "status": "completed", "completedAt": "2026-09-07T18:05:00Z" },
     "T-506": { "status": "completed", "completedAt": "2026-09-07T18:15:00Z" },
     "T-507": { "status": "completed", "completedAt": "2026-09-07T18:25:00Z" },
-    "T-508": { "status": "pending" }
+    "T-508": { "status": "completed", "completedAt": "2026-09-07T18:35:00Z" },
+    "T-509": { "status": "pending" }
   },
   "verification": {
-    "lastRunAt": "2026-09-07T18:25:00Z",
+    "lastRunAt": "2026-09-07T18:35:00Z",
     "command": ".\\gradlew.bat ktlintCheck detekt lint",
     "allPassed": true,
     "results": {
@@ -206,7 +207,13 @@
     {
       "at": "2026-09-07T18:25:00Z",
       "tasksCompleted": [ "T-507" ],
-      "summary": "T-507 abgeschlossen. CalculateDailyMetricsUseCase implementiert und Zusammenfassung in TimelineScreen integriert.",
+      "summary": "T-507 abgeschlossen. CalculateDailyMetricsUseCase implementiert.",
+      "problems": ""
+    },
+    {
+      "at": "2026-09-07T18:35:00Z",
+      "tasksCompleted": [ "T-508" ],
+      "summary": "T-508 abgeschlossen. CorrectionSheet mit TimePicker implementiert. Logik fuer CORRECTION-Events und Voiding in ViewModel integriert. Interval clickable gemacht.",
       "problems": ""
     }
   ],

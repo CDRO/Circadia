@@ -29,7 +29,8 @@ class DeriveIntervalsUseCase(private val clock: Clock) {
                         endUtcMillis = nextEvent.occurredAtUtcMillis,
                         isOpen = false,
                         startZoneId = currentEvent.timeZoneId,
-                        endZoneId = nextEvent.timeZoneId
+                        endZoneId = nextEvent.timeZoneId,
+                        startEventId = currentEvent.id
                     )
                 )
                 currentEvent = nextEvent
@@ -44,7 +45,8 @@ class DeriveIntervalsUseCase(private val clock: Clock) {
                 endUtcMillis = windowEndUtc,
                 isOpen = true,
                 startZoneId = currentEvent.timeZoneId,
-                endZoneId = currentEvent.timeZoneId
+                endZoneId = currentEvent.timeZoneId,
+                startEventId = currentEvent.id
             )
         )
 

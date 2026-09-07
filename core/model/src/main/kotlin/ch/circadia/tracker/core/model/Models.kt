@@ -37,6 +37,7 @@ data class Interval(
     val isOpen: Boolean,
     val startZoneId: String,
     val endZoneId: String,
+    val startEventId: String
 )
 
 enum class EntitlementSource { FREE, SUBSCRIPTION, RESEARCH }

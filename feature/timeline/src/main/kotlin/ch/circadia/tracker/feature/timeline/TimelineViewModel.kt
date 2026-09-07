@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.ZoneId
+import java.util.UUID
 import javax.inject.Inject
 
 sealed interface TimelineUiState {
@@ -163,6 +164,29 @@ class TimelineViewModel @Inject constructor(
     fun setUseSideBySide(use: Boolean) {
         viewModelScope.launch {
             settingsRepository.setUseSideBySide(use)
+        }
+    }
+
+    fun saveCorrection(
+        interval: Interval,
+        newOccurredAt: Long,
+        note: String?
+    ) {
+        viewModelScope.launch {
+            val correction = StateEvent(
+                id = UUID.randomUUID().toString(),
+                personId = interval.personId,
+                state = interval.state,
+                occurredAtUtcMillis = newOccurredAt,
+                timeZoneId = ZoneId.systemDefault().id,
+                source = EventSource.CORRECTION,
+                recordedAtUtcMillis = System.currentTimeMillis(),
+                supersedesEventId = interval.startEventId,
+                note = note
+            )
+            stateEventRepository.addEvent(correction)
+            // Void the original event (P2: append-only, but we mark as voided)
+            stateEventRepository.voidEvent(interval.startEventId, System.currentTimeMillis())
         }
     }
 }

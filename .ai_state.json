@@ -3,10 +3,10 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-07T18:15:00Z",
+  "updatedAt": "2026-09-07T18:25:00Z",
   "updatedBy": "gemini-coding-agent",
   "currentMilestone": "M5",
-  "currentTask": "T-507",
+  "currentTask": "T-508",
   "github": {
     "milestoneNumber": 5,
     "milestoneTitle": "M5 - Auswertung",
@@ -97,10 +97,11 @@
     "T-504": { "status": "completed", "completedAt": "2026-09-07T17:55:00Z" },
     "T-505": { "status": "completed", "completedAt": "2026-09-07T18:05:00Z" },
     "T-506": { "status": "completed", "completedAt": "2026-09-07T18:15:00Z" },
-    "T-507": { "status": "pending" }
+    "T-507": { "status": "completed", "completedAt": "2026-09-07T18:25:00Z" },
+    "T-508": { "status": "pending" }
   },
   "verification": {
-    "lastRunAt": "2026-09-07T18:15:00Z",
+    "lastRunAt": "2026-09-07T18:25:00Z",
     "command": ".\\gradlew.bat ktlintCheck detekt lint",
     "allPassed": true,
     "results": {
@@ -199,7 +200,13 @@
     {
       "at": "2026-09-07T18:15:00Z",
       "tasksCompleted": [ "T-506" ],
-      "summary": "T-506 abgeschlossen. Side-by-side Modus (Tracks) im Aktogramm-Renderer und ViewModel implementiert. SettingsRepository um useSideBySide erweitert.",
+      "summary": "T-506 abgeschlossen. Side-by-side Modus (Tracks) im Aktogramm-Renderer und ViewModel implementiert.",
+      "problems": ""
+    },
+    {
+      "at": "2026-09-07T18:25:00Z",
+      "tasksCompleted": [ "T-507" ],
+      "summary": "T-507 abgeschlossen. CalculateDailyMetricsUseCase implementiert und Zusammenfassung in TimelineScreen integriert.",
       "problems": ""
     }
   ],

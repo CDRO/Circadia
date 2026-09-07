@@ -13,9 +13,7 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.dp
 import ch.circadia.tracker.core.designsystem.ChartColors
-import ch.circadia.tracker.core.model.Interval
-import ch.circadia.tracker.core.model.PersonId
-import ch.circadia.tracker.core.model.SleepState
+import ch.circadia.tracker.core.model.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -28,7 +26,8 @@ data class ActogramDay(
     val date: LocalDate,
     val startTimeUtc: Long,
     val endTimeUtc: Long,
-    val coloredIntervals: List<ColoredInterval>
+    val coloredIntervals: List<ColoredInterval>,
+    val metrics: List<DailyMetrics>
 )
 
 @Composable

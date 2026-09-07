@@ -34,7 +34,8 @@ class TimelineViewModel @Inject constructor(
     private val stateEventRepository: StateEventRepository,
     private val settingsRepository: SettingsRepository,
     private val entitlementRepository: EntitlementRepository,
-    private val deriveIntervalsUseCase: DeriveIntervalsUseCase
+    private val deriveIntervalsUseCase: DeriveIntervalsUseCase,
+    private val calculateDailyMetricsUseCase: CalculateDailyMetricsUseCase
 ) : ViewModel() {
 
     private val _selectedPersonIds = MutableStateFlow<Set<PersonId>>(emptySet())
@@ -122,12 +123,19 @@ class TimelineViewModel @Inject constructor(
                 it.interval.startUtcMillis < rowEnd && it.interval.endUtcMillis > currentBucketStart
             }
             
+            val dayMetrics = dayIntervals
+                .groupBy { it.interval.personId }
+                .mapNotNull { (_, personIntervals) ->
+                    calculateDailyMetricsUseCase(personIntervals.map { it.interval }, currentBucketStart, bucket1End)
+                }
+
             days.add(
                 ActogramDay(
                     date = Instant.ofEpochMilli(currentBucketStart).atZone(ZoneId.of(zoneId)).toLocalDate(),
                     startTimeUtc = currentBucketStart,
                     endTimeUtc = rowEnd,
-                    coloredIntervals = dayIntervals
+                    coloredIntervals = dayIntervals,
+                    metrics = dayMetrics
                 )
             )
             

@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ch.circadia.tracker.core.model.DailyMetrics
 import ch.circadia.tracker.core.model.Person
 import ch.circadia.tracker.core.model.PersonId
 
@@ -86,6 +87,14 @@ fun TimelineScreen(
                                     useSideBySide = state.useSideBySide
                                 )
                             }
+                            
+                            item {
+                                MetricsSummary(
+                                    persons = state.persons,
+                                    selectedIds = state.selectedPersonIds,
+                                    latestMetrics = state.actogramDays.firstOrNull()?.metrics ?: emptyList()
+                                )
+                            }
                         }
                     }
                 }
@@ -101,7 +110,7 @@ fun PersonSelector(
     onPersonToggle: (Person) -> Unit
 ) {
     ScrollableTabRow(
-        selectedTabIndex = 0, // Not really used since we use chips
+        selectedTabIndex = 0,
         edgePadding = 16.dp,
         divider = {},
         indicator = {}
@@ -113,6 +122,31 @@ fun PersonSelector(
                 label = { Text(person.displayName) },
                 modifier = Modifier.padding(horizontal = 4.dp)
             )
+        }
+    }
+}
+
+@Composable
+fun MetricsSummary(
+    persons: List<Person>,
+    selectedIds: Set<PersonId>,
+    latestMetrics: List<DailyMetrics>
+) {
+    Column(modifier = Modifier.padding(16.dp)) {
+        Text("Zusammenfassung (Letzter Tag)", style = MaterialTheme.typography.titleMedium)
+        Spacer(modifier = Modifier.height(8.dp))
+        
+        selectedIds.forEach { personId ->
+            val person = persons.find { it.id == personId }
+            val metrics = latestMetrics.find { it.personId == personId }
+            
+            if (person != null && metrics != null) {
+                Text("${person.displayName}:", style = MaterialTheme.typography.bodyMedium)
+                Text("- Schlafdauer: ${metrics.totalSleepMillis / 3600000}h ${(metrics.totalSleepMillis % 3600000) / 60000}m")
+                Text("- Episoden: ${metrics.sleepEpisodes}")
+                Text("- Längste Wachphase: ${metrics.maxAwakeMillis / 3600000}h")
+                Spacer(modifier = Modifier.height(8.dp))
+            }
         }
     }
 }

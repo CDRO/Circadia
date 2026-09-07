@@ -10,7 +10,9 @@ translation_notes: Codeblöcke, Pfade, Befehle und Bezeichner nicht übersetzen.
 
 # Ergänzungen für `.geminirules` {#g-0}
 
-Diese Regeln in die vorhandene `.geminirules` übernehmen. Sie sind projektspezifisch und ergänzen die allgemeinen Konventionen; sie ersetzen sie nicht.
+> **Hinweis:** Für dieses Projekt gibt es bereits eine zusammengeführte, einbaufertige Datei: `agent/geminirules-merged.txt`. Sie enthält diese Regeln **plus** den bestehenden Windows-/PowerShell- und GitHub-Workflow und ersetzt die vorhandene `.geminirules` vollständig. Dieses Dokument hier ist die Referenzfassung der reinen Projektregeln — nützlich, wenn der Zielworkflow ein anderer ist.
+
+Diese Regeln sind projektspezifisch und ergänzen die allgemeinen Konventionen; sie ersetzen sie nicht.
 
 ---
 

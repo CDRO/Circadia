@@ -22,14 +22,21 @@ Bauplan für einen Schlaf-Wach-Zyklus-Tracker (Android), geschrieben für einen 
 
 ## Einrichtung {#r-2}
 
-```bash
-cp BUILD_PLAN.md TASKS.md            <projekt>/
-cp agent/ai_state.schema.json        <projekt>/.ai_state.schema.json
-cp agent/ai_state.example.json       <projekt>/.ai_state.json   # danach Tasks auf "pending" zurücksetzen
-cat agent/GEMINI_RULES_ADDENDUM.md >> <projekt>/.geminirules
+In PowerShell, im Projektwurzelverzeichnis:
+
+```powershell
+New-Item -ItemType Directory -Force -Path docs\artifacts
+Copy-Item BUILD_PLAN.md                docs\artifacts\
+Copy-Item TASKS.md                     docs\artifacts\
+Copy-Item docs\artifacts\MASTER_PLAN.md docs\artifacts\
+Copy-Item agent\ai_state.schema.json  .ai_state.schema.json
+Copy-Item agent\ai_state.example.json .ai_state.json
+Copy-Item agent\geminirules-merged.txt .geminirules -Force
 ```
 
-Danach `.ai_state.json` leeren: alle `tasks` auf `"status": "pending"`, alle `milestones` auf `"pending"`, `currentMilestone` auf `"M0"`, `currentTask` auf `null`, `sessionLog` und `decisions` leeren. Die `openQuestions` und `constraints` bleiben stehen – sie gelten von Anfang an.
+> **Wichtig:** `.geminirules` wird **ersetzt**, nicht ergänzt. `geminirules-merged.txt` ist die fertige Datei — sie enthält den bestehenden Windows-/PowerShell- und GitHub-Workflow **und** die Projektregeln. Ein blosses Anhängen von `GEMINI_RULES_ADDENDUM.md` würde widersprüchliche Regeln erzeugen (`./gradlew` gegen `.\gradlew.bat`, verkettete Befehle, zwei verschiedene Commit-Formate). Das Addendum bleibt als Referenz erhalten, ist aber nicht mehr die Datei, die man einbaut.
+
+Danach `.ai_state.json` leeren: alle `tasks` auf `"status": "pending"`, alle `milestones` auf `"pending"`, `currentMilestone` auf `"M0"`, `currentTask` auf `null`, `github` und `reviewLoop` zurücksetzen, `sessionLog` und `decisions` leeren. Die `openQuestions`, `constraints` und `featureFlags` bleiben stehen – sie gelten von Anfang an.
 
 ## Zweiter technischer Vorbehalt: nativer Code {#r-2b}
 
@@ -38,6 +45,23 @@ Performance-kritische Komponenten werden in C++ gebaut, nicht in Kotlin: die Rhy
 ## Forschungsmodus: gebaut, aber aus {#r-2c}
 
 M8 baut die gesamte Logik des Forschungsmodus — Umfrage-Motor, gestufte Einwilligung, Anonymisierung, Warteschlange, Widerruf — gegen Platzhalter-Inhalte und hinter `FEATURE_RESEARCH_MODE = false`. In der App ist davon nichts sichtbar, es wird nichts erhoben und nichts hochgeladen; das Data-Safety-Formular für v1.0 beschreibt entsprechend keine Datenweitergabe. Die Inhalte — Fragebogen, freigegebene Texte, echter Endpunkt — kommen in M11 und münden in v1.1. Ein Pflichttest verhindert, dass der Schalter angeht, solange Platzhalter im Spiel sind. Details in `BUILD_PLAN.md {#a-4-7}`, `{#a-8-4}` und `{#a-8-5}`.
+
+## Ablage im Projekt {#r-2d}
+
+```
+<projekt>/
+├─ .geminirules                    ← agent/geminirules-merged.txt
+├─ .ai_state.json                  ← agent/ai_state.example.json, geleert
+├─ .ai_state.schema.json
+└─ docs/artifacts/
+   ├─ MASTER_PLAN.md               ← Einstieg: Meilensteinliste
+   ├─ BUILD_PLAN.md                ← Spezifikation
+   ├─ TASKS.md                     ← Backlog
+   └─ milestones/
+      └─ M3-widget-basis/          ← vom Agenten je Meilenstein angelegt
+         ├─ implementation_plan.md
+         └─ tasks.md
+```
 
 ## Verweissystem {#r-3}
 

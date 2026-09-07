@@ -1,12 +1,20 @@
 {
   "schemaVersion": 1,
   "project": "circadia",
-  "specFile": "BUILD_PLAN.md",
-  "backlogFile": "TASKS.md",
+  "specFile": "docs/artifacts/BUILD_PLAN.md",
+  "backlogFile": "docs/artifacts/TASKS.md",
   "updatedAt": "2026-09-06T09:14:00Z",
   "updatedBy": "gemini-coding-agent",
   "currentMilestone": "M1",
   "currentTask": "T-107",
+  "github": {
+    "milestoneNumber": 2,
+    "milestoneTitle": "M1 - Datenkern",
+    "issueNumber": 12,
+    "prNumber": 13,
+    "branch": "milestone/M1-datenkern",
+    "artifactsDir": "docs/artifacts/milestones/M1-datenkern/"
+  },
   "milestones": {
     "M0": {
       "status": "completed",
@@ -197,7 +205,7 @@
   },
   "verification": {
     "lastRunAt": "2026-09-06T09:12:00Z",
-    "command": "./gradlew ktlintCheck detekt lint testDebugUnitTest",
+    "command": ".\\gradlew.bat ktlintCheck; detekt; lint; testDebugUnitTest (einzeln aufgerufen)",
     "allPassed": false,
     "results": {
       "ktlintCheck": "pass",
@@ -261,6 +269,14 @@
     "11": {
       "status": "missing"
     }
+  },
+  "reviewLoop": {
+    "milestone": null,
+    "iteration": 0,
+    "consecutiveNoFindings": 0,
+    "endedEarly": false,
+    "endedEarlyReason": null,
+    "iterations": []
   },
   "featureFlags": {
     "FEATURE_RESEARCH_MODE": {
@@ -396,7 +412,9 @@
     "Performance-kritische Komponenten werden in C++ gebaut (:core:native, ADR-006) - aber erst nach einem Benchmark-Beleg. Siehe BUILD_PLAN.md {#a-3-4}.",
     "Alle nativen .so muessen auf 16-KB-Speicherseiten ausgerichtet gelinkt sein. CI prueft das.",
     "Der Forschungsmodus liegt hinter FEATURE_RESEARCH_MODE=false und wird gegen Platzhalter-Inhalte gebaut. Schalter niemals eigenmaechtig umlegen. Siehe BUILD_PLAN.md {#a-4-7} und {#a-8-4}.",
-    "Testfall 35 verhindert, dass ein Platzhalter-Einwilligungstext in einen Produktivbuild geraet. Diese Sicherung wird nur in T-1105 entschaerft."
+    "Testfall 35 verhindert, dass ein Platzhalter-Einwilligungstext in einen Produktivbuild geraet. Diese Sicherung wird nur in T-1105 entschaerft.",
+    "Windows 11 / PowerShell: immer .\\gradlew.bat, nie ./gradlew, und keine && / || Verkettungen.",
+    "Ein Meilenstein = ein GitHub-Issue = ein Branch = ein PR. Ein Commit = ein Task."
   ],
   "sessionLog": [
     {
@@ -427,5 +445,6 @@
       "summary": "DeriveIntervalsUseCase implementiert, Tests 1-7 gruen.",
       "problems": "Faelle 8 und 9 rot: Zeitumstellung falsch berechnet. T-107 bleibt in_progress."
     }
-  ]
+  ],
+  "masterPlanFile": "docs/artifacts/MASTER_PLAN.md"
 }

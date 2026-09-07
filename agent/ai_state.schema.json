@@ -9,8 +9,9 @@
   "properties": {
     "schemaVersion": { "type": "integer", "const": 1 },
     "project": { "type": "string" },
-    "specFile": { "type": "string", "default": "BUILD_PLAN.md" },
-    "backlogFile": { "type": "string", "default": "TASKS.md" },
+    "specFile": { "type": "string", "default": "docs/artifacts/BUILD_PLAN.md" },
+    "masterPlanFile": { "type": "string", "default": "docs/artifacts/MASTER_PLAN.md" },
+    "backlogFile": { "type": "string", "default": "docs/artifacts/TASKS.md" },
     "updatedAt": { "type": "string", "format": "date-time" },
     "updatedBy": { "type": "string", "description": "Agentenkennung oder Modellname" },
 
@@ -151,6 +152,53 @@
           "status": { "enum": ["open", "answered", "obsolete"] },
           "answer": { "type": ["string", "null"] },
           "answeredAt": { "type": ["string", "null"], "format": "date-time" }
+        }
+      }
+    },
+
+    "github": {
+      "type": "object",
+      "description": "GitHub-Kontext des aktuellen Meilensteins. Ein Meilenstein = ein Issue = ein Branch = ein PR. Commits sind Tasks.",
+      "additionalProperties": false,
+      "properties": {
+        "milestoneNumber": { "type": ["integer", "null"] },
+        "milestoneTitle": { "type": ["string", "null"] },
+        "issueNumber": { "type": ["integer", "null"] },
+        "prNumber": { "type": ["integer", "null"] },
+        "branch": { "type": ["string", "null"], "description": "z.B. milestone/M3-widget-basis" },
+        "artifactsDir": { "type": ["string", "null"], "description": "docs/artifacts/milestones/<ID>-<slug>/" }
+      }
+    },
+
+    "reviewLoop": {
+      "type": "object",
+      "description": "Zustand der Review & Repair Loop des aktuellen Meilensteins. Laeuft erst, wenn alle Tasks gruen sind.",
+      "additionalProperties": false,
+      "properties": {
+        "milestone": { "type": ["string", "null"], "pattern": "^M(1[01]|[0-9])$" },
+        "iteration": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "consecutiveNoFindings": { "type": "integer", "minimum": 0 },
+        "endedEarly": { "type": "boolean", "default": false },
+        "endedEarlyReason": { "type": ["string", "null"] },
+        "iterations": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "required": ["n", "focus", "finding"],
+            "additionalProperties": false,
+            "properties": {
+              "n": { "type": "integer", "minimum": 1, "maximum": 10 },
+              "focus": {
+                "enum": ["acceptance", "mandatory-tests", "time-and-dst", "ui-states",
+                         "module-boundaries", "threading", "accessibility", "i18n",
+                         "privacy-and-flags", "performance"]
+              },
+              "finding": { "type": "string", "description": "Was gefunden und geaendert wurde, oder 'keine Befunde'." },
+              "changed": { "type": "boolean" },
+              "commit": { "type": ["string", "null"] }
+            }
+          }
         }
       }
     },

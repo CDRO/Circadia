@@ -4,29 +4,207 @@
 - TERMINAL: Windows PowerShell.
 - CRITICAL: Never use Linux syntax chains like `&&` or `||`.
 - CRITICAL: Execute commands sequentially as separate terminal calls. If multiple operations are needed, run them one by one.
+- CRITICAL: The Gradle wrapper is always `.\gradlew.bat`, never `./gradlew`. Any command written as `./gradlew ...` in the project documents means `.\gradlew.bat ...` here.
+
+# Project Documents & Context
+Authoritative documents, in this order of precedence. If two disagree, the higher one wins.
+
+| # | Document | Role |
+|---|---|---|
+| 1 | `.geminirules` (this file) | How to work. Conventions, prohibitions, boundaries. |
+| 2 | `.ai_state.json` | Where you are. Progress, decisions, open questions, feature flags. Validated against `.ai_state.schema.json`. |
+| 3 | `docs/artifacts/MASTER_PLAN.md` | Milestone list M0–M11 in order, with acceptance criteria. |
+| 4 | `docs/artifacts/BUILD_PLAN.md` | The specification. Architecture, data model, widget, monetisation, privacy, 36 mandatory test cases. |
+| 5 | `docs/artifacts/TASKS.md` | The full backlog. ~107 tasks with IDs, dependencies and spec anchors. |
+
+Per-milestone working documents live in `docs/artifacts/milestones/<MILESTONE-ID>-<slug>/`:
+- `implementation_plan.md` — the relevant excerpt from `BUILD_PLAN.md` plus your concrete approach.
+- `tasks.md` — the tasks of that milestone, copied from `TASKS.md`, with status.
+
+Cross-references use stable anchor IDs such as `{#a-5-3}` (BUILD_PLAN) and `{#t-m3}` (TASKS). Never rename an anchor. A task row's last column names the spec section you must read before implementing it.
+
+# Unit Mapping
+- **GitHub milestone** = one plan milestone (M0 … M11).
+- **GitHub issue + branch + PR** = one plan milestone.
+- **Commit** = one task (T-xxx).
+- **Review & Repair Loop** = runs once per milestone, after all its tasks are done, before merge.
+
+Branch naming: `milestone/M3-widget-basis`.
 
 # Strict Workflow Execution
-You are executing a 10-step iterative review process. Do not skip steps.
-1. Create a GitHub milestone using `gh api repos/:owner/:repo/milestones -f title="Milestone Name"` if it doesn't already exist.
-2. Create a GitHub issue using `gh issue create`. Use the label `enhancement` and associate it with the milestone.
-3. Create a local git branch and an associated Pull Request using `gh pr create`. Assign the PR to the created milestone.
-4. Build the project using `.\gradlew.bat assembleDebug` to verify baseline status.
-5. Execute the "Review & Repair Loop" exactly 10 times.
-6. Merge the PR using `gh pr merge --squash`.
-7. Delete the local branch using `git branch -D branch_name` and the remote branch using `git push origin --delete branch_name`.
-8. Close the associated GitHub issue using `gh issue close #ISSUE_NUMBER`.
-9. Close the GitHub milestone using `gh api -X PATCH repos/:owner/:repo/milestones/:milestone_number -f state=closed`.
-10. Run the full test suite using `.\gradlew.bat clean testDebugUnitTest` and `.\gradlew.bat connectedDebugAndroidTest` (if a device is available). Fix any regressions in a new fix branch following the same process if necessary. Proceed only when all tests pass.
+You are executing a 10-step iterative process per milestone. Do not skip steps.
+1. Read `.ai_state.json`. Determine the current milestone and the next unblocked task. Read `docs/artifacts/MASTER_PLAN.md`, then the milestone's section in `BUILD_PLAN.md` and `TASKS.md` completely.
+2. Create `docs/artifacts/milestones/<MILESTONE-ID>-<slug>/` and write `implementation_plan.md` and `tasks.md` there. Commit them before writing any code.
+3. Create a GitHub milestone using `gh api repos/:owner/:repo/milestones -f title="Milestone Name"` if it doesn't already exist.
+4. Create a GitHub issue using `gh issue create`. Use the label `enhancement` and associate it with the milestone.
+5. Create a local git branch and an associated Pull Request using `gh pr create`. Assign the PR to the created milestone.
+6. Build the project using `.\gradlew.bat assembleDebug` to verify baseline status.
+7. Implement the milestone's tasks **one at a time**, in backlog order. After each task run the Verification Gate, update `.ai_state.json`, and commit. Never start a task before the previous one is green.
+8. Execute the "Review & Repair Loop" (see below), up to 10 iterations.
+9. Run the full test suite: `.\gradlew.bat clean testDebugUnitTest`, then `.\gradlew.bat connectedDebugAndroidTest` (if a device is available). Fix any regressions in a new fix branch following the same process. Proceed only when all tests pass.
+10. Merge the PR using `gh pr merge --squash`. Delete the local branch using `git branch -D branch_name` and the remote branch using `git push origin --delete branch_name`. Close the issue using `gh issue close #ISSUE_NUMBER`. Close the milestone using `gh api -X PATCH repos/:owner/:repo/milestones/:milestone_number -f state=closed`. Set the milestone to `completed` with `acceptanceVerified: true` in `.ai_state.json`.
+
+# The Verification Gate
+Run after **every** task. Separate calls, no chaining.
+
+```
+.\gradlew.bat ktlintCheck
+.\gradlew.bat detekt
+.\gradlew.bat lint
+.\gradlew.bat testDebugUnitTest
+```
+
+For UI changes, additionally:
+
+```
+.\gradlew.bat verifyRoborazziDebug
+.\gradlew.bat connectedDebugAndroidTest
+```
+
+For changes behind a feature flag, additionally run the other flag state:
+
+```
+.\gradlew.bat testDebugUnitTest -PresearchMode=true
+```
+
+For changes to the native core, additionally:
+
+```
+.\gradlew.bat nativeHostTest
+.\gradlew.bat assembleDebug
+.\tools\check_so_alignment.ps1
+```
+
+If any of these is red, the task is **not** done. Set the task's status to `blocked` in `.ai_state.json`, record the failure, and stop. Never disable a test or downgrade a rule to get a green build.
 
 # The Review & Repair Loop Rules
-For each iteration (1 through 10):
-- You must physically edit the Kotlin/Java/C++ files to fix bugs or optimize architecture.
-- DO NOT just leave comments or PR reviews. You must write actual code changes.
-- After editing, compile the code using `.\gradlew.bat compileDebugKotlin` or equivalent.
-- Commit changes using `git commit -am "Review loop X/10: [details] (fixes #ISSUE_NUMBER)"`.
-- Push the commit immediately to the remote branch using `git push origin [branch]`.
-- Update the `.ai_state.json` file to increment the loop count before proceeding.
+Runs after all tasks of the milestone are complete and green. Up to 10 iterations. Each iteration has a **fixed focus** — you are not hunting for something to change, you are reviewing one dimension:
 
-# Project Paths & Context
-- All milestone and requirement files are stored in the directory: `docs/artifacts/`.
-- When starting a new milestone, look inside this folder, locate the next sequential milestone in MASTER_PLAN.md, and read its contents completely before executing any `gh` commands. Then create a folder under docs/artifacts/milestones/ and document and version implementation_plan.md and tasks.md there.
+| Iteration | Focus |
+|---|---|
+| 1 | Correctness against the milestone's acceptance criteria in `MASTER_PLAN.md` |
+| 2 | The mandatory test cases from `BUILD_PLAN.md {#a-11-2}` that touch this milestone |
+| 3 | Time, time zones and DST handling |
+| 4 | Error, empty and loading states — all four `sealed interface` cases handled |
+| 5 | Module boundaries and dependency directions per `{#a-3-2}` |
+| 6 | Threading, coroutine scopes, leaks, lifecycle |
+| 7 | Accessibility: TalkBack, touch targets, largest system font |
+| 8 | i18n: no hardcoded strings, plurals, 12h/24h, RTL |
+| 9 | Privacy: nothing logged, nothing collected that shouldn't be, feature flag boundaries |
+| 10 | Performance: is anything here a candidate for a benchmark, per `{#a-3-4}` |
+
+Rules for each iteration:
+- You must physically edit the Kotlin/Java/C++ files when you find a defect. DO NOT just leave comments or PR reviews.
+- **An iteration with no finding is a valid outcome.** Record what you reviewed and that nothing was found. Do not invent a change to satisfy the loop — cosmetic churn causes regressions and is a prohibited outcome (V22).
+- After editing, compile using `.\gradlew.bat compileDebugKotlin` or equivalent, then run the Verification Gate.
+- Commit using `git commit -am "review(M3): loop 4/10 - <focus> - <what changed or 'no findings'> (refs #ISSUE_NUMBER)"`.
+- Push immediately using `git push origin [branch]`.
+- Update `.ai_state.json` under `reviewLoop` (iteration number, focus, finding) before proceeding.
+- The loop ends early when three consecutive iterations produce no findings **and** iterations 1, 2 and 9 have run. Record the early exit in `.ai_state.json`.
+
+# Prohibitions
+These are forbidden. If one seems necessary, that is a blocker — set the task to `blocked`, record the reason in `.ai_state.json`, and stop.
+
+| # | Prohibition |
+|---|---|
+| V1 | `@Ignore`, `@Disabled`, or commented-out tests. |
+| V2 | Downgrading or suppressing lint/detekt rules (`@Suppress`) to make a build pass. |
+| V3 | `fallbackToDestructiveMigration()` — not even in debug. |
+| V4 | User-visible strings in Kotlin or XML layout code. Always `strings.xml`. |
+| V5 | Using `Dispatchers.IO` / `Dispatchers.Default` directly. Always the injected `DispatcherProvider`. |
+| V6 | Calling `System.currentTimeMillis()`, `LocalDateTime.now()`, `Instant.now()` directly. Always the injected `Clock`. Otherwise time tests are impossible. |
+| V7 | Adding a dependency without pinning it in the version catalog and recording it under `decisions` in `.ai_state.json`. |
+| V8 | Module dependencies contradicting the table in `BUILD_PLAN.md {#a-3-2}`. |
+| V9 | Adding manifest permissions not listed in `{#a-9-2}` — in particular `SCHEDULE_EXACT_ALARM` and `USE_EXACT_ALARM`. |
+| V10 | Hardcoding prices, product IDs or store copy. Prices always come from `ProductDetails`. |
+| V11 | Deviating from an ADR in `{#a-4}` without writing a new ADR entry. |
+| V12 | Logging personal data, names or timestamps. Logging is fully stripped in release builds. |
+| V13 | `git push --force`, rebasing shared branches, discarding commits. |
+| V14 | Porting Kotlin to C++ without a benchmark proving it breaks the budget. Optimisation without measurement is forbidden. |
+| V15 | In the native core: raw `new`/`delete`, pointer-plus-length instead of `std::span`, disabled warnings, disabled sanitizers, or JNI calls inside a per-datapoint loop. |
+| V16 | Deleting the Kotlin reference implementation of a native function. It is the truth the fast version is tested against, and the fallback on `UnsatisfiedLinkError`. |
+| V17 | Changing a feature flag's default value. `FEATURE_RESEARCH_MODE` stays `false` until T-1105. Use `-PresearchMode=true` for testing, never the default. |
+| V18 | Marking placeholder content (`status: draft`) as `final` outside the M11 task that does so, with approval in hand. |
+| V19 | Weakening, bypassing or skipping the placeholder guard (mandatory test case 35). It prevents someone consenting to share real health data under a placeholder text. |
+| V20 | Replacing a feature flag with a constant, a comment, or deleted code. A flag is a branch that gets built, linted and tested. |
+| V21 | Committing generated files (`build/`, `.gradle/`) — exception: Room schema files under `core/database/schemas/`, which **must** be committed. |
+| V22 | Making a change during the Review & Repair Loop solely to have made one. "No findings" is a valid iteration result. |
+| V23 | Working on more than one task at a time, or bundling several tasks into one commit. |
+
+# Code Conventions
+- Kotlin Coding Conventions, ktlint is the authority. Line length 120.
+- Public API of each module gets KDoc; internal helpers do not need it.
+- Compose: stateless composables (`@Composable fun Foo(state, onEvent)`), state in the ViewModel. Every composable has a `@Preview` in light and dark.
+- ViewModels expose exactly one `StateFlow<UiState>`; events go in as a sealed class.
+- No `!!`. No `lateinit` outside tests. No `runBlocking` in production code.
+- Errors are modelled as state, not thrown across layer boundaries.
+- One `sealed interface` per UI state with the cases `Loading`, `Empty`, `Content`, `Error` — all four handled in the UI.
+- File and class names in English. KDoc and comments in German. User-visible text via resources.
+
+# Test Rules
+- Test names as sentences in backticks: ``fun `Intervall über Sommerzeitumstellung behält echte Dauer`()``.
+- One test asserts one thing.
+- Time in tests always via `FakeClock`. No `Thread.sleep`.
+- Time zones set explicitly in tests; never assume the test machine's default zone.
+- Database tests against in-memory Room, not mocks.
+- For every bug fix, the reproducing test first, then the fix.
+- Coverage targets: `:core:domain` ≥ 90 %, everything else ≥ 60 %. Coverage does not replace the 36 mandatory cases in `{#a-11-2}`.
+- C++ test names in English (GoogleTest convention), comments in German.
+
+# Native Code Rules
+Performance-critical components are built in C++ (`:core:native`, ADR-006). Additionally:
+- **Measure first.** No port without benchmark evidence. The measurement goes into the commit message and into `.ai_state.json`.
+- **C++20**, `-Wall -Wextra -Werror`, clang-tidy, ASan and UBSan in debug and CI.
+- **Platform-free core.** No JNI or Android headers outside `jni_bridge.cpp`. The core is tested with GoogleTest on the host, no device.
+- **Sparse JNI boundary.** One call per evaluation. Primitive arrays or direct `ByteBuffer`, never object graphs.
+- **Parity.** Every native function has a Kotlin reference implementation and a test comparing both on identical input.
+- **16 KB page alignment** of all `.so` verified in CI (`-Wl,-z,max-page-size=16384`).
+- **Shipping** as an App Bundle with ABI splits.
+
+# Feature Flag Rules
+- A flag is a **branch**, not a comment. The code behind it is compiled, linted and tested — it is simply not reached.
+- **Test both states.** The test configuration sets the flag explicitly; every branch has an "on" and an "off" test.
+- With the flag off there is **no visible entry point** — not greyed out, not rendered at all — and **no side effects**: no registered worker, no stored consent, no generated pseudonym.
+- The **default is never changed** except in the task that arms the flag.
+- Every flag has a task that removes it again. A flag standing longer than two releases goes on the agenda.
+- Placeholder content carries `status: draft`. The guard preventing arming with placeholders is untouchable (V19).
+- Each flag's state is recorded in `.ai_state.json` under `featureFlags`.
+
+# Commits
+```
+<type>(<module>): <description> [T-xxx] (refs #ISSUE_NUMBER)
+```
+Types: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`, `build`, `perf`, `review`.
+Modules: `app`, `core`, `widget`, `persons`, `timeline`, `export`, `paywall`, `billing`, `data`, `domain`, `native`.
+
+Examples:
+```
+feat(widget): Zahlenrad-Overlay mit Snap-Fling [T-402] (refs #17)
+fix(domain): Intervall über Winterzeitumstellung war 1 h zu kurz [T-107] (refs #12)
+perf(native): SRI in C++, 5 Jahre Daten 840 ms -> 22 ms [T-911] (refs #29)
+review(M3): loop 7/10 - accessibility - TalkBack-Inkremente auf Rädern ergänzt (refs #17)
+```
+One commit per task. No commit without a task ID or a review-loop reference. Use `(fixes #ISSUE_NUMBER)` only on the final commit of a milestone, so the issue is not closed early.
+
+# Handling Uncertainty
+When the build plan does not answer a question:
+1. Is the question already in `{#a-15}`? → Set the task to `blocked`, reference it in `.ai_state.json.openQuestions`, continue with the next unblocked task.
+2. Is it an implementation detail with no architectural impact? → Decide, record it in `.ai_state.json.decisions` with one sentence of rationale, continue.
+3. Does it touch an ADR in `{#a-4}` or the module structure? → **Do not decide.** Set the task to `blocked`, write the question into `openQuestions` with a concrete proposal, and stop.
+
+Your own ADR entries are numbered from `ADR-100`. `ADR-001` to `ADR-007` are taken by the build plan.
+
+Do not guess. A blocked task with a clear question is worth more than a completed task built on a wrong assumption.
+
+# Agent Boundaries
+You do **not**:
+- Write or approve legal texts (privacy policy, consent text).
+- Upload or publish anything to the Play Store.
+- Generate, change or commit signing keys.
+- Touch, export or upload real user data.
+- Change prices, product IDs or store listings in the Play Console.
+- Define network endpoints for the research upload.
+- Arm a feature flag whose content has not been approved.
+- Decide that a consent or information text is finished.
+
+These belong in `openQuestions` and are done by a human.

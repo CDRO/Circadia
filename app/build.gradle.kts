@@ -4,16 +4,12 @@ plugins {
 
 android {
     namespace = "ch.schmidlins.circadia"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 37
 
     defaultConfig {
-        applicationId = "ch.schmidlins.circadia"
-        minSdk = 29
-        targetSdk = 36
+        applicationId = "ch.circadia.tracker"
+        minSdk = 26
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -22,9 +18,8 @@ android {
 
     buildTypes {
         release {
-            optimization {
-                enable = false
-            }
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {

@@ -22,6 +22,11 @@ dependencyResolutionManagement {
     }
 }
 
+includeBuild("build-logic")
+
 rootProject.name = "Circadia"
 include(":app")
+include(":core:model")
+include(":core:common")
+include(":core:domain")
  

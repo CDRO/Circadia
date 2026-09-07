@@ -7,6 +7,7 @@ message SettingsProto {
   int32 day_boundary_hour = 1;
   int32 day_boundary_minute = 2;
   bool use_double_plot = 3;
+  bool use_side_by_side = 4;
 }
 
 message EntitlementProto {

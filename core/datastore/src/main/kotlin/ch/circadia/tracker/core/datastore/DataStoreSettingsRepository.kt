@@ -34,4 +34,16 @@ class DataStoreSettingsRepository(
                 .build()
         }
     }
+
+    override fun getUseSideBySide(): Flow<Boolean> = dataStore.data.map {
+        it.useSideBySide
+    }
+
+    override suspend fun setUseSideBySide(use: Boolean) {
+        dataStore.updateData {
+            it.toBuilder()
+                .setUseSideBySide(use)
+                .build()
+        }
+    }
 }

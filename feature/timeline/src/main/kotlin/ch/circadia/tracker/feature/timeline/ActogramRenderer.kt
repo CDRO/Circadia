@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.dp
 import ch.circadia.tracker.core.designsystem.ChartColors
 import ch.circadia.tracker.core.model.Interval
+import ch.circadia.tracker.core.model.PersonId
 import ch.circadia.tracker.core.model.SleepState
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -33,12 +34,14 @@ data class ActogramDay(
 @Composable
 fun ActogramRenderer(
     days: List<ActogramDay>,
+    selectedPersonIds: List<PersonId>,
+    useSideBySide: Boolean = false,
     modifier: Modifier = Modifier,
     zoom: Float = 1f
 ) {
     if (days.isEmpty()) return
 
-    val rowHeight = 48.dp
+    val rowHeight = if (useSideBySide) (24 * selectedPersonIds.size + 16).dp else 48.dp
     val labelWidth = 60.dp
     val totalHeight = rowHeight * days.size
 
@@ -79,26 +82,52 @@ fun ActogramRenderer(
                 strokeWidth = 1f
             )
 
-            // Draw intervals with Multiply blend mode
-            day.coloredIntervals
-                .filter { it.interval.state == SleepState.ASLEEP }
-                .forEach { colored ->
-                    val interval = colored.interval
-                    val startRatio = (interval.startUtcMillis - day.startTimeUtc).toFloat() / (day.endTimeUtc - day.startTimeUtc)
-                    val endRatio = (interval.endUtcMillis - day.startTimeUtc).toFloat() / (day.endTimeUtc - day.startTimeUtc)
+            if (useSideBySide) {
+                selectedPersonIds.forEachIndexed { pIndex, personId ->
+                    val trackTop = top + 8.dp.toPx() + pIndex * 24.dp.toPx()
+                    val trackHeight = 16.dp.toPx()
                     
-                    val left = labelWidthPx + startRatio.coerceIn(0f, 1f) * chartWidth
-                    val right = labelWidthPx + endRatio.coerceIn(0f, 1f) * chartWidth
-                    
-                    if (right > left) {
-                        drawRect(
-                            color = colored.color.copy(alpha = 0.6f),
-                            topLeft = Offset(left, top + 8.dp.toPx()),
-                            size = Size(right - left, rowHeightPx - 16.dp.toPx()),
-                            blendMode = BlendMode.Multiply
-                        )
-                    }
+                    day.coloredIntervals
+                        .filter { it.interval.personId == personId && it.interval.state == SleepState.ASLEEP }
+                        .forEach { colored ->
+                            val interval = colored.interval
+                            val startRatio = (interval.startUtcMillis - day.startTimeUtc).toFloat() / (day.endTimeUtc - day.startTimeUtc)
+                            val endRatio = (interval.endUtcMillis - day.startTimeUtc).toFloat() / (day.endTimeUtc - day.startTimeUtc)
+                            
+                            val left = labelWidthPx + startRatio.coerceIn(0f, 1f) * chartWidth
+                            val right = labelWidthPx + endRatio.coerceIn(0f, 1f) * chartWidth
+                            
+                            if (right > left) {
+                                drawRect(
+                                    color = colored.color,
+                                    topLeft = Offset(left, trackTop),
+                                    size = Size(right - left, trackHeight)
+                                )
+                            }
+                        }
                 }
+            } else {
+                // Overlay mode
+                day.coloredIntervals
+                    .filter { it.interval.state == SleepState.ASLEEP }
+                    .forEach { colored ->
+                        val interval = colored.interval
+                        val startRatio = (interval.startUtcMillis - day.startTimeUtc).toFloat() / (day.endTimeUtc - day.startTimeUtc)
+                        val endRatio = (interval.endUtcMillis - day.startTimeUtc).toFloat() / (day.endTimeUtc - day.startTimeUtc)
+                        
+                        val left = labelWidthPx + startRatio.coerceIn(0f, 1f) * chartWidth
+                        val right = labelWidthPx + endRatio.coerceIn(0f, 1f) * chartWidth
+                        
+                        if (right > left) {
+                            drawRect(
+                                color = colored.color.copy(alpha = 0.6f),
+                                topLeft = Offset(left, top + 8.dp.toPx()),
+                                size = Size(right - left, rowHeightPx - 16.dp.toPx()),
+                                blendMode = BlendMode.Multiply
+                            )
+                        }
+                    }
+            }
         }
         
         // Draw vertical time markers

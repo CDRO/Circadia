@@ -37,4 +37,6 @@ interface SettingsRepository {
     suspend fun setDayBoundary(time: java.time.LocalTime)
     fun getUseDoublePlot(): Flow<Boolean>
     suspend fun setUseDoublePlot(use: Boolean)
+    fun getUseSideBySide(): Flow<Boolean>
+    suspend fun setUseSideBySide(use: Boolean)
 }

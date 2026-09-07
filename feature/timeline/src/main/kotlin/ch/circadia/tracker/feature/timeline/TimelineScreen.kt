@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ViewAgenda
+import androidx.compose.material.icons.filled.ViewColumn
 import androidx.compose.material.icons.filled.ViewStream
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -30,6 +31,12 @@ fun TimelineScreen(
                 actions = {
                     val state = uiState
                     if (state is TimelineUiState.Content) {
+                        IconButton(onClick = { viewModel.setUseSideBySide(!state.useSideBySide) }) {
+                            Icon(
+                                imageVector = if (state.useSideBySide) Icons.Default.ViewAgenda else Icons.Default.ViewColumn,
+                                contentDescription = if (state.useSideBySide) "Overlay" else "Side-by-side"
+                            )
+                        }
                         IconButton(onClick = { viewModel.setUseDoublePlot(!state.useDoublePlot) }) {
                             Icon(
                                 imageVector = if (state.useDoublePlot) Icons.Default.ViewAgenda else Icons.Default.ViewStream,
@@ -73,7 +80,11 @@ fun TimelineScreen(
                         
                         LazyColumn(modifier = Modifier.fillMaxSize()) {
                             item {
-                                ActogramRenderer(days = state.actogramDays)
+                                ActogramRenderer(
+                                    days = state.actogramDays,
+                                    selectedPersonIds = state.selectedPersonIds.toList(),
+                                    useSideBySide = state.useSideBySide
+                                )
                             }
                         }
                     }
@@ -90,9 +101,10 @@ fun PersonSelector(
     onPersonToggle: (Person) -> Unit
 ) {
     ScrollableTabRow(
-        selectedTabIndex = persons.indexOfFirst { it.id in selectedIds }.coerceAtLeast(0),
+        selectedTabIndex = 0, // Not really used since we use chips
         edgePadding = 16.dp,
-        divider = {}
+        divider = {},
+        indicator = {}
     ) {
         persons.forEach { person ->
             FilterChip(

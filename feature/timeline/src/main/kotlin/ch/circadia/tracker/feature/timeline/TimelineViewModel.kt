@@ -20,6 +20,7 @@ sealed interface TimelineUiState {
         val selectedPersonIds: Set<PersonId>,
         val actogramDays: List<ActogramDay>,
         val useDoublePlot: Boolean,
+        val useSideBySide: Boolean,
         val isLimited: Boolean
     ) : TimelineUiState
     data object Empty : TimelineUiState
@@ -39,13 +40,18 @@ class TimelineViewModel @Inject constructor(
     private val _selectedPersonIds = MutableStateFlow<Set<PersonId>>(emptySet())
     
     val uiState: StateFlow<TimelineUiState> = combine(
-        personRepository.getPersons(),
-        _selectedPersonIds,
-        settingsRepository.getDayBoundary(),
-        settingsRepository.getUseDoublePlot(),
-        entitlementRepository.current()
-    ) { persons, selectedIds, dayBoundary, useDoublePlot, entitlement ->
-        DataSnapshot(persons, selectedIds, dayBoundary, useDoublePlot, entitlement)
+        combine(
+            personRepository.getPersons(),
+            _selectedPersonIds,
+            settingsRepository.getDayBoundary()
+        ) { p, s, d -> Triple(p, s, d) },
+        combine(
+            settingsRepository.getUseDoublePlot(),
+            settingsRepository.getUseSideBySide(),
+            entitlementRepository.current()
+        ) { d, sb, e -> Triple(d, sb, e) }
+    ) { t1, t2 ->
+        DataSnapshot(t1.first, t1.second, t1.third, t2.first, t2.second, t2.third)
     }.flatMapLatest { snapshot ->
         if (snapshot.persons.isEmpty()) {
             flowOf(TimelineUiState.Empty)
@@ -79,6 +85,7 @@ class TimelineViewModel @Inject constructor(
                     selectedPersonIds = effectiveSelectedIds,
                     actogramDays = days,
                     useDoublePlot = snapshot.useDoublePlot,
+                    useSideBySide = snapshot.useSideBySide,
                     isLimited = isLimited
                 )
             }
@@ -144,6 +151,12 @@ class TimelineViewModel @Inject constructor(
             settingsRepository.setUseDoublePlot(use)
         }
     }
+
+    fun setUseSideBySide(use: Boolean) {
+        viewModelScope.launch {
+            settingsRepository.setUseSideBySide(use)
+        }
+    }
 }
 
 private data class DataSnapshot(
@@ -151,5 +164,6 @@ private data class DataSnapshot(
     val selectedPersonIds: Set<PersonId>,
     val dayBoundary: java.time.LocalTime,
     val useDoublePlot: Boolean,
+    val useSideBySide: Boolean,
     val entitlement: Entitlement
 )

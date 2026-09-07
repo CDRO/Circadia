@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_package = "ch.circadia.tracker.core.datastore";
+option java_multiple_files = true;
+
+message SettingsProto {
+  int32 day_boundary_hour = 1;
+  int32 day_boundary_minute = 2;
+  bool use_double_plot = 3;
+}
+
+message EntitlementProto {
+  enum Source {
+    FREE = 0;
+    SUBSCRIPTION = 1;
+    RESEARCH = 2;
+  }
+  Source source = 1;
+  int64 valid_until_utc_millis = 2;
+}

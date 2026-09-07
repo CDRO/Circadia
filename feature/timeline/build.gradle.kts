@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ch.circadia.tracker.feature.persons"
+    namespace = "ch.circadia.tracker.feature.timeline"
 }
 
 dependencies {

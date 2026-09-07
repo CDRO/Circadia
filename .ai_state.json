@@ -3,10 +3,10 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-07T17:15:00Z",
+  "updatedAt": "2026-09-07T17:35:00Z",
   "updatedBy": "gemini-coding-agent",
   "currentMilestone": "M5",
-  "currentTask": "T-501",
+  "currentTask": "T-503",
   "github": {
     "milestoneNumber": 5,
     "milestoneTitle": "M5 - Auswertung",
@@ -135,10 +135,11 @@
     "T-408": { "status": "completed", "completedAt": "2026-09-07T14:10:00Z" },
     "T-409": { "status": "completed", "completedAt": "2026-09-07T14:15:00Z" },
     "T-501": { "status": "completed", "completedAt": "2026-09-07T17:15:00Z" },
-    "T-502": { "status": "pending" }
+    "T-502": { "status": "completed", "completedAt": "2026-09-07T17:35:00Z" },
+    "T-503": { "status": "pending" }
   },
   "verification": {
-    "lastRunAt": "2026-09-07T17:15:00Z",
+    "lastRunAt": "2026-09-07T17:35:00Z",
     "command": ".\\gradlew.bat ktlintCheck detekt lint testDebugUnitTest",
     "allPassed": true,
     "results": {
@@ -220,6 +221,12 @@
       "at": "2026-09-07T17:15:00Z",
       "tasksCompleted": [ "T-501" ],
       "summary": "M5 gestartet. Chart-Palette (Paul Tol Muted) in :core:designsystem angelegt.",
+      "problems": ""
+    },
+    {
+      "at": "2026-09-07T17:35:00Z",
+      "tasksCompleted": [ "T-502" ],
+      "summary": "T-502 abgeschlossen. :feature:timeline Modul angelegt. Aktogramm-Renderer (Canvas) fuer Single-Plot implementiert. Navigation zwischen Timeline und Personen in der App integriert.",
       "problems": ""
     }
   ],

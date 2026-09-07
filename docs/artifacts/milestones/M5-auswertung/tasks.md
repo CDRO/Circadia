@@ -2,8 +2,8 @@
 
 | ID | Task | Status | Spec |
 |---|---|---|---|
-| T-501 | **`dataviz`-Skill lesen**, Palette, Achsen, Legenden, Zustände „keine Daten" festlegen und in `:core:designsystem` ablegen. | pending | {#a-7-2} |
-| T-502 | Aktogramm-Renderer (Compose `Canvas`): eine Zeile pro Tag, Single-Plot. Zeitachse, Tagesbeschriftung, Schlafbalken. | pending | {#a-7-1} |
+| T-501 | **`dataviz`-Skill lesen**, Palette, Achsen, Legenden, Zustände „keine Daten" festlegen und in `:core:designsystem` ablegen. | completed | {#a-7-2} |
+| T-502 | Aktogramm-Renderer (Compose `Canvas`): eine Zeile pro Tag, Single-Plot. Zeitachse, Tagesbeschriftung, Schlafbalken. | in_progress | {#a-7-1} |
 | T-503 | Double-Plot-Modus (48 h pro Zeile, versetzt). Umschalter. | pending | {#a-7-1} |
 | T-504 | 7-Tage-Ansicht als Standard, Scrollen und Zoomen der Zeitachse vorbereitet. | pending | {#a-8-3} |
 | T-505 | Personenauswahl für die Auswertung (Mehrfachauswahl) + Modus „übereinandergelegt" mit halbtransparenten Balken und `BlendMode.Multiply`. | pending | {#a-7-2} |

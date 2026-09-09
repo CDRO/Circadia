@@ -47,3 +47,27 @@ fun StateEvent.toEntity() = StateEventEntity(
     voidedAt = voidedAtUtcMillis,
     note = note
 )
+
+fun ch.circadia.tracker.core.database.ResearchConsentEntity.toDomain() = ResearchConsent(
+    id = id,
+    grantedAtUtcMillis = grantedAt,
+    revokedAtUtcMillis = revokedAt,
+    surveyVersion = surveyVersion,
+    consentTextHash = consentTextHash,
+    participantPseudonym = participantPseudonym,
+    validUntilUtcMillis = validUntil,
+    consentSurvey = consentSurvey,
+    consentData = consentData
+)
+
+fun ResearchConsent.toEntity() = ch.circadia.tracker.core.database.ResearchConsentEntity(
+    id = id,
+    grantedAt = grantedAtUtcMillis,
+    revokedAt = revokedAtUtcMillis,
+    surveyVersion = surveyVersion,
+    consentTextHash = consentTextHash,
+    participantPseudonym = participantPseudonym,
+    validUntil = validUntilUtcMillis,
+    consentSurvey = consentSurvey,
+    consentData = consentData
+)

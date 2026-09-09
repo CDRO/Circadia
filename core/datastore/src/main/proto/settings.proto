@@ -8,6 +8,8 @@ message SettingsProto {
   int32 day_boundary_minute = 2;
   bool use_double_plot = 3;
   bool use_side_by_side = 4;
+  int64 last_uploaded_event_recorded_at = 5;
+  bool pending_revocation = 6;
 }
 
 message EntitlementProto {

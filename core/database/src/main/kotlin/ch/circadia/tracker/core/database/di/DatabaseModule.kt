@@ -2,10 +2,7 @@ package ch.circadia.tracker.core.database.di
 
 import android.content.Context
 import androidx.room.Room
-import ch.circadia.tracker.core.database.CircadiaDatabase
-import ch.circadia.tracker.core.database.PersonDao
-import ch.circadia.tracker.core.database.StateEventDao
-import ch.circadia.tracker.core.database.WidgetBindingDao
+import ch.circadia.tracker.core.database.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +22,8 @@ object DatabaseModule {
         context,
         CircadiaDatabase::class.java,
         "circadia-database"
-    ).build()
+    ).addMigrations(CircadiaDatabase.MIGRATION_1_2)
+     .build()
 
     @Provides
     fun providePersonDao(db: CircadiaDatabase): PersonDao = db.personDao()
@@ -35,4 +33,7 @@ object DatabaseModule {
 
     @Provides
     fun provideWidgetBindingDao(db: CircadiaDatabase): WidgetBindingDao = db.widgetBindingDao()
+
+    @Provides
+    fun provideResearchDao(db: CircadiaDatabase): ResearchDao = db.researchDao()
 }

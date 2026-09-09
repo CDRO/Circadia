@@ -1,9 +1,6 @@
 package ch.circadia.tracker.core.domain
 
-import ch.circadia.tracker.core.model.Entitlement
-import ch.circadia.tracker.core.model.Person
-import ch.circadia.tracker.core.model.PersonId
-import ch.circadia.tracker.core.model.StateEvent
+import ch.circadia.tracker.core.model.*
 import kotlinx.coroutines.flow.Flow
 
 interface PersonRepository {
@@ -12,6 +9,7 @@ interface PersonRepository {
     suspend fun getPersonSync(id: PersonId): Person?
     suspend fun savePerson(person: Person)
     suspend fun deletePerson(id: PersonId)
+    suspend fun deleteAll()
 }
 
 interface StateEventRepository {
@@ -20,6 +18,7 @@ interface StateEventRepository {
     suspend fun addEvent(event: StateEvent)
     suspend fun voidEvent(eventId: String, voidedAt: Long)
     fun getEventChain(eventId: String): Flow<List<StateEvent>>
+    suspend fun deleteAll()
 }
 
 interface WidgetBindingRepository {
@@ -40,4 +39,18 @@ interface SettingsRepository {
     suspend fun setUseDoublePlot(use: Boolean)
     fun getUseSideBySide(): Flow<Boolean>
     suspend fun setUseSideBySide(use: Boolean)
+    fun getLastUploadedEventRecordedAt(): Flow<Long>
+    suspend fun setLastUploadedEventRecordedAt(time: Long)
+    fun isRevocationPending(): Flow<Boolean>
+    suspend fun setRevocationPending(pending: Boolean)
+}
+
+interface ResearchRepository {
+    fun getConsent(): Flow<ResearchConsent?>
+    suspend fun saveConsent(consent: ResearchConsent)
+    suspend fun revokeConsent()
+}
+
+interface ResearchUploadEndpoint {
+    suspend fun uploadEvents(events: List<AnonymizedEvent>): Boolean
 }

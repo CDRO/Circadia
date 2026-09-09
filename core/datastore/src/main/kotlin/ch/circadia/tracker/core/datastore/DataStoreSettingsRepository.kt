@@ -46,4 +46,28 @@ class DataStoreSettingsRepository(
                 .build()
         }
     }
+
+    override fun getLastUploadedEventRecordedAt(): Flow<Long> = dataStore.data.map {
+        it.lastUploadedEventRecordedAt
+    }
+
+    override suspend fun setLastUploadedEventRecordedAt(time: Long) {
+        dataStore.updateData {
+            it.toBuilder()
+                .setLastUploadedEventRecordedAt(time)
+                .build()
+        }
+    }
+
+    override fun isRevocationPending(): Flow<Boolean> = dataStore.data.map {
+        it.pendingRevocation
+    }
+
+    override suspend fun setRevocationPending(pending: Boolean) {
+        dataStore.updateData {
+            it.toBuilder()
+                .setPendingRevocation(pending)
+                .build()
+        }
+    }
 }

@@ -2,8 +2,7 @@ package ch.circadia.tracker.core.data.di
 
 import ch.circadia.tracker.core.common.*
 import ch.circadia.tracker.core.data.*
-import ch.circadia.tracker.core.database.PersonDao
-import ch.circadia.tracker.core.database.StateEventDao
+import ch.circadia.tracker.core.database.*
 import ch.circadia.tracker.core.domain.*
 import dagger.Module
 import dagger.Provides
@@ -26,6 +25,18 @@ object DataModule {
     fun provideStateEventRepository(
         stateEventDao: StateEventDao
     ): StateEventRepository = OfflineStateEventRepository(stateEventDao)
+
+    @Provides
+    @Singleton
+    fun provideResearchRepository(
+        researchDao: ResearchDao,
+        entitlementRepository: EntitlementRepository,
+        settingsRepository: SettingsRepository
+    ): ResearchRepository = OfflineResearchRepository(researchDao, entitlementRepository, settingsRepository)
+
+    @Provides
+    @Singleton
+    fun provideResearchUploadEndpoint(): ResearchUploadEndpoint = NoopUploadEndpoint()
 
     @Provides
     @Singleton
@@ -54,4 +65,20 @@ object DataModule {
 
     @Provides
     fun provideJsonExportUseCase(): JsonExportUseCase = JsonExportUseCase()
+
+    @Provides
+    fun provideAnonymizeUseCase(): AnonymizeUseCase = AnonymizeUseCase()
+
+    @Provides
+    fun provideDeleteAllDataUseCase(
+        personRepository: PersonRepository,
+        stateEventRepository: StateEventRepository,
+        researchRepository: ResearchRepository,
+        widgetBindingRepository: WidgetBindingRepository
+    ): DeleteAllDataUseCase = DeleteAllDataUseCase(
+        personRepository,
+        stateEventRepository,
+        researchRepository,
+        widgetBindingRepository
+    )
 }

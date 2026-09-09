@@ -25,6 +25,9 @@ interface PersonDao {
 
     @Query("DELETE FROM persons WHERE id = :id")
     suspend fun deletePerson(id: String)
+
+    @Query("DELETE FROM persons")
+    suspend fun deleteAllPersons()
 }
 
 @Dao
@@ -44,8 +47,14 @@ interface StateEventDao {
     @Query("SELECT * FROM state_events WHERE person_id = :personId")
     fun getAllEvents(personId: String): Flow<List<StateEventEntity>>
 
+    @Query("SELECT * FROM state_events WHERE recorded_at > :recordedAt AND voided_at IS NULL ORDER BY recorded_at ASC")
+    suspend fun getEventsRecordedAfter(recordedAt: Long): List<StateEventEntity>
+
     @Query("UPDATE state_events SET voided_at = :voidedAt WHERE id = :eventId")
     suspend fun voidEvent(eventId: String, voidedAt: Long)
+
+    @Query("DELETE FROM state_events")
+    suspend fun deleteAllEvents()
 }
 
 @Dao
@@ -58,4 +67,16 @@ interface WidgetBindingDao {
 
     @Query("DELETE FROM widget_bindings WHERE app_widget_id = :appWidgetId")
     suspend fun deleteBinding(appWidgetId: Int)
+}
+
+@Dao
+interface ResearchDao {
+    @Query("SELECT * FROM research_consents ORDER BY granted_at DESC LIMIT 1")
+    fun getLatestConsent(): Flow<ResearchConsentEntity?>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertConsent(consent: ResearchConsentEntity)
+
+    @Query("UPDATE research_consents SET revoked_at = :revokedAt WHERE revoked_at IS NULL")
+    suspend fun revokeAllConsents(revokedAt: Long)
 }

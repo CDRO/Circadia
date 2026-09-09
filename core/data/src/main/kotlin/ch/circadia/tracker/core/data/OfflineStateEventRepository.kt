@@ -26,7 +26,6 @@ class OfflineStateEventRepository(
     }
 
     override fun getEventChain(eventId: String): Flow<List<StateEvent>> = flow {
-        // Fetch the initial event to know the personId
         val initialEvent = stateEventDao.getEvent(eventId)?.toDomain() ?: return@flow
         
         stateEventDao.getAllEvents(initialEvent.personId.value).map { list ->
@@ -41,5 +40,9 @@ class OfflineStateEventRepository(
             }
             chain.toList()
         }.collect { emit(it) }
+    }
+
+    override suspend fun deleteAll() {
+        stateEventDao.deleteAllEvents()
     }
 }

@@ -51,4 +51,7 @@ object DataModule {
 
     @Provides
     fun provideCsvExportUseCase(): CsvExportUseCase = CsvExportUseCase()
+
+    @Provides
+    fun provideJsonExportUseCase(): JsonExportUseCase = JsonExportUseCase()
 }

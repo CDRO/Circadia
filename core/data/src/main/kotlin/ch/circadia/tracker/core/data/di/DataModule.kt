@@ -61,6 +61,34 @@ object DataModule {
         CalculateDailyMetricsUseCase()
 
     @Provides
+    fun provideGetMainSleepEpisodeUseCase(): GetMainSleepEpisodeUseCase =
+        GetMainSleepEpisodeUseCase()
+
+    @Provides
+    fun provideCalculateMidSleepUseCase(): CalculateMidSleepUseCase =
+        CalculateMidSleepUseCase()
+
+    @Provides
+    fun provideCalculateMSFscUseCase(
+        calculateMidSleepUseCase: CalculateMidSleepUseCase
+    ): CalculateMSFscUseCase = CalculateMSFscUseCase(calculateMidSleepUseCase)
+
+    @Provides
+    fun provideCalculateSocialJetlagUseCase(
+        calculateMidSleepUseCase: CalculateMidSleepUseCase
+    ): CalculateSocialJetlagUseCase = CalculateSocialJetlagUseCase(calculateMidSleepUseCase)
+
+    @Provides
+    fun provideCalculateSRIUseCase(): CalculateSRIUseCase = CalculateSRIUseCase()
+
+    @Provides
+    fun provideCalculateStabilityVariabilityUseCase(): CalculateStabilityVariabilityUseCase =
+        CalculateStabilityVariabilityUseCase()
+
+    @Provides
+    fun provideCalculateTrendsUseCase(): CalculateTrendsUseCase = CalculateTrendsUseCase()
+
+    @Provides
     fun provideCsvExportUseCase(): CsvExportUseCase = CsvExportUseCase()
 
     @Provides

@@ -10,4 +10,11 @@
     <string name="onboarding_welcome">Welcome to Circadia</string>
     <string name="onboarding_name_prompt">Your Name</string>
     <string name="onboarding_start">Start</string>
+    <string name="export_title">Export Data</string>
+    <string name="export_events_csv">Raw Data (CSV)</string>
+    <string name="export_intervals_csv">Intervals (CSV)</string>
+    <string name="export_json">Complete Backup (JSON)</string>
+    <string name="export_import_json">Import Backup (JSON)</string>
+    <string name="export_success">Export successful</string>
+    <string name="export_error">Export failed</string>
 </resources>

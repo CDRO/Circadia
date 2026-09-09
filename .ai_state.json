@@ -3,10 +3,10 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-09T11:30:00Z",
+  "updatedAt": "2026-09-09T11:45:00Z",
   "updatedBy": "gemini-coding-agent",
   "currentMilestone": "M6",
-  "currentTask": "T-603",
+  "currentTask": "T-606",
   "github": {
     "milestoneNumber": 6,
     "milestoneTitle": "M6 - Export",
@@ -53,14 +53,14 @@
       "acceptanceVerified": true
     },
     "M6": {
-      "status": "in_progress",
+      "status": "completed",
       "startedAt": "2026-09-09T11:00:00Z",
-      "completedAt": null,
-      "acceptanceVerified": false
+      "completedAt": "2026-09-09T11:45:00Z",
+      "acceptanceVerified": true
     },
     "M7": {
-      "status": "pending",
-      "startedAt": null,
+      "status": "in_progress",
+      "startedAt": "2026-09-09T11:45:00Z",
       "completedAt": null,
       "acceptanceVerified": false
     },
@@ -94,10 +94,13 @@
   "tasks": {
     "T-601": { "status": "completed", "completedAt": "2026-09-09T11:15:00Z", "commit": "feat(export): implement CSV export for raw events [T-601]" },
     "T-602": { "status": "completed", "completedAt": "2026-09-09T11:20:00Z", "commit": "feat(export): implement CSV export for intervals [T-602]" },
-    "T-603": { "status": "completed", "completedAt": "2026-09-09T11:30:00Z", "commit": "feat(export): implement JSON export [T-603]" }
+    "T-603": { "status": "completed", "completedAt": "2026-09-09T11:30:00Z", "commit": "feat(export): implement JSON export [T-603]" },
+    "T-604": { "status": "completed", "completedAt": "2026-09-09T11:35:00Z", "commit": "feat(export): implement ExportScreen with SAF [T-604]" },
+    "T-605": { "status": "completed", "completedAt": "2026-09-09T11:40:00Z", "commit": "feat(export): implement JSON import [T-605]" },
+    "T-606": { "status": "completed", "completedAt": "2026-09-09T11:45:00Z", "commit": "test(export): verify CSV and JSON logic [T-606]" }
   },
   "verification": {
-    "lastRunAt": "2026-09-09T11:29:00Z",
+    "lastRunAt": "2026-09-09T11:44:00Z",
     "command": ".\\gradlew.bat ktlintCheck detekt lint testDebugUnitTest",
     "allPassed": true,
     "results": {
@@ -167,9 +170,9 @@
       "problems": ""
     },
     {
-      "at": "2026-09-09T11:30:00Z",
-      "tasksCompleted": [ "T-601", "T-602", "T-603" ],
-      "summary": "M6 gestartet. CSV- und JSON-Export-Logik in :core:domain implementiert und paritätsgeprueft.",
+      "at": "2026-09-09T11:45:00Z",
+      "tasksCompleted": [ "T-601", "T-602", "T-603", "T-604", "T-605", "T-606" ],
+      "summary": "M6 abgeschlossen. Export-Funktionalität implementiert. CSV-Export für Events und Intervalle, JSON-Backup (Export/Import) via SAF integriert.",
       "problems": ""
     }
   ],

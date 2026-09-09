@@ -22,6 +22,7 @@ class RecordStateEventUseCaseTest {
         override suspend fun addEvent(event: StateEvent) { events.add(event) }
         override suspend fun voidEvent(eventId: String, voidedAt: Long) {}
         override fun getEventChain(eventId: String): Flow<List<StateEvent>> = emptyFlow()
+        override suspend fun deleteAll() {}
     }
 
     private val useCase = RecordStateEventUseCase(fakeRepo, fakeClock)

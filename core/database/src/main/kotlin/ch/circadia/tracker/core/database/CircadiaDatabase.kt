@@ -12,7 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         WidgetBindingEntity::class,
         ResearchConsentEntity::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = true
 )
 abstract class CircadiaDatabase : RoomDatabase() {
@@ -26,6 +26,11 @@ abstract class CircadiaDatabase : RoomDatabase() {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL("ALTER TABLE research_consents ADD COLUMN consent_survey INTEGER NOT NULL DEFAULT 0")
                 db.execSQL("ALTER TABLE research_consents ADD COLUMN consent_data INTEGER NOT NULL DEFAULT 0")
+            }
+        }
+        val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE persons ADD COLUMN work_days INTEGER NOT NULL DEFAULT 31")
             }
         }
     }

@@ -10,7 +10,8 @@ fun PersonEntity.toDomain() = Person(
     colorSeed = colorSeed,
     sortIndex = sortIndex,
     createdAtUtcMillis = createdAt,
-    archivedAtUtcMillis = archivedAt
+    archivedAtUtcMillis = archivedAt,
+    workDays = workDays
 )
 
 fun Person.toEntity() = PersonEntity(
@@ -19,7 +20,8 @@ fun Person.toEntity() = PersonEntity(
     colorSeed = colorSeed,
     sortIndex = sortIndex,
     createdAt = createdAtUtcMillis,
-    archivedAt = archivedAtUtcMillis
+    archivedAt = archivedAtUtcMillis,
+    workDays = workDays
 )
 
 fun StateEventEntity.toDomain() = StateEvent(

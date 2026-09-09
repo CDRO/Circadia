@@ -14,6 +14,7 @@ data class Person(
     val sortIndex: Int,
     val createdAtUtcMillis: Long,
     val archivedAtUtcMillis: Long? = null,
+    val workDays: Int = 31 // Bitmask
 )
 
 @Serializable

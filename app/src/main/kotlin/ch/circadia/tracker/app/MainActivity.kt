@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Analytics
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.Science
@@ -28,6 +29,7 @@ import ch.circadia.tracker.feature.export.ExportScreen
 import ch.circadia.tracker.feature.export.SettingsScreen
 import ch.circadia.tracker.feature.paywall.*
 import ch.circadia.tracker.feature.persons.PersonsScreen
+import ch.circadia.tracker.feature.timeline.AnalyticsScreen
 import ch.circadia.tracker.feature.timeline.TimelineScreen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -47,12 +49,13 @@ class MainActivity : ComponentActivity() {
                 val screens = remember {
                     mutableListOf(
                         Screen.Timeline,
+                        Screen.Analytics,
                         Screen.Persons,
                         Screen.Export,
                         Screen.Settings
                     ).apply {
                         if (FeatureFlags.researchMode) {
-                            add(2, Screen.Research)
+                            add(Screen.Research)
                         }
                     }
                 }
@@ -87,6 +90,7 @@ class MainActivity : ComponentActivity() {
                             startDestination = Screen.Timeline.route
                         ) {
                             composable(Screen.Timeline.route) { TimelineScreen() }
+                            composable(Screen.Analytics.route) { AnalyticsScreen() }
                             composable(Screen.Persons.route) { PersonsScreen() }
                             composable(Screen.Export.route) { ExportScreen() }
                             composable(Screen.Settings.route) { 
@@ -147,6 +151,7 @@ enum class ResearchStep { ENLIGHTENMENT, SURVEY, CONSENT }
 
 sealed class Screen(val route: String, val label: String, val icon: ImageVector) {
     data object Timeline : Screen("timeline", "Auswertung", Icons.Default.Timeline)
+    data object Analytics : Screen("analytics", "Analytik", Icons.Default.Analytics)
     data object Persons : Screen("persons", "Personen", Icons.Default.People)
     data object Research : Screen("research", "Forschung", Icons.Default.Science)
     data object Export : Screen("export", "Export", Icons.Default.Download)

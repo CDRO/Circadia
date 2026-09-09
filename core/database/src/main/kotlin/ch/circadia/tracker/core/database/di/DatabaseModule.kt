@@ -22,7 +22,7 @@ object DatabaseModule {
         context,
         CircadiaDatabase::class.java,
         "circadia-database"
-    ).addMigrations(CircadiaDatabase.MIGRATION_1_2)
+    ).addMigrations(CircadiaDatabase.MIGRATION_1_2, CircadiaDatabase.MIGRATION_2_3)
      .build()
 
     @Provides

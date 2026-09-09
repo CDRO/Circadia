@@ -13,7 +13,8 @@ data class PersonEntity(
     @ColumnInfo(name = "color_seed") val colorSeed: Int,
     @ColumnInfo(name = "sort_index") val sortIndex: Int,
     @ColumnInfo(name = "created_at") val createdAt: Long,
-    @ColumnInfo(name = "archived_at") val archivedAt: Long?
+    @ColumnInfo(name = "archived_at") val archivedAt: Long?,
+    @ColumnInfo(name = "work_days") val workDays: Int = 31 // Default: Mo-Fr (1+2+4+8+16)
 )
 
 @Entity(

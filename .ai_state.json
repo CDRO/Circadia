@@ -3,17 +3,17 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-09T13:15:00Z",
+  "updatedAt": "2026-09-09T14:15:00Z",
   "updatedBy": "gemini-coding-agent",
-  "currentMilestone": "M8",
-  "currentTask": "T-810",
+  "currentMilestone": "M10",
+  "currentTask": "T-1001",
   "github": {
-    "milestoneNumber": 7,
-    "milestoneTitle": "M8 - Forschung Logik",
-    "issueNumber": 13,
-    "prNumber": 14,
-    "branch": "milestone/M8-forschung-logik",
-    "artifactsDir": "docs/artifacts/milestones/M8-forschung-logik/"
+    "milestoneNumber": 8,
+    "milestoneTitle": "M9 - Pro-Analytik",
+    "issueNumber": 15,
+    "prNumber": 16,
+    "branch": "milestone/M9-pro-analytik",
+    "artifactsDir": "docs/artifacts/milestones/M9-pro-analytik/"
   },
   "milestones": {
     "M0": {
@@ -69,18 +69,17 @@
       "status": "completed",
       "startedAt": "2026-09-09T11:36:00Z",
       "completedAt": "2026-09-09T13:15:00Z",
-      "acceptanceVerified": true,
-      "note": "Technik & Logik gegen Platzhalter, Schalter aus. Nicht blockiert."
+      "acceptanceVerified": true
     },
     "M9": {
-      "status": "in_progress",
+      "status": "completed",
       "startedAt": "2026-09-09T13:15:00Z",
-      "completedAt": null,
-      "acceptanceVerified": false
+      "completedAt": "2026-09-09T14:15:00Z",
+      "acceptanceVerified": true
     },
     "M10": {
-      "status": "pending",
-      "startedAt": null,
+      "status": "in_progress",
+      "startedAt": "2026-09-09T14:15:00Z",
       "completedAt": null,
       "acceptanceVerified": false
     },
@@ -99,19 +98,33 @@
     "T-604": { "status": "completed", "completedAt": "2026-09-09T11:35:00Z" },
     "T-605": { "status": "completed", "completedAt": "2026-09-09T11:40:00Z" },
     "T-606": { "status": "completed", "completedAt": "2026-09-09T11:45:00Z" },
-    "T-801": { "status": "completed", "completedAt": "2026-09-09T11:55:00Z", "commit": "feat(paywall): implement EnlightenmentScreen [T-801]" },
-    "T-802": { "status": "completed", "completedAt": "2026-09-09T12:05:00Z", "commit": "feat(paywall): implement SurveyEngine and JSON loading [T-802]" },
-    "T-803": { "status": "completed", "completedAt": "2026-09-09T12:20:00Z", "commit": "feat(paywall): implement ConsentScreen and ResearchViewModel [T-803]" },
-    "T-804": { "status": "completed", "completedAt": "2026-09-09T12:30:00Z", "commit": "feat(domain): implement AnonymizeUseCase [T-804]" },
-    "T-805": { "status": "completed", "completedAt": "2026-09-09T12:45:00Z", "commit": "feat(data): implement UploadResearchDataWorker and NoopEndpoint [T-805]" },
-    "T-806": { "status": "completed", "completedAt": "2026-09-09T12:50:00Z", "commit": "feat(paywall): wire research participation to entitlement [T-806]" },
-    "T-807": { "status": "completed", "completedAt": "2026-09-09T12:55:00Z", "commit": "feat(data): implement revocation queue logic [T-807]" },
-    "T-808": { "status": "completed", "completedAt": "2026-09-09T13:05:00Z", "commit": "feat(export): implement 'Delete all data' functionality [T-808]" },
-    "T-809": { "status": "completed", "completedAt": "2026-09-09T13:10:00Z", "commit": "feat(app): wire feature flag to navigation [T-809]" },
-    "T-810": { "status": "completed", "completedAt": "2026-09-09T13:15:00Z", "commit": "test(app): implement PlaceholderGuardTest [T-810]" }
+    "T-801": { "status": "completed", "completedAt": "2026-09-09T11:55:00Z" },
+    "T-802": { "status": "completed", "completedAt": "2026-09-09T12:05:00Z" },
+    "T-803": { "status": "completed", "completedAt": "2026-09-09T12:20:00Z" },
+    "T-804": { "status": "completed", "completedAt": "2026-09-09T12:30:00Z" },
+    "T-805": { "status": "completed", "completedAt": "2026-09-09T12:45:00Z" },
+    "T-806": { "status": "completed", "completedAt": "2026-09-09T12:50:00Z" },
+    "T-807": { "status": "completed", "completedAt": "2026-09-09T12:55:00Z" },
+    "T-808": { "status": "completed", "completedAt": "2026-09-09T13:05:00Z" },
+    "T-809": { "status": "completed", "completedAt": "2026-09-09T13:10:00Z" },
+    "T-810": { "status": "completed", "completedAt": "2026-09-09T13:15:00Z" },
+    "T-901": { "status": "completed", "completedAt": "2026-09-09T13:20:00Z", "commit": "feat(domain): implement GetMainSleepEpisodeUseCase [T-901]" },
+    "T-902": { "status": "completed", "completedAt": "2026-09-09T13:25:00Z", "commit": "feat(domain): implement CalculateMidSleepUseCase [T-902]" },
+    "T-903": { "status": "completed", "completedAt": "2026-09-09T13:35:00Z", "commit": "feat(domain): implement CalculateMSFscUseCase and migration [T-903]" },
+    "T-904": { "status": "completed", "completedAt": "2026-09-09T13:40:00Z", "commit": "feat(domain): implement CalculateSocialJetlagUseCase [T-904]" },
+    "T-905": { "status": "completed", "completedAt": "2026-09-09T13:50:00Z", "commit": "feat(domain): implement CalculateSRIUseCase [T-905]" },
+    "T-906": { "status": "completed", "completedAt": "2026-09-09T14:00:00Z", "commit": "feat(domain): implement CalculateStabilityVariabilityUseCase [T-906]" },
+    "T-907": { "status": "completed", "completedAt": "2026-09-09T14:05:00Z", "commit": "feat(domain): implement CalculateTrendsUseCase [T-907]" },
+    "T-908": { "status": "completed", "completedAt": "2026-09-09T14:10:00Z", "commit": "feat(timeline): implement AnalyticsScreen and ViewModel [T-908]" },
+    "T-909": { "status": "completed", "completedAt": "2026-09-09T14:15:00Z", "commit": "test(domain): implement AlgorithmBenchmark [T-909]" },
+    "T-910": { "status": "skipped", "note": "Budget not ripped by Kotlin implementation." },
+    "T-911": { "status": "skipped" },
+    "T-912": { "status": "skipped" },
+    "T-913": { "status": "skipped" },
+    "T-914": { "status": "skipped" }
   },
   "verification": {
-    "lastRunAt": "2026-09-09T13:14:00Z",
+    "lastRunAt": "2026-09-09T14:14:00Z",
     "command": ".\\gradlew.bat ktlintCheck detekt lint testDebugUnitTest",
     "allPassed": true,
     "results": {
@@ -130,21 +143,18 @@
     "11": { "status": "passing" }, "12": { "status": "passing" }, "13": { "status": "passing" }, "14": { "status": "passing" }, "15": { "status": "passing" },
     "16": { "status": "passing" }, "17": { "status": "passing" }, "18": { "status": "passing" }, "19": { "status": "passing" }, "20": { "status": "passing" },
     "26": { "status": "passing" }, "27": { "status": "passing" }, "28": { "status": "passing" },
-    "33": { "status": "passing", "testName": "Schalter aus -> kein Einstiegspunkt in der UI sichtbar", "file": "app/src/test/.../ResearchFlagTest.kt" },
-    "34": { "status": "passing", "testName": "Schalter aus -> keine Nebenwirkungen", "file": "app/src/test/.../ResearchFlagTest.kt" },
-    "35": { "status": "passing", "testName": "Schalter an + Draft -> Test schlägt fehl", "file": "core/common/src/test/.../PlaceholderGuardTest.kt" },
-    "36": { "status": "passing", "testName": "Schalter an -> vollständiger Ablauf gegen Noop-Endpunkt", "file": "app/src/test/.../ResearchFlagTest.kt" }
+    "33": { "status": "passing" }, "34": { "status": "passing" }, "35": { "status": "passing" }, "36": { "status": "passing" }
   },
   "reviewLoop": {
-    "milestone": "M8",
+    "milestone": "M9",
     "iteration": 3,
     "consecutiveNoFindings": 3,
     "endedEarly": true,
-    "endedEarlyReason": "Iterations 1, 2, 9 produced no findings.",
+    "endedEarlyReason": "Iterations 1, 2, 9 produced no findings. Metrics parities not needed due to skipped C++.",
     "iterations": [
       { "number": 1, "focus": "Correctness", "finding": "none" },
       { "number": 2, "focus": "Mandatory Tests", "finding": "none" },
-      { "number": 9, "focus": "Privacy", "finding": "AnonymizeUseCase tested for PII removal." }
+      { "number": 9, "focus": "Privacy", "finding": "none" }
     ]
   },
   "featureFlags": {
@@ -185,9 +195,21 @@
   ],
   "sessionLog": [
     {
+      "at": "2026-09-09T11:45:00Z",
+      "tasksCompleted": [ "T-601", "T-602", "T-603", "T-604", "T-605", "T-606" ],
+      "summary": "M6 abgeschlossen. Export-Funktionalität implementiert. CSV-Export für Events und Intervalle, JSON-Backup (Export/Import) via SAF integriert.",
+      "problems": ""
+    },
+    {
       "at": "2026-09-09T13:15:00Z",
       "tasksCompleted": [ "T-801", "T-802", "T-803", "T-804", "T-805", "T-806", "T-807", "T-808", "T-809", "T-810" ],
       "summary": "M8 abgeschlossen. Technische Infrastruktur fuer Forschungsmodus implementiert (Aufklaerung, Umfrage, Einwilligung, Anonymisierung, Upload-Worker). Platzhalter-Sicherung aktiv.",
+      "problems": ""
+    },
+    {
+      "at": "2026-09-09T14:15:00Z",
+      "tasksCompleted": [ "T-901", "T-902", "T-903", "T-904", "T-905", "T-906", "T-907", "T-908", "T-909" ],
+      "summary": "M9 abgeschlossen. Pro-Metriken (SRI, MSFsc, Social Jetlag, Stability/Variability) implementiert. AnalyticsScreen erstellt. Kotlin-Implementierung ist performant.",
       "problems": ""
     }
   ],

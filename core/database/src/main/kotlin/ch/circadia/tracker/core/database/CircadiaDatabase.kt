@@ -2,6 +2,8 @@ package ch.circadia.tracker.core.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     entities = [
@@ -10,11 +12,21 @@ import androidx.room.RoomDatabase
         WidgetBindingEntity::class,
         ResearchConsentEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class CircadiaDatabase : RoomDatabase() {
     abstract fun personDao(): PersonDao
     abstract fun stateEventDao(): StateEventDao
     abstract fun widgetBindingDao(): WidgetBindingDao
+    abstract fun researchDao(): ResearchDao
+
+    companion object {
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE research_consents ADD COLUMN consent_survey INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE research_consents ADD COLUMN consent_data INTEGER NOT NULL DEFAULT 0")
+            }
+        }
+    }
 }

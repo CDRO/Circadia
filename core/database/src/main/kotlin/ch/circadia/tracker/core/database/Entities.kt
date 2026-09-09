@@ -69,5 +69,7 @@ data class ResearchConsentEntity(
     @ColumnInfo(name = "survey_version") val surveyVersion: String,
     @ColumnInfo(name = "consent_text_hash") val consentTextHash: String,
     @ColumnInfo(name = "participant_pseudonym") val participantPseudonym: String,
-    @ColumnInfo(name = "valid_until") val validUntil: Long
+    @ColumnInfo(name = "valid_until") val validUntil: Long,
+    @ColumnInfo(name = "consent_survey") val consentSurvey: Boolean,
+    @ColumnInfo(name = "consent_data") val consentData: Boolean
 )

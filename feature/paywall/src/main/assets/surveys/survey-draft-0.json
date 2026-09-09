@@ -1,0 +1,33 @@
+{
+  "id": "survey-draft-0",
+  "version": 0,
+  "status": "draft",
+  "questions": [
+    {
+      "id": "age",
+      "text": "Wie alt bist du?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        { "id": "18-25", "text": "18-25" },
+        { "id": "26-35", "text": "26-35" },
+        { "id": "36-50", "text": "36-50" },
+        { "id": "51+", "text": "51+" }
+      ],
+      "isRequired": true
+    },
+    {
+      "id": "work",
+      "text": "Arbeitest du im Schichtdienst?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        { "id": "yes", "text": "Ja" },
+        { "id": "no", "text": "Nein" }
+      ]
+    },
+    {
+      "id": "feedback",
+      "text": "Hast du weiteres Feedback für uns?",
+      "type": "FREE_TEXT"
+    }
+  ]
+}

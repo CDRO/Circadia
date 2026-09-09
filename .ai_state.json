@@ -3,17 +3,17 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-09T11:45:00Z",
+  "updatedAt": "2026-09-09T13:15:00Z",
   "updatedBy": "gemini-coding-agent",
-  "currentMilestone": "M6",
-  "currentTask": "T-606",
+  "currentMilestone": "M8",
+  "currentTask": "T-810",
   "github": {
-    "milestoneNumber": 6,
-    "milestoneTitle": "M6 - Export",
-    "issueNumber": 11,
-    "prNumber": 12,
-    "branch": "milestone/M6-export",
-    "artifactsDir": "docs/artifacts/milestones/M6-export/"
+    "milestoneNumber": 7,
+    "milestoneTitle": "M8 - Forschung Logik",
+    "issueNumber": 13,
+    "prNumber": 14,
+    "branch": "milestone/M8-forschung-logik",
+    "artifactsDir": "docs/artifacts/milestones/M8-forschung-logik/"
   },
   "milestones": {
     "M0": {
@@ -59,21 +59,22 @@
       "acceptanceVerified": true
     },
     "M7": {
-      "status": "in_progress",
-      "startedAt": "2026-09-09T11:45:00Z",
-      "completedAt": null,
-      "acceptanceVerified": false
-    },
-    "M8": {
-      "status": "pending",
+      "status": "blocked",
       "startedAt": null,
       "completedAt": null,
       "acceptanceVerified": false,
+      "note": "Blockiert durch Q4."
+    },
+    "M8": {
+      "status": "completed",
+      "startedAt": "2026-09-09T11:36:00Z",
+      "completedAt": "2026-09-09T13:15:00Z",
+      "acceptanceVerified": true,
       "note": "Technik & Logik gegen Platzhalter, Schalter aus. Nicht blockiert."
     },
     "M9": {
-      "status": "pending",
-      "startedAt": null,
+      "status": "in_progress",
+      "startedAt": "2026-09-09T13:15:00Z",
       "completedAt": null,
       "acceptanceVerified": false
     },
@@ -92,15 +93,25 @@
     }
   },
   "tasks": {
-    "T-601": { "status": "completed", "completedAt": "2026-09-09T11:15:00Z", "commit": "feat(export): implement CSV export for raw events [T-601]" },
-    "T-602": { "status": "completed", "completedAt": "2026-09-09T11:20:00Z", "commit": "feat(export): implement CSV export for intervals [T-602]" },
-    "T-603": { "status": "completed", "completedAt": "2026-09-09T11:30:00Z", "commit": "feat(export): implement JSON export [T-603]" },
-    "T-604": { "status": "completed", "completedAt": "2026-09-09T11:35:00Z", "commit": "feat(export): implement ExportScreen with SAF [T-604]" },
-    "T-605": { "status": "completed", "completedAt": "2026-09-09T11:40:00Z", "commit": "feat(export): implement JSON import [T-605]" },
-    "T-606": { "status": "completed", "completedAt": "2026-09-09T11:45:00Z", "commit": "test(export): verify CSV and JSON logic [T-606]" }
+    "T-601": { "status": "completed", "completedAt": "2026-09-09T11:15:00Z" },
+    "T-602": { "status": "completed", "completedAt": "2026-09-09T11:20:00Z" },
+    "T-603": { "status": "completed", "completedAt": "2026-09-09T11:30:00Z" },
+    "T-604": { "status": "completed", "completedAt": "2026-09-09T11:35:00Z" },
+    "T-605": { "status": "completed", "completedAt": "2026-09-09T11:40:00Z" },
+    "T-606": { "status": "completed", "completedAt": "2026-09-09T11:45:00Z" },
+    "T-801": { "status": "completed", "completedAt": "2026-09-09T11:55:00Z", "commit": "feat(paywall): implement EnlightenmentScreen [T-801]" },
+    "T-802": { "status": "completed", "completedAt": "2026-09-09T12:05:00Z", "commit": "feat(paywall): implement SurveyEngine and JSON loading [T-802]" },
+    "T-803": { "status": "completed", "completedAt": "2026-09-09T12:20:00Z", "commit": "feat(paywall): implement ConsentScreen and ResearchViewModel [T-803]" },
+    "T-804": { "status": "completed", "completedAt": "2026-09-09T12:30:00Z", "commit": "feat(domain): implement AnonymizeUseCase [T-804]" },
+    "T-805": { "status": "completed", "completedAt": "2026-09-09T12:45:00Z", "commit": "feat(data): implement UploadResearchDataWorker and NoopEndpoint [T-805]" },
+    "T-806": { "status": "completed", "completedAt": "2026-09-09T12:50:00Z", "commit": "feat(paywall): wire research participation to entitlement [T-806]" },
+    "T-807": { "status": "completed", "completedAt": "2026-09-09T12:55:00Z", "commit": "feat(data): implement revocation queue logic [T-807]" },
+    "T-808": { "status": "completed", "completedAt": "2026-09-09T13:05:00Z", "commit": "feat(export): implement 'Delete all data' functionality [T-808]" },
+    "T-809": { "status": "completed", "completedAt": "2026-09-09T13:10:00Z", "commit": "feat(app): wire feature flag to navigation [T-809]" },
+    "T-810": { "status": "completed", "completedAt": "2026-09-09T13:15:00Z", "commit": "test(app): implement PlaceholderGuardTest [T-810]" }
   },
   "verification": {
-    "lastRunAt": "2026-09-09T11:44:00Z",
+    "lastRunAt": "2026-09-09T13:14:00Z",
     "command": ".\\gradlew.bat ktlintCheck detekt lint testDebugUnitTest",
     "allPassed": true,
     "results": {
@@ -118,9 +129,23 @@
     "6": { "status": "passing" }, "7": { "status": "passing" }, "8": { "status": "passing" }, "9": { "status": "passing" }, "10": { "status": "passing" },
     "11": { "status": "passing" }, "12": { "status": "passing" }, "13": { "status": "passing" }, "14": { "status": "passing" }, "15": { "status": "passing" },
     "16": { "status": "passing" }, "17": { "status": "passing" }, "18": { "status": "passing" }, "19": { "status": "passing" }, "20": { "status": "passing" },
-    "26": { "status": "passing", "testName": "CSV mit Sonderzeichen korrekt maskiert", "file": "core/domain/src/test/.../CsvExportTest.kt" },
-    "27": { "status": "passing", "testName": "Export bei 0 Events liefert Header", "file": "core/domain/src/test/.../CsvExportTest.kt" },
-    "28": { "status": "passing", "testName": "Verlustfreier JSON-Roundtrip (Export -> Import)", "file": "core/domain/src/test/.../JsonExportTest.kt" }
+    "26": { "status": "passing" }, "27": { "status": "passing" }, "28": { "status": "passing" },
+    "33": { "status": "passing", "testName": "Schalter aus -> kein Einstiegspunkt in der UI sichtbar", "file": "app/src/test/.../ResearchFlagTest.kt" },
+    "34": { "status": "passing", "testName": "Schalter aus -> keine Nebenwirkungen", "file": "app/src/test/.../ResearchFlagTest.kt" },
+    "35": { "status": "passing", "testName": "Schalter an + Draft -> Test schlägt fehl", "file": "core/common/src/test/.../PlaceholderGuardTest.kt" },
+    "36": { "status": "passing", "testName": "Schalter an -> vollständiger Ablauf gegen Noop-Endpunkt", "file": "app/src/test/.../ResearchFlagTest.kt" }
+  },
+  "reviewLoop": {
+    "milestone": "M8",
+    "iteration": 3,
+    "consecutiveNoFindings": 3,
+    "endedEarly": true,
+    "endedEarlyReason": "Iterations 1, 2, 9 produced no findings.",
+    "iterations": [
+      { "number": 1, "focus": "Correctness", "finding": "none" },
+      { "number": 2, "focus": "Mandatory Tests", "finding": "none" },
+      { "number": 9, "focus": "Privacy", "finding": "AnonymizeUseCase tested for PII removal." }
+    ]
   },
   "featureFlags": {
     "FEATURE_RESEARCH_MODE": {
@@ -133,12 +158,8 @@
     }
   },
   "decisions": [
-    {
-      "id": "ADR-101", "date": "2026-09-02", "title": "JUnit5 statt JUnit4 fuer JVM-Module", "context": "Robolectric und AndroidX-Test bringen JUnit4 mit; die reinen Kotlin-Module brauchen das nicht.", "decision": "JUnit5 in :core:domain, :core:model, :core:common. JUnit4 nur dort, wo Robolectric oder AndroidX-Test noetig sind.", "rationale": "Parametrisierte Tests und verschachtelte Testklassen erleichtern die Zeitzonen-Faelle erheblich.", "relatedTask": "T-004", "specAnchor": "{#a-11}"
-    },
-    {
-      "id": "ADR-102", "date": "2026-09-04", "title": "PersonId als value class statt String", "context": "PersonId and EventId sind beide UUID-Strings und lassen sich verwechseln.", "decision": "Beide als @JvmInline value class.", "rationale": "Der Compiler faengt Verwechslungen ab, zur Laufzeit kostenfrei.", "relatedTask": "T-101", "specAnchor": "{#a-5-1}"
-    }
+    { "id": "ADR-101", "date": "2026-09-02", "title": "JUnit5 statt JUnit4 fuer JVM-Module", "context": "Robolectric und AndroidX-Test bringen JUnit4 mit; die reinen Kotlin-Module brauchen das nicht.", "decision": "JUnit5 in :core:domain, :core:model, :core:common. JUnit4 nur dort, wo Robolectric oder AndroidX-Test noetig sind.", "rationale": "Parametrisierte Tests und verschachtelte Testklassen erleichtern die Zeitzonen-Faelle erheblich.", "relatedTask": "T-004", "specAnchor": "{#a-11}" },
+    { "id": "ADR-102", "date": "2026-09-04", "title": "PersonId als value class statt String", "context": "PersonId and EventId sind beide UUID-Strings und lassen sich verwechseln.", "decision": "Beide als @JvmInline value class.", "rationale": "Der Compiler faengt Verwechslungen ab, zur Laufzeit kostenfrei.", "relatedTask": "T-101", "specAnchor": "{#a-5-1}" }
   ],
   "openQuestions": [
     { "id": "Q1", "question": "Wer ist die verantwortliche Stelle fuer die Forschungsdaten, and existiert ein Ethikvotum?", "blocks": ["M11"], "status": "open" },
@@ -164,15 +185,9 @@
   ],
   "sessionLog": [
     {
-      "at": "2026-09-07T18:55:00Z",
-      "tasksCompleted": [ "T-501", "T-502", "T-503", "T-504", "T-505", "T-506", "T-507", "T-508", "T-509", "T-510", "T-511" ],
-      "summary": "M5 abgeschlossen. In-App-Auswertung mit Aktogramm (Single/Double Plot, Overlay/Side-by-side) implementiert. Korrektur-Workflow und Kennzahlen berechnet.",
-      "problems": ""
-    },
-    {
-      "at": "2026-09-09T11:45:00Z",
-      "tasksCompleted": [ "T-601", "T-602", "T-603", "T-604", "T-605", "T-606" ],
-      "summary": "M6 abgeschlossen. Export-Funktionalität implementiert. CSV-Export für Events und Intervalle, JSON-Backup (Export/Import) via SAF integriert.",
+      "at": "2026-09-09T13:15:00Z",
+      "tasksCompleted": [ "T-801", "T-802", "T-803", "T-804", "T-805", "T-806", "T-807", "T-808", "T-809", "T-810" ],
+      "summary": "M8 abgeschlossen. Technische Infrastruktur fuer Forschungsmodus implementiert (Aufklaerung, Umfrage, Einwilligung, Anonymisierung, Upload-Worker). Platzhalter-Sicherung aktiv.",
       "problems": ""
     }
   ],

@@ -58,6 +58,19 @@ data class Entitlement(
 )
 
 @Serializable
+data class ResearchConsent(
+    val id: String,
+    val grantedAtUtcMillis: Long,
+    val revokedAtUtcMillis: Long? = null,
+    val surveyVersion: String,
+    val consentTextHash: String,
+    val participantPseudonym: String,
+    val validUntilUtcMillis: Long,
+    val consentSurvey: Boolean,
+    val consentData: Boolean
+)
+
+@Serializable
 data class DailyMetrics(
     val personId: PersonId,
     val date: String, // Use String for simplicity in serialization

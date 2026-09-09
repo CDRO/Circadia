@@ -28,4 +28,8 @@ class OfflinePersonRepository(
     override suspend fun deletePerson(id: PersonId) {
         personDao.deletePerson(id.value)
     }
+
+    override suspend fun deleteAll() {
+        personDao.deleteAllPersons()
+    }
 }

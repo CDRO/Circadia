@@ -1,5 +1,6 @@
 package ch.circadia.tracker.core.domain
 
+import ch.circadia.tracker.core.model.Interval
 import ch.circadia.tracker.core.model.StateEvent
 
 class CsvExportUseCase {
@@ -21,9 +22,30 @@ class CsvExportUseCase {
             ).joinToString(",")
         }
         
+        return withBom((listOf(header) + rows).joinToString("\n"))
+    }
+
+    fun exportIntervals(intervals: List<Interval>): String {
+        val header = "personId,state,startUtcMillis,endUtcMillis,isOpen,startZoneId,endZoneId,startEventId"
+        val rows = intervals.map { interval ->
+            listOf(
+                interval.personId.value,
+                interval.state.name,
+                interval.startUtcMillis.toString(),
+                interval.endUtcMillis.toString(),
+                interval.isOpen.toString(),
+                interval.startZoneId,
+                interval.endZoneId,
+                interval.startEventId
+            ).joinToString(",")
+        }
+        
+        return withBom((listOf(header) + rows).joinToString("\n"))
+    }
+
+    private fun withBom(content: String): String {
         // UTF-8 with BOM for Excel
-        val bom = "\uFEFF"
-        return bom + (listOf(header) + rows).joinToString("\n")
+        return "\uFEFF" + content
     }
 
     private fun escapeCsv(value: String): String {

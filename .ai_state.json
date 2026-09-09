@@ -3,10 +3,10 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-09T11:15:00Z",
+  "updatedAt": "2026-09-09T11:20:00Z",
   "updatedBy": "gemini-coding-agent",
   "currentMilestone": "M6",
-  "currentTask": "T-601",
+  "currentTask": "T-602",
   "github": {
     "milestoneNumber": 6,
     "milestoneTitle": "M6 - Export",
@@ -96,10 +96,15 @@
       "status": "completed",
       "completedAt": "2026-09-09T11:15:00Z",
       "commit": "feat(export): implement CSV export for raw events [T-601]"
+    },
+    "T-602": {
+      "status": "completed",
+      "completedAt": "2026-09-09T11:20:00Z",
+      "commit": "feat(export): implement CSV export for intervals [T-602]"
     }
   },
   "verification": {
-    "lastRunAt": "2026-09-09T11:14:00Z",
+    "lastRunAt": "2026-09-09T11:20:00Z",
     "command": ".\\gradlew.bat ktlintCheck detekt lint testDebugUnitTest",
     "allPassed": true,
     "results": {
@@ -168,9 +173,9 @@
       "problems": ""
     },
     {
-      "at": "2026-09-09T11:15:00Z",
-      "tasksCompleted": [ "T-601" ],
-      "summary": "M6 gestartet. :feature:export Modul angelegt. CSV-Export fuer Roh-Events implementiert und getestet.",
+      "at": "2026-09-09T11:20:00Z",
+      "tasksCompleted": [ "T-601", "T-602" ],
+      "summary": "M6 gestartet. CSV-Export fuer Events und Intervalle implementiert.",
       "problems": ""
     }
   ],

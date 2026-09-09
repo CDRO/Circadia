@@ -41,4 +41,24 @@ class CsvExportTest {
         // Let's just check the starting part of the row
         assertTrue(content.contains("e1,p1,ASLEEP,1000,UTC,APP,2000,,,"))
     }
+
+    @Test
+    fun `Interval-Export liefert Header und Zeilen`() {
+        val interval = Interval(
+            personId = PersonId("p1"),
+            state = SleepState.ASLEEP,
+            startUtcMillis = 1000L,
+            endUtcMillis = 2000L,
+            isOpen = false,
+            startZoneId = "UTC",
+            endZoneId = "UTC",
+            startEventId = "e1"
+        )
+        
+        val result = useCase.exportIntervals(listOf(interval))
+        val content = result.removePrefix("\uFEFF")
+        
+        assertTrue(content.startsWith("personId,state"))
+        assertTrue(content.contains("p1,ASLEEP,1000,2000,false,UTC,UTC,e1"))
+    }
 }

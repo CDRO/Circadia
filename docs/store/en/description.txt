@@ -1,0 +1,10 @@
+Circadia – Your Sleep-Wake Tracker
+
+Track your biological rhythm with ease.
+
+• Fast Logging: Mark sleep and wake phases with just two taps directly from your home screen widget.
+• Scientific Insights: Analyze your actogram and learn more about your chronotype and social jetlag.
+• Privacy First: Your data belongs to you. Local storage and easy export/import.
+• Support Research: Help science by optionally sharing anonymized data (from version 1.1).
+
+Optimize your rhythm with Circadia.

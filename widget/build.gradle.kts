@@ -14,8 +14,10 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:domain"))
     implementation(project(":core:designsystem"))
+    implementation(project(":feature:persons"))
     
     implementation(libs.androidx.activity.compose)
+    implementation(libs.hiltnavcompose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.glance.appwidget)
     implementation(libs.androidx.glance.material3)

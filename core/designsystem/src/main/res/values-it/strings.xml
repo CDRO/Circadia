@@ -1,5 +1,8 @@
 <resources>
+    <!-- TODO:i18n -->
     <string name="app_name">Circadia</string>
+
+    <!-- Persons -->
     <string name="persons_title">Persone</string>
     <string name="persons_empty">Nessuna persona disponibile.</string>
     <string name="persons_add_title">Aggiungi persona</string>
@@ -7,9 +10,14 @@
     <string name="persons_save">Salva</string>
     <string name="persons_cancel">Annulla</string>
     <string name="persons_add_desc">Aggiungi</string>
+    <string name="persons_create">Crea persona</string>
+
+    <!-- Onboarding -->
     <string name="onboarding_welcome">Benvenuti in Circadia</string>
     <string name="onboarding_name_prompt">Il tuo nome</string>
     <string name="onboarding_start">Inizia</string>
+
+    <!-- Export -->
     <string name="export_title">Esporta dati</string>
     <string name="export_events_csv">Dati grezzi (CSV)</string>
     <string name="export_intervals_csv">Intervalli (CSV)</string>
@@ -17,4 +25,51 @@
     <string name="export_import_json">Importa backup (JSON)</string>
     <string name="export_success">Esportazione riuscita</string>
     <string name="export_error">Esportazione fallita</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Impostazioni</string>
+    <string name="settings_delete_all_title">Eliminare tutti i dati?</string>
+    <string name="settings_delete_all_desc">Questa operazione non può essere annullata. Tutte le persone e gli eventi saranno eliminati in modo permanente.</string>
+    <string name="settings_delete_all_button">Elimina tutti i miei dati</string>
+
+    <!-- Research -->
+    <string name="research_title">Ricerca</string>
+    <string name="research_enlightenment_title">Ricerca: Informazione</string>
+    <string name="research_survey_title">Ricerca: Sondaggio</string>
+    <string name="research_consent_title">Ricerca: Consenso</string>
+    <string name="research_finish">Termina</string>
+    <string name="research_survey_answer_label">La tua risposta</string>
+    <string name="research_consent_desc">Qui puoi definire quali dati desideri condividere con la ricerca.</string>
+    <string name="research_consent_survey">Risposte al sondaggio</string>
+    <string name="research_consent_survey_desc">Le tue risposte al questionario di ricerca.</string>
+    <string name="research_consent_data">Dati di sonno-veglia</string>
+    <string name="research_consent_data_desc">I tuoi tempi di sonno-veglia anonimizzati.</string>
+    <string name="research_agree">Accetta</string>
+
+    <!-- Analytics -->
+    <string name="analytics_title">Analisi Pro</string>
+    <string name="analytics_empty">Dati insufficienti</string>
+    <string name="analytics_summary_title">Riepilogo (Ultimo giorno)</string>
+    <string name="analytics_sleep_duration">Durata del sonno</string>
+    <string name="analytics_episodes">Episodi</string>
+    <string name="analytics_max_awake">Fase di veglia più lunga</string>
+
+    <!-- Timeline / Correction -->
+    <string name="timeline_title">Valutazione</string>
+    <string name="timeline_empty">Nessun dato disponibile</string>
+    <string name="timeline_correction_title">Correggi voce</string>
+    <string name="timeline_correction_state">Stato</string>
+    <string name="timeline_state_asleep">Sonno</string>
+    <string name="timeline_state_awake">Veglia</string>
+    <string name="timeline_correction_time">Ora</string>
+    <string name="timeline_correction_note">Nota</string>
+    <string name="timeline_history">Cronologia</string>
+
+    <!-- Common -->
+    <string name="common_save">Salva</string>
+    <string name="common_cancel">Annulla</string>
+    <string name="common_delete">Elimina</string>
+    <string name="common_continue">Continua</string>
+    <string name="common_yes">Sì</string>
+    <string name="common_no">No</string>
 </resources>

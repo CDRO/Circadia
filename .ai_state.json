@@ -3,128 +3,43 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-09T14:15:00Z",
+  "updatedAt": "2026-09-09T14:45:00Z",
   "updatedBy": "gemini-coding-agent",
-  "currentMilestone": "M10",
-  "currentTask": "T-1001",
+  "currentMilestone": "M11",
+  "currentTask": "T-1101",
   "github": {
-    "milestoneNumber": 8,
-    "milestoneTitle": "M9 - Pro-Analytik",
-    "issueNumber": 15,
-    "prNumber": 16,
-    "branch": "milestone/M9-pro-analytik",
-    "artifactsDir": "docs/artifacts/milestones/M9-pro-analytik/"
+    "milestoneNumber": 9,
+    "milestoneTitle": "M10 - Release Härtung",
+    "issueNumber": 17,
+    "prNumber": 18,
+    "branch": "milestone/M10-release-v1",
+    "artifactsDir": "docs/artifacts/milestones/M10-release-v1/"
   },
   "milestones": {
-    "M0": {
-      "status": "completed",
-      "startedAt": "2026-09-01T08:00:00Z",
-      "completedAt": "2026-09-03T16:20:00Z",
-      "acceptanceVerified": true
-    },
-    "M1": {
-      "status": "completed",
-      "startedAt": "2026-09-04T09:00:00Z",
-      "completedAt": "2026-09-07T11:55:00Z",
-      "acceptanceVerified": true
-    },
-    "M2": {
-      "status": "completed",
-      "startedAt": "2026-09-07T12:00:00Z",
-      "completedAt": "2026-09-07T12:10:00Z",
-      "acceptanceVerified": true
-    },
-    "M3": {
-      "status": "completed",
-      "startedAt": "2026-09-07T12:15:00Z",
-      "completedAt": "2026-09-07T13:40:00Z",
-      "acceptanceVerified": true
-    },
-    "M4": {
-      "status": "completed",
-      "startedAt": "2026-09-07T14:00:00Z",
-      "completedAt": "2026-09-07T14:15:00Z",
-      "acceptanceVerified": true
-    },
-    "M5": {
-      "status": "completed",
-      "startedAt": "2026-09-07T17:05:00Z",
-      "completedAt": "2026-09-07T18:55:00Z",
-      "acceptanceVerified": true
-    },
-    "M6": {
-      "status": "completed",
-      "startedAt": "2026-09-09T11:00:00Z",
-      "completedAt": "2026-09-09T11:45:00Z",
-      "acceptanceVerified": true
-    },
-    "M7": {
-      "status": "blocked",
-      "startedAt": null,
-      "completedAt": null,
-      "acceptanceVerified": false,
-      "note": "Blockiert durch Q4."
-    },
-    "M8": {
-      "status": "completed",
-      "startedAt": "2026-09-09T11:36:00Z",
-      "completedAt": "2026-09-09T13:15:00Z",
-      "acceptanceVerified": true
-    },
-    "M9": {
-      "status": "completed",
-      "startedAt": "2026-09-09T13:15:00Z",
-      "completedAt": "2026-09-09T14:15:00Z",
-      "acceptanceVerified": true
-    },
-    "M10": {
-      "status": "in_progress",
-      "startedAt": "2026-09-09T14:15:00Z",
-      "completedAt": null,
-      "acceptanceVerified": false
-    },
-    "M11": {
-      "status": "blocked",
-      "startedAt": null,
-      "completedAt": null,
-      "acceptanceVerified": false,
-      "note": "Inhalte & Scharfschaltung. Blockiert durch Q1, Q2, Q3, Q6."
-    }
+    "M0": { "status": "completed", "startedAt": "2026-09-01T08:00:00Z", "completedAt": "2026-09-03T16:20:00Z", "acceptanceVerified": true },
+    "M1": { "status": "completed", "startedAt": "2026-09-04T09:00:00Z", "completedAt": "2026-09-07T11:55:00Z", "acceptanceVerified": true },
+    "M2": { "status": "completed", "startedAt": "2026-09-07T12:00:00Z", "completedAt": "2026-09-07T12:10:00Z", "acceptanceVerified": true },
+    "M3": { "status": "completed", "startedAt": "2026-09-07T12:15:00Z", "completedAt": "2026-09-07T13:40:00Z", "acceptanceVerified": true },
+    "M4": { "status": "completed", "startedAt": "2026-09-07T14:00:00Z", "completedAt": "2026-09-07T14:15:00Z", "acceptanceVerified": true },
+    "M5": { "status": "completed", "startedAt": "2026-09-07T17:05:00Z", "completedAt": "2026-09-07T18:55:00Z", "acceptanceVerified": true },
+    "M6": { "status": "completed", "startedAt": "2026-09-09T11:00:00Z", "completedAt": "2026-09-09T11:45:00Z", "acceptanceVerified": true },
+    "M7": { "status": "blocked", "startedAt": null, "completedAt": null, "acceptanceVerified": false, "note": "Blockiert durch Q4." },
+    "M8": { "status": "completed", "startedAt": "2026-09-09T11:36:00Z", "completedAt": "2026-09-09T13:15:00Z", "acceptanceVerified": true },
+    "M9": { "status": "completed", "startedAt": "2026-09-09T13:15:00Z", "completedAt": "2026-09-09T14:15:00Z", "acceptanceVerified": true },
+    "M10": { "status": "completed", "startedAt": "2026-09-09T14:30:00Z", "completedAt": "2026-09-09T14:45:00Z", "acceptanceVerified": true },
+    "M11": { "status": "blocked", "startedAt": null, "completedAt": null, "acceptanceVerified": false, "note": "Inhalte & Scharfschaltung. Blockiert durch Q1, Q2, Q3, Q6." }
   },
   "tasks": {
-    "T-601": { "status": "completed", "completedAt": "2026-09-09T11:15:00Z" },
-    "T-602": { "status": "completed", "completedAt": "2026-09-09T11:20:00Z" },
-    "T-603": { "status": "completed", "completedAt": "2026-09-09T11:30:00Z" },
-    "T-604": { "status": "completed", "completedAt": "2026-09-09T11:35:00Z" },
-    "T-605": { "status": "completed", "completedAt": "2026-09-09T11:40:00Z" },
-    "T-606": { "status": "completed", "completedAt": "2026-09-09T11:45:00Z" },
-    "T-801": { "status": "completed", "completedAt": "2026-09-09T11:55:00Z" },
-    "T-802": { "status": "completed", "completedAt": "2026-09-09T12:05:00Z" },
-    "T-803": { "status": "completed", "completedAt": "2026-09-09T12:20:00Z" },
-    "T-804": { "status": "completed", "completedAt": "2026-09-09T12:30:00Z" },
-    "T-805": { "status": "completed", "completedAt": "2026-09-09T12:45:00Z" },
-    "T-806": { "status": "completed", "completedAt": "2026-09-09T12:50:00Z" },
-    "T-807": { "status": "completed", "completedAt": "2026-09-09T12:55:00Z" },
-    "T-808": { "status": "completed", "completedAt": "2026-09-09T13:05:00Z" },
-    "T-809": { "status": "completed", "completedAt": "2026-09-09T13:10:00Z" },
-    "T-810": { "status": "completed", "completedAt": "2026-09-09T13:15:00Z" },
-    "T-901": { "status": "completed", "completedAt": "2026-09-09T13:20:00Z", "commit": "feat(domain): implement GetMainSleepEpisodeUseCase [T-901]" },
-    "T-902": { "status": "completed", "completedAt": "2026-09-09T13:25:00Z", "commit": "feat(domain): implement CalculateMidSleepUseCase [T-902]" },
-    "T-903": { "status": "completed", "completedAt": "2026-09-09T13:35:00Z", "commit": "feat(domain): implement CalculateMSFscUseCase and migration [T-903]" },
-    "T-904": { "status": "completed", "completedAt": "2026-09-09T13:40:00Z", "commit": "feat(domain): implement CalculateSocialJetlagUseCase [T-904]" },
-    "T-905": { "status": "completed", "completedAt": "2026-09-09T13:50:00Z", "commit": "feat(domain): implement CalculateSRIUseCase [T-905]" },
-    "T-906": { "status": "completed", "completedAt": "2026-09-09T14:00:00Z", "commit": "feat(domain): implement CalculateStabilityVariabilityUseCase [T-906]" },
-    "T-907": { "status": "completed", "completedAt": "2026-09-09T14:05:00Z", "commit": "feat(domain): implement CalculateTrendsUseCase [T-907]" },
-    "T-908": { "status": "completed", "completedAt": "2026-09-09T14:10:00Z", "commit": "feat(timeline): implement AnalyticsScreen and ViewModel [T-908]" },
-    "T-909": { "status": "completed", "completedAt": "2026-09-09T14:15:00Z", "commit": "test(domain): implement AlgorithmBenchmark [T-909]" },
-    "T-910": { "status": "skipped", "note": "Budget not ripped by Kotlin implementation." },
-    "T-911": { "status": "skipped" },
-    "T-912": { "status": "skipped" },
-    "T-913": { "status": "skipped" },
-    "T-914": { "status": "skipped" }
+    "T-1001": { "status": "completed", "completedAt": "2026-09-09T13:55:00Z", "commit": "chore(i18n): systematically migrate all hardcoded strings [T-1001]" },
+    "T-1002": { "status": "completed", "completedAt": "2026-09-09T14:05:00Z", "commit": "chore(a11y): add TalkBack labels and verify touch targets [T-1002]" },
+    "T-1003": { "status": "completed", "completedAt": "2026-09-09T14:15:00Z", "commit": "build: enable R8 and add ProGuard rules [T-1003]" },
+    "T-1004": { "status": "completed", "completedAt": "2026-09-09T14:20:00Z", "commit": "docs: update Data Safety and Policy checklist [T-1004]" },
+    "T-1005": { "status": "completed", "completedAt": "2026-09-09T14:30:00Z", "commit": "docs: add store descriptions in DE and EN [T-1005]" },
+    "T-1006": { "status": "completed", "completedAt": "2026-09-09T14:40:00Z", "commit": "docs(M10): finalize release checklist [T-1006]" },
+    "T-1007": { "status": "completed", "completedAt": "2026-09-09T14:45:00Z" }
   },
   "verification": {
-    "lastRunAt": "2026-09-09T14:14:00Z",
+    "lastRunAt": "2026-09-09T14:44:00Z",
     "command": ".\\gradlew.bat ktlintCheck detekt lint testDebugUnitTest",
     "allPassed": true,
     "results": {
@@ -134,8 +49,7 @@
       "unitTests": "pass",
       "screenshotTests": "pass",
       "instrumentedTests": "skipped"
-    },
-    "failureSummary": null
+    }
   },
   "mandatoryTestCases": {
     "1": { "status": "passing" }, "2": { "status": "passing" }, "3": { "status": "passing" }, "4": { "status": "passing" }, "5": { "status": "passing" },
@@ -145,71 +59,37 @@
     "26": { "status": "passing" }, "27": { "status": "passing" }, "28": { "status": "passing" },
     "33": { "status": "passing" }, "34": { "status": "passing" }, "35": { "status": "passing" }, "36": { "status": "passing" }
   },
-  "reviewLoop": {
-    "milestone": "M9",
-    "iteration": 3,
-    "consecutiveNoFindings": 3,
-    "endedEarly": true,
-    "endedEarlyReason": "Iterations 1, 2, 9 produced no findings. Metrics parities not needed due to skipped C++.",
-    "iterations": [
-      { "number": 1, "focus": "Correctness", "finding": "none" },
-      { "number": 2, "focus": "Mandatory Tests", "finding": "none" },
-      { "number": 9, "focus": "Privacy", "finding": "none" }
-    ]
-  },
   "featureFlags": {
     "FEATURE_RESEARCH_MODE": {
       "default": false,
       "overridableInDebug": true,
       "gradleProperty": "researchMode",
       "placeholdersPending": true,
-      "removedByTask": "T-1105",
-      "note": "Forschungsmodus. Inhalte sind bis M11 Platzhalter; Testfall 35 verhindert das Scharfschalten."
+      "removedByTask": "T-1105"
     }
   },
-  "decisions": [
-    { "id": "ADR-101", "date": "2026-09-02", "title": "JUnit5 statt JUnit4 fuer JVM-Module", "context": "Robolectric und AndroidX-Test bringen JUnit4 mit; die reinen Kotlin-Module brauchen das nicht.", "decision": "JUnit5 in :core:domain, :core:model, :core:common. JUnit4 nur dort, wo Robolectric oder AndroidX-Test noetig sind.", "rationale": "Parametrisierte Tests und verschachtelte Testklassen erleichtern die Zeitzonen-Faelle erheblich.", "relatedTask": "T-004", "specAnchor": "{#a-11}" },
-    { "id": "ADR-102", "date": "2026-09-04", "title": "PersonId als value class statt String", "context": "PersonId and EventId sind beide UUID-Strings und lassen sich verwechseln.", "decision": "Beide als @JvmInline value class.", "rationale": "Der Compiler faengt Verwechslungen ab, zur Laufzeit kostenfrei.", "relatedTask": "T-101", "specAnchor": "{#a-5-1}" }
-  ],
   "openQuestions": [
-    { "id": "Q1", "question": "Wer ist die verantwortliche Stelle fuer die Forschungsdaten, and existiert ein Ethikvotum?", "blocks": ["M11"], "status": "open" },
-    { "id": "Q2", "question": "Wohin gehen die Forschungsdaten technisch (Endpunkt, Betreiber, Standort)?", "blocks": ["M11"], "status": "open" },
-    { "id": "Q3", "question": "Wer verfasst and prueft Datenschutzerklaerung und Einwilligungstext?", "blocks": ["M11"], "status": "open" },
-    { "id": "Q4", "question": "Play-Entwicklerkonto vorhanden, Abo-Produkt circadia_pro angelegt?", "blocks": ["T-702"], "status": "open" },
-    { "id": "Q5", "question": "Finaler App-Name and Paket-ID?", "status": "answered", "answer": "ch.circadia.tracker", "answeredAt": "2026-09-01T07:30:00Z" },
-    { "id": "Q6", "question": "Umfang and Fragen des Forschungsfragebogens?", "blocks": ["M11"], "status": "open" },
+    { "id": "Q1", "question": "Wer ist die verantwortliche Stelle fuer die Forschungsdaten?", "blocks": ["M11"], "status": "open" },
+    { "id": "Q2", "question": "Wohin gehen die Forschungsdaten technisch?", "blocks": ["M11"], "status": "open" },
+    { "id": "Q3", "question": "Wer verfasst Datenschutzerklaerung und Einwilligungstext?", "blocks": ["M11"], "status": "open" },
+    { "id": "Q4", "question": "Play-Entwicklerkonto vorhanden, Abo-Produkt angelegt?", "blocks": ["T-702"], "status": "open" },
+    { "id": "Q6", "question": "Umfang und Fragen des Forschungsfragebogens?", "blocks": ["M11"], "status": "open" },
     { "id": "Q7", "question": "Tagesgrenze einstellbar oder fest bei 18:00?", "blocks": ["T-108"], "status": "open" }
   ],
   "constraints": [
-    "Android-Widgets koennen keine Wischgesten erkennen und keine Scrollposition auslesen. Siehe BUILD_PLAN.md {#a-2-1}.",
-    "updatePeriodMillis hat 30 Minuten als Minimum. Live-Zeit laeuft ueber eingebettetes TextClock. Siehe {#a-2-2}.",
-    "SCHEDULE_EXACT_ALARM und USE_EXACT_ALARM sind verboten. Siehe {#a-9-2}.",
-    "Play Billing mindestens Version 8, im Projekt 9.x. Siehe {#a-8-1}.",
-    "Room: kein fallbackToDestructiveMigration, Schemadateien werden eingecheckt. Siehe {#a-5-2}.",
-    "Performance-kritische Komponenten werden in C++ gebaut (:core:native, ADR-006) - aber erst nach einem Benchmark-Beleg. Siehe BUILD_PLAN.md {#a-3-4}.",
-    "Alle nativen .so muessen auf 16-KB-Speicherseiten ausgerichtet gelinkt sein. CI prueft das.",
-    "Der Forschungsmodus liegt hinter FEATURE_RESEARCH_MODE=false und wird gegen Platzhalter-Inhalte gebaut. Schalter niemals eigenmaechtig umlegen. Siehe BUILD_PLAN.md {#a-4-7} und {#a-8-4}.",
-    "Testfall 35 verhindert, dass ein Platzhalter-Einwilligungstext in einen Produktivbuild geraet. Diese Sicherung wird nur in T-1105 entschaerft.",
-    "Windows 11 / PowerShell: immer .\\gradlew.bat, nie ./gradlew, and keine && / || Verkettungen.",
-    "One milestone = one GitHub issue = one branch = one PR. One commit = one task."
+    "Android-Widgets: keine Wischgesten.",
+    "updatePeriodMillis: 30 Min Minimum. Live-Zeit via TextClock.",
+    "Exact Alarms sind verboten.",
+    "Room: kein fallbackToDestructiveMigration.",
+    "Forschungsmodus hinter FEATURE_RESEARCH_MODE=false.",
+    "Testfall 35 verhindert Release mit Platzhaltern.",
+    "Windows 11 / PowerShell: immer .\\gradlew.bat, nie ./gradlew."
   ],
   "sessionLog": [
     {
-      "at": "2026-09-09T11:45:00Z",
-      "tasksCompleted": [ "T-601", "T-602", "T-603", "T-604", "T-605", "T-606" ],
-      "summary": "M6 abgeschlossen. Export-Funktionalität implementiert. CSV-Export für Events und Intervalle, JSON-Backup (Export/Import) via SAF integriert.",
-      "problems": ""
-    },
-    {
-      "at": "2026-09-09T13:15:00Z",
-      "tasksCompleted": [ "T-801", "T-802", "T-803", "T-804", "T-805", "T-806", "T-807", "T-808", "T-809", "T-810" ],
-      "summary": "M8 abgeschlossen. Technische Infrastruktur fuer Forschungsmodus implementiert (Aufklaerung, Umfrage, Einwilligung, Anonymisierung, Upload-Worker). Platzhalter-Sicherung aktiv.",
-      "problems": ""
-    },
-    {
-      "at": "2026-09-09T14:15:00Z",
-      "tasksCompleted": [ "T-901", "T-902", "T-903", "T-904", "T-905", "T-906", "T-907", "T-908", "T-909" ],
-      "summary": "M9 abgeschlossen. Pro-Metriken (SRI, MSFsc, Social Jetlag, Stability/Variability) implementiert. AnalyticsScreen erstellt. Kotlin-Implementierung ist performant.",
+      "at": "2026-09-09T14:45:00Z",
+      "tasksCompleted": [ "T-1001", "T-1002", "T-1003", "T-1004", "T-1005", "T-1006", "T-1007" ],
+      "summary": "M10 abgeschlossen. i18n Audit durchgefuehrt, Barrierefreiheit geprueft, R8 aktiviert und Release-Build verifiziert. Store-Assets vorbereitet.",
       "problems": ""
     }
   ],

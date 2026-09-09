@@ -4,7 +4,6 @@ import android.app.TimePickerDialog
 import android.text.format.DateFormat
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ViewAgenda
 import androidx.compose.material.icons.filled.ViewColumn
@@ -14,9 +13,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ch.circadia.tracker.core.designsystem.R as DesignR
 import ch.circadia.tracker.core.model.*
 import java.time.Instant
 import java.time.LocalTime
@@ -36,7 +37,7 @@ fun TimelineScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Auswertung") },
+                title = { Text(stringResource(DesignR.string.timeline_title)) },
                 actions = {
                     val state = uiState
                     if (state is TimelineUiState.Content) {
@@ -60,7 +61,7 @@ fun TimelineScreen(
         Box(modifier = Modifier.padding(padding)) {
             when (val state = uiState) {
                 TimelineUiState.Loading -> CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                TimelineUiState.Empty -> Text("Keine Daten vorhanden", modifier = Modifier.align(Alignment.Center))
+                TimelineUiState.Empty -> Text(stringResource(DesignR.string.timeline_empty), modifier = Modifier.align(Alignment.Center))
                 is TimelineUiState.Error -> Text(state.message, color = MaterialTheme.colorScheme.error, modifier = Modifier.align(Alignment.Center))
                 is TimelineUiState.Content -> {
                     Column {
@@ -144,10 +145,15 @@ fun CorrectionSheetContent(
     var note by remember { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Eintrag korrigieren", style = MaterialTheme.typography.titleLarge)
+        Text(stringResource(DesignR.string.timeline_correction_title), style = MaterialTheme.typography.titleLarge)
         Spacer(modifier = Modifier.height(16.dp))
         
-        Text("Zustand: ${if (interval.state == SleepState.ASLEEP) "Schlaf" else "Wach"}")
+        val stateText = if (interval.state == SleepState.ASLEEP) {
+            stringResource(DesignR.string.timeline_state_asleep)
+        } else {
+            stringResource(DesignR.string.timeline_state_awake)
+        }
+        Text("${stringResource(DesignR.string.timeline_correction_state)}: $stateText")
         Spacer(modifier = Modifier.height(8.dp))
         
         OutlinedButton(onClick = {
@@ -159,7 +165,7 @@ fun CorrectionSheetContent(
                 DateFormat.is24HourFormat(context)
             ).show()
         }) {
-            Text("Zeit: $selectedTime")
+            Text("${stringResource(DesignR.string.timeline_correction_time)}: $selectedTime")
         }
         
         Spacer(modifier = Modifier.height(16.dp))
@@ -167,13 +173,13 @@ fun CorrectionSheetContent(
         OutlinedTextField(
             value = note,
             onValueChange = { note = it },
-            label = { Text("Notiz") },
+            label = { Text(stringResource(DesignR.string.timeline_correction_note)) },
             modifier = Modifier.fillMaxWidth()
         )
         
         if (history.size > 1) {
             Spacer(modifier = Modifier.height(24.dp))
-            Text("Verlauf:", style = MaterialTheme.typography.titleSmall)
+            Text(stringResource(DesignR.string.timeline_history), style = MaterialTheme.typography.titleSmall)
             history.forEach { event ->
                 val time = Instant.ofEpochMilli(event.occurredAtUtcMillis).atZone(ZoneId.of(event.timeZoneId)).format(DateTimeFormatter.ofPattern("HH:mm"))
                 Text("- $time (${event.source}) ${event.note ?: ""}", style = MaterialTheme.typography.bodySmall)
@@ -182,12 +188,12 @@ fun CorrectionSheetContent(
         
         Spacer(modifier = Modifier.height(32.dp))
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-            TextButton(onClick = onDismiss) { Text("Abbrechen") }
+            TextButton(onClick = onDismiss) { Text(stringResource(DesignR.string.common_cancel)) }
             Button(onClick = { 
                 val newZdt = initialZdt.toLocalDate().atTime(selectedTime).atZone(initialZdt.zone)
                 onSave(newZdt.toInstant().toEpochMilli(), note.ifBlank { null }) 
             }) { 
-                Text("Speichern") 
+                Text(stringResource(DesignR.string.common_save)) 
             }
         }
     }
@@ -223,7 +229,7 @@ fun MetricsSummary(
     latestMetrics: List<DailyMetrics>
 ) {
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Zusammenfassung (Letzter Tag)", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(DesignR.string.analytics_summary_title), style = MaterialTheme.typography.titleMedium)
         Spacer(modifier = Modifier.height(8.dp))
         
         selectedIds.forEach { personId ->
@@ -232,9 +238,9 @@ fun MetricsSummary(
             
             if (person != null && metrics != null) {
                 Text("${person.displayName}:", style = MaterialTheme.typography.bodyMedium)
-                Text("- Schlafdauer: ${metrics.totalSleepMillis / 3600000}h ${(metrics.totalSleepMillis % 3600000) / 60000}m")
-                Text("- Episoden: ${metrics.sleepEpisodes}")
-                Text("- Längste Wachphase: ${metrics.maxAwakeMillis / 3600000}h")
+                Text("- ${stringResource(DesignR.string.analytics_sleep_duration)}: ${metrics.totalSleepMillis / 3600000}h ${(metrics.totalSleepMillis % 3600000) / 60000}m")
+                Text("- ${stringResource(DesignR.string.analytics_episodes)}: ${metrics.sleepEpisodes}")
+                Text("- ${stringResource(DesignR.string.analytics_max_awake)}: ${metrics.maxAwakeMillis / 3600000}h")
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }

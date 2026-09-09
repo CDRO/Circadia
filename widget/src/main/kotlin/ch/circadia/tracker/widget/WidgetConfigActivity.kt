@@ -5,41 +5,33 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.lifecycleScope
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import ch.circadia.tracker.core.designsystem.CircadiaTheme
-import ch.circadia.tracker.core.domain.PersonRepository
-import ch.circadia.tracker.core.domain.WidgetBindingRepository
+import ch.circadia.tracker.core.designsystem.R as DesignR
 import ch.circadia.tracker.core.model.Person
+import ch.circadia.tracker.feature.persons.PersonsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class WidgetConfigActivity : ComponentActivity() {
 
-    @Inject lateinit var personRepository: PersonRepository
-    @Inject lateinit var widgetBindingRepository: WidgetBindingRepository
-
-    private var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        appWidgetId = intent?.extras?.getInt(
+        val appWidgetId = intent.getIntExtra(
             AppWidgetManager.EXTRA_APPWIDGET_ID,
             AppWidgetManager.INVALID_APPWIDGET_ID
-        ) ?: AppWidgetManager.INVALID_APPWIDGET_ID
-
-        setResult(RESULT_CANCELED)
+        )
 
         if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
             finish()
@@ -48,52 +40,50 @@ class WidgetConfigActivity : ComponentActivity() {
 
         setContent {
             CircadiaTheme {
-                val persons by personRepository.getPersons().collectAsState(initial = null)
-
-                Scaffold { padding ->
-                    Box(modifier = Modifier.fillMaxSize().padding(padding)) {
-                        when (val list = persons) {
-                            null -> CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                            else -> {
-                                if (list.isEmpty()) {
-                                    Button(
-                                        onClick = { 
-                                            val intent = Intent("ch.circadia.tracker.action.ONBOARDING")
-                                            startActivity(intent)
-                                        },
-                                        modifier = Modifier.align(Alignment.Center)
-                                    ) {
-                                        Text("Person anlegen")
-                                    }
-                                } else {
-                                    LazyColumn {
-                                        items(list) { person ->
-                                            ListItem(
-                                                headlineContent = { Text(person.displayName) },
-                                                modifier = Modifier.clickable {
-                                                    onPersonSelected(person)
-                                                }
-                                            )
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                WidgetConfigScreen(
+                    onPersonSelected = { person ->
+                        // TODO: Implement binding logic
+                        val resultValue = Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+                        setResult(RESULT_OK, resultValue)
+                        finish()
                     }
-                }
+                )
             }
         }
     }
+}
 
-    private fun onPersonSelected(person: Person) {
-        lifecycleScope.launch {
-            widgetBindingRepository.bindWidget(appWidgetId, person.id)
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun WidgetConfigScreen(
+    onPersonSelected: (Person) -> Unit,
+    viewModel: PersonsViewModel = hiltViewModel()
+) {
+    val persons by viewModel.persons.collectAsState()
 
-            val resultValue = Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-            setResult(RESULT_OK, resultValue)
-
-            UpdateWidgetReceiver.updateAll(this@WidgetConfigActivity)
-            finish()
+    Scaffold(
+        topBar = { TopAppBar(title = { Text(stringResource(DesignR.string.persons_title)) }) }
+    ) { padding ->
+        LazyColumn(modifier = Modifier.padding(padding)) {
+            items(persons) { person ->
+                ListItem(
+                    headlineContent = { Text(person.displayName) },
+                    modifier = Modifier.fillMaxWidth(),
+                    trailingContent = {
+                        Button(onClick = { onPersonSelected(person) }) {
+                            Text(stringResource(DesignR.string.persons_save))
+                        }
+                    }
+                )
+            }
+            item {
+                Button(
+                    onClick = { /* TODO: Open PersonSetupActivity */ },
+                    modifier = Modifier.fillMaxWidth().padding(16.dp)
+                ) {
+                    Text(stringResource(DesignR.string.persons_create))
+                }
+            }
         }
     }
 }

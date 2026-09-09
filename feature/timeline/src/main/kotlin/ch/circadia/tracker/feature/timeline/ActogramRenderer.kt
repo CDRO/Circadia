@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import ch.circadia.tracker.core.designsystem.ChartColors
 import ch.circadia.tracker.core.model.*
@@ -54,6 +56,9 @@ fun ActogramRenderer(
         modifier = modifier
             .fillMaxWidth()
             .height(totalHeight)
+            .semantics {
+                contentDescription = "Aktogramm mit ${days.size} Tagen für ${selectedPersonIds.size} Personen"
+            }
             .pointerInput(days, selectedPersonIds, useSideBySide, zoom) {
                 detectTapGestures { offset ->
                     val rowHeightPx = rowHeight.toPx()

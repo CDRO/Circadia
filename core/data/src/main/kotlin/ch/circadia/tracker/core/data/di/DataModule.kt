@@ -48,4 +48,7 @@ object DataModule {
     @Provides
     fun provideCalculateDailyMetricsUseCase(): CalculateDailyMetricsUseCase =
         CalculateDailyMetricsUseCase()
+
+    @Provides
+    fun provideCsvExportUseCase(): CsvExportUseCase = CsvExportUseCase()
 }

@@ -7,7 +7,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import ch.circadia.tracker.core.designsystem.R as DesignR
 import ch.circadia.tracker.core.model.*
 import kotlinx.serialization.json.Json
 
@@ -28,7 +30,7 @@ fun SurveyScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Forschung: Umfrage") })
+            TopAppBar(title = { Text(stringResource(DesignR.string.research_survey_title)) })
         },
         bottomBar = {
             Surface(tonalElevation = 8.dp) {
@@ -42,7 +44,7 @@ fun SurveyScreen(
                         onClick = onCancel,
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text("Abbrechen")
+                        Text(stringResource(DesignR.string.common_cancel))
                     }
                     Button(
                         onClick = {
@@ -51,7 +53,7 @@ fun SurveyScreen(
                         enabled = survey.questions.all { !it.isRequired || answers.containsKey(it.id) },
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text("Abschließen")
+                        Text(stringResource(DesignR.string.research_finish))
                     }
                 }
             }
@@ -112,7 +114,7 @@ fun QuestionItem(
                     value = currentAnswer ?: "",
                     onValueChange = onAnswerChanged,
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text("Deine Antwort") }
+                    label = { Text(stringResource(DesignR.string.research_survey_answer_label)) }
                 )
             }
             else -> {

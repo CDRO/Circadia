@@ -6,13 +6,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ch.circadia.tracker.core.designsystem.R as DesignR
 import ch.circadia.tracker.core.model.Person
 import ch.circadia.tracker.core.model.PersonId
 import java.time.Instant
-import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
@@ -25,13 +26,13 @@ fun AnalyticsScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Pro-Analytik") })
+            TopAppBar(title = { Text(stringResource(DesignR.string.analytics_title)) })
         }
     ) { padding ->
         Box(modifier = Modifier.padding(padding)) {
             when (val state = uiState) {
                 AnalyticsUiState.Loading -> CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                AnalyticsUiState.Empty -> Text("Zu wenig Daten", modifier = Modifier.align(Alignment.Center))
+                AnalyticsUiState.Empty -> Text(stringResource(DesignR.string.analytics_empty), modifier = Modifier.align(Alignment.Center))
                 is AnalyticsUiState.Content -> {
                     Column {
                         SinglePersonSelector(

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Circadia</string>
+
+    <!-- Persons -->
     <string name="persons_title">Personen</string>
     <string name="persons_empty">Keine Personen vorhanden.</string>
     <string name="persons_add_title">Person hinzufügen</string>
@@ -7,9 +9,14 @@
     <string name="persons_save">Speichern</string>
     <string name="persons_cancel">Abbrechen</string>
     <string name="persons_add_desc">Hinzufügen</string>
+    <string name="persons_create">Person anlegen</string>
+
+    <!-- Onboarding -->
     <string name="onboarding_welcome">Willkommen bei Circadia</string>
     <string name="onboarding_name_prompt">Dein Name</string>
     <string name="onboarding_start">Starten</string>
+
+    <!-- Export -->
     <string name="export_title">Daten exportieren</string>
     <string name="export_events_csv">Rohdaten (CSV)</string>
     <string name="export_intervals_csv">Intervalle (CSV)</string>
@@ -17,4 +24,51 @@
     <string name="export_import_json">Backup importieren (JSON)</string>
     <string name="export_success">Export erfolgreich</string>
     <string name="export_error">Export fehlgeschlagen</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_delete_all_title">Alle Daten löschen?</string>
+    <string name="settings_delete_all_desc">Dieser Vorgang kann nicht rückgängig gemacht werden. Alle Personen und Ereignisse werden unwiderruflich gelöscht.</string>
+    <string name="settings_delete_all_button">Alle meine Daten löschen</string>
+
+    <!-- Research -->
+    <string name="research_title">Forschung</string>
+    <string name="research_enlightenment_title">Forschung: Aufklärung</string>
+    <string name="research_survey_title">Forschung: Umfrage</string>
+    <string name="research_consent_title">Forschung: Einwilligung</string>
+    <string name="research_finish">Abschließen</string>
+    <string name="research_survey_answer_label">Deine Antwort</string>
+    <string name="research_consent_desc">Hier kannst du festlegen, welche Daten du mit der Forschung teilen möchtest.</string>
+    <string name="research_consent_survey">Umfrageantworten</string>
+    <string name="research_consent_survey_desc">Deine Antworten auf den Forschungsfragebogen.</string>
+    <string name="research_consent_data">Schlaf-Wach-Daten</string>
+    <string name="research_consent_data_desc">Deine anonymisierten Schlaf- und Wachzeiten.</string>
+    <string name="research_agree">Zustimmen</string>
+
+    <!-- Analytics -->
+    <string name="analytics_title">Pro-Analytik</string>
+    <string name="analytics_empty">Zu wenig Daten</string>
+    <string name="analytics_summary_title">Zusammenfassung (Letzter Tag)</string>
+    <string name="analytics_sleep_duration">Schlafdauer</string>
+    <string name="analytics_episodes">Episoden</string>
+    <string name="analytics_max_awake">Längste Wachphase</string>
+
+    <!-- Timeline / Correction -->
+    <string name="timeline_title">Auswertung</string>
+    <string name="timeline_empty">Keine Daten vorhanden</string>
+    <string name="timeline_correction_title">Eintrag korrigieren</string>
+    <string name="timeline_correction_state">Zustand</string>
+    <string name="timeline_state_asleep">Schlaf</string>
+    <string name="timeline_state_awake">Wach</string>
+    <string name="timeline_correction_time">Zeit</string>
+    <string name="timeline_correction_note">Notiz</string>
+    <string name="timeline_history">Verlauf</string>
+
+    <!-- Common -->
+    <string name="common_save">Speichern</string>
+    <string name="common_cancel">Abbrechen</string>
+    <string name="common_delete">Löschen</string>
+    <string name="common_continue">Weiter</string>
+    <string name="common_yes">Ja</string>
+    <string name="common_no">Nein</string>
 </resources>

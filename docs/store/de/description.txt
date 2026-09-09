@@ -1,0 +1,10 @@
+Circadia – Dein Schlaf-Wach-Tracker
+
+Erfasse deinen biologischen Rhythmus mit Leichtigkeit.
+
+• Schnelle Erfassung: Markiere Schlaf- und Wachphasen mit nur zwei Taps direkt über das Homescreen-Widget.
+• Wissenschaftliche Einblicke: Analysiere dein Aktogramm und lerne mehr über deinen Chronotyp und sozialen Jetlag.
+• Datenschutz an erster Stelle: Deine Daten gehören dir. Lokale Speicherung und einfacher Export/Import.
+• Forschung unterstützen: Hilf der Wissenschaft, indem du optional anonymisierte Daten teilst (ab Version 1.1).
+
+Optimiere deinen Rhythmus mit Circadia.

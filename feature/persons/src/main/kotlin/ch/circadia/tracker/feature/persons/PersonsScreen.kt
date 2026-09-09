@@ -11,9 +11,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import ch.circadia.tracker.core.model.Person
 import ch.circadia.tracker.core.designsystem.R as DesignR
+import ch.circadia.tracker.core.model.Person
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -72,7 +73,7 @@ fun PersonItem(person: Person, onDelete: () -> Unit) {
         headlineContent = { Text(person.displayName) },
         trailingContent = {
             IconButton(onClick = onDelete) {
-                Icon(Icons.Default.Delete, contentDescription = "Löschen")
+                Icon(Icons.Default.Delete, contentDescription = stringResource(DesignR.string.common_delete))
             }
         }
     )
@@ -86,22 +87,22 @@ fun AddPersonDialog(
     var name by remember { mutableStateOf("") }
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Person hinzufügen") },
+        title = { Text(stringResource(DesignR.string.persons_add_title)) },
         text = {
             TextField(
                 value = name,
                 onValueChange = { name = it },
-                label = { Text("Name") }
+                label = { Text(stringResource(DesignR.string.persons_name_label)) }
             )
         },
         confirmButton = {
             TextButton(onClick = { onSave(name) }, enabled = name.isNotBlank()) {
-                Text("Speichern")
+                Text(stringResource(DesignR.string.persons_save))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Abbrechen")
+                Text(stringResource(DesignR.string.persons_cancel))
             }
         }
     )

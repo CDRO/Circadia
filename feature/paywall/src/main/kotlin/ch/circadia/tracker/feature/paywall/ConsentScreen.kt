@@ -5,7 +5,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import ch.circadia.tracker.core.designsystem.R as DesignR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -18,7 +20,7 @@ fun ConsentScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Forschung: Einwilligung") })
+            TopAppBar(title = { Text(stringResource(DesignR.string.research_consent_title)) })
         },
         bottomBar = {
             Surface(tonalElevation = 8.dp) {
@@ -32,14 +34,14 @@ fun ConsentScreen(
                         onClick = onCancel,
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text("Abbrechen")
+                        Text(stringResource(DesignR.string.common_cancel))
                     }
                     Button(
                         onClick = { onComplete(consentSurvey, consentData) },
                         modifier = Modifier.weight(1f),
                         enabled = consentSurvey || consentData
                     ) {
-                        Text("Zustimmen")
+                        Text(stringResource(DesignR.string.research_agree))
                     }
                 }
             }
@@ -53,20 +55,20 @@ fun ConsentScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             Text(
-                text = "Hier kannst du festlegen, welche Daten du mit der Forschung teilen möchtest.",
+                text = stringResource(DesignR.string.research_consent_desc),
                 style = MaterialTheme.typography.bodyLarge
             )
 
             ConsentItem(
-                title = "Umfrageantworten",
-                description = "Deine Antworten auf den Forschungsfragebogen.",
+                title = stringResource(DesignR.string.research_consent_survey),
+                description = stringResource(DesignR.string.research_consent_survey_desc),
                 checked = consentSurvey,
                 onCheckedChange = { consentSurvey = it }
             )
 
             ConsentItem(
-                title = "Schlaf-Wach-Daten",
-                description = "Deine anonymisierten Schlaf- und Wachzeiten.",
+                title = stringResource(DesignR.string.research_consent_data),
+                description = stringResource(DesignR.string.research_consent_data_desc),
                 checked = consentData,
                 onCheckedChange = { consentData = it }
             )

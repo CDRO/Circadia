@@ -7,7 +7,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import ch.circadia.tracker.core.designsystem.R as DesignR
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -33,7 +35,7 @@ fun EnlightenmentScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Forschung: Aufklärung") })
+            TopAppBar(title = { Text(stringResource(DesignR.string.research_enlightenment_title)) })
         },
         bottomBar = {
             Surface(tonalElevation = 8.dp) {
@@ -47,14 +49,14 @@ fun EnlightenmentScreen(
                         onClick = onCancel,
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text("Abbrechen")
+                        Text(stringResource(DesignR.string.common_cancel))
                     }
                     Button(
                         onClick = onContinue,
                         enabled = isAtBottom,
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text("Weiter")
+                        Text(stringResource(DesignR.string.common_continue))
                     }
                 }
             }

@@ -5,10 +5,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import ch.circadia.tracker.core.domain.DeleteAllDataUseCase
-import kotlinx.coroutines.launch
+import ch.circadia.tracker.core.designsystem.R as DesignR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -20,8 +19,8 @@ fun SettingsScreen(
     if (showConfirmDialog) {
         AlertDialog(
             onDismissRequest = { showConfirmDialog = false },
-            title = { Text("Alle Daten löschen?") },
-            text = { Text("Dieser Vorgang kann nicht rückgängig gemacht werden. Alle Personen und Ereignisse werden unwiderruflich gelöscht.") },
+            title = { Text(stringResource(DesignR.string.settings_delete_all_title)) },
+            text = { Text(stringResource(DesignR.string.settings_delete_all_desc)) },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -30,12 +29,12 @@ fun SettingsScreen(
                     },
                     colors = ButtonDefaults.textButtonColors(contentColor = Color.Red)
                 ) {
-                    Text("Löschen")
+                    Text(stringResource(DesignR.string.common_delete))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showConfirmDialog = false }) {
-                    Text("Abbrechen")
+                    Text(stringResource(DesignR.string.common_cancel))
                 }
             }
         )
@@ -43,7 +42,7 @@ fun SettingsScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Einstellungen") })
+            TopAppBar(title = { Text(stringResource(DesignR.string.settings_title)) })
         }
     ) { padding ->
         Column(
@@ -57,7 +56,7 @@ fun SettingsScreen(
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
             ) {
-                Text("Alle meine Daten löschen", color = Color.White)
+                Text(stringResource(DesignR.string.settings_delete_all_button), color = Color.White)
             }
         }
     }

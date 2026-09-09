@@ -1,8 +1,12 @@
 package ch.circadia.tracker.core.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 @JvmInline
 value class PersonId(val value: String)
 
+@Serializable
 data class Person(
     val id: PersonId,
     val displayName: String,
@@ -12,10 +16,13 @@ data class Person(
     val archivedAtUtcMillis: Long? = null,
 )
 
+@Serializable
 enum class SleepState { AWAKE, ASLEEP }
 
+@Serializable
 enum class EventSource { WIDGET, APP, CORRECTION, IMPORT }
 
+@Serializable
 data class StateEvent(
     val id: String,
     val personId: PersonId,
@@ -29,6 +36,7 @@ data class StateEvent(
     val note: String? = null,
 )
 
+@Serializable
 data class Interval(
     val personId: PersonId,
     val state: SleepState,
@@ -40,16 +48,19 @@ data class Interval(
     val startEventId: String
 )
 
+@Serializable
 enum class EntitlementSource { FREE, SUBSCRIPTION, RESEARCH }
 
+@Serializable
 data class Entitlement(
     val source: EntitlementSource,
     val validUntilUtcMillis: Long?,
 )
 
+@Serializable
 data class DailyMetrics(
     val personId: PersonId,
-    val date: java.time.LocalDate,
+    val date: String, // Use String for simplicity in serialization
     val totalSleepMillis: Long,
     val sleepEpisodes: Int,
     val maxAwakeMillis: Long,

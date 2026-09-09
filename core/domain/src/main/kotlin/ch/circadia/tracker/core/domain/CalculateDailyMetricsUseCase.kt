@@ -9,7 +9,7 @@ class CalculateDailyMetricsUseCase {
         if (intervals.isEmpty()) return null
         
         val personId = intervals.first().personId
-        val date = Instant.ofEpochMilli(bucketStart).atZone(ZoneId.systemDefault()).toLocalDate()
+        val date = Instant.ofEpochMilli(bucketStart).atZone(ZoneId.systemDefault()).toLocalDate().toString()
         
         val sleepIntervals = intervals.filter { 
             it.state == SleepState.ASLEEP && it.startUtcMillis < bucketEnd && it.endUtcMillis > bucketStart

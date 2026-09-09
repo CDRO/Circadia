@@ -40,6 +40,7 @@ dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":feature:persons"))
     implementation(project(":feature:timeline"))
+    implementation(project(":feature:export"))
     implementation(project(":widget"))
 
     implementation(libs.androidx.appcompat)

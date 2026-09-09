@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.Timeline
 import androidx.compose.material3.*
@@ -18,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import ch.circadia.tracker.core.designsystem.CircadiaTheme
+import ch.circadia.tracker.feature.export.ExportScreen
 import ch.circadia.tracker.feature.persons.PersonsScreen
 import ch.circadia.tracker.feature.timeline.TimelineScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +33,8 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val screens = listOf(
                     Screen.Timeline,
-                    Screen.Persons
+                    Screen.Persons,
+                    Screen.Export
                 )
 
                 Scaffold(
@@ -65,6 +68,7 @@ class MainActivity : ComponentActivity() {
                         ) {
                             composable(Screen.Timeline.route) { TimelineScreen() }
                             composable(Screen.Persons.route) { PersonsScreen() }
+                            composable(Screen.Export.route) { ExportScreen() }
                         }
                     }
                 }
@@ -76,4 +80,5 @@ class MainActivity : ComponentActivity() {
 sealed class Screen(val route: String, val label: String, val icon: ImageVector) {
     data object Timeline : Screen("timeline", "Auswertung", Icons.Default.Timeline)
     data object Persons : Screen("persons", "Personen", Icons.Default.People)
+    data object Export : Screen("export", "Export", Icons.Default.Download)
 }

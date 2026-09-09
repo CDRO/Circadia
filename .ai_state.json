@@ -3,17 +3,17 @@
   "project": "circadia",
   "specFile": "docs/artifacts/BUILD_PLAN.md",
   "backlogFile": "docs/artifacts/TASKS.md",
-  "updatedAt": "2026-09-07T18:55:00Z",
+  "updatedAt": "2026-09-09T11:45:00Z",
   "updatedBy": "gemini-coding-agent",
   "currentMilestone": "M6",
-  "currentTask": "T-601",
+  "currentTask": "T-606",
   "github": {
-    "milestoneNumber": 5,
-    "milestoneTitle": "M5 - Auswertung",
-    "issueNumber": 9,
-    "prNumber": 10,
-    "branch": "milestone/M5-auswertung",
-    "artifactsDir": "docs/artifacts/milestones/M5-auswertung/"
+    "milestoneNumber": 6,
+    "milestoneTitle": "M6 - Export",
+    "issueNumber": 11,
+    "prNumber": 12,
+    "branch": "milestone/M6-export",
+    "artifactsDir": "docs/artifacts/milestones/M6-export/"
   },
   "milestones": {
     "M0": {
@@ -53,14 +53,14 @@
       "acceptanceVerified": true
     },
     "M6": {
-      "status": "in_progress",
-      "startedAt": "2026-09-07T19:00:00Z",
-      "completedAt": null,
-      "acceptanceVerified": false
+      "status": "completed",
+      "startedAt": "2026-09-09T11:00:00Z",
+      "completedAt": "2026-09-09T11:45:00Z",
+      "acceptanceVerified": true
     },
     "M7": {
-      "status": "pending",
-      "startedAt": null,
+      "status": "in_progress",
+      "startedAt": "2026-09-09T11:45:00Z",
       "completedAt": null,
       "acceptanceVerified": false
     },
@@ -92,21 +92,15 @@
     }
   },
   "tasks": {
-    "T-501": { "status": "completed", "completedAt": "2026-09-07T17:15:00Z" },
-    "T-502": { "status": "completed", "completedAt": "2026-09-07T17:35:00Z" },
-    "T-503": { "status": "completed", "completedAt": "2026-09-07T17:45:00Z" },
-    "T-504": { "status": "completed", "completedAt": "2026-09-07T17:55:00Z" },
-    "T-505": { "status": "completed", "completedAt": "2026-09-07T18:05:00Z" },
-    "T-506": { "status": "completed", "completedAt": "2026-09-07T18:15:00Z" },
-    "T-507": { "status": "completed", "completedAt": "2026-09-07T18:25:00Z" },
-    "T-508": { "status": "completed", "completedAt": "2026-09-07T18:35:00Z" },
-    "T-509": { "status": "completed", "completedAt": "2026-09-07T18:45:00Z" },
-    "T-510": { "status": "completed", "completedAt": "2026-09-07T18:50:00Z" },
-    "T-511": { "status": "completed", "completedAt": "2026-09-07T18:55:00Z" },
-    "T-601": { "status": "pending" }
+    "T-601": { "status": "completed", "completedAt": "2026-09-09T11:15:00Z", "commit": "feat(export): implement CSV export for raw events [T-601]" },
+    "T-602": { "status": "completed", "completedAt": "2026-09-09T11:20:00Z", "commit": "feat(export): implement CSV export for intervals [T-602]" },
+    "T-603": { "status": "completed", "completedAt": "2026-09-09T11:30:00Z", "commit": "feat(export): implement JSON export [T-603]" },
+    "T-604": { "status": "completed", "completedAt": "2026-09-09T11:35:00Z", "commit": "feat(export): implement ExportScreen with SAF [T-604]" },
+    "T-605": { "status": "completed", "completedAt": "2026-09-09T11:40:00Z", "commit": "feat(export): implement JSON import [T-605]" },
+    "T-606": { "status": "completed", "completedAt": "2026-09-09T11:45:00Z", "commit": "test(export): verify CSV and JSON logic [T-606]" }
   },
   "verification": {
-    "lastRunAt": "2026-09-07T18:55:00Z",
+    "lastRunAt": "2026-09-09T11:44:00Z",
     "command": ".\\gradlew.bat ktlintCheck detekt lint testDebugUnitTest",
     "allPassed": true,
     "results": {
@@ -123,7 +117,10 @@
     "1": { "status": "passing" }, "2": { "status": "passing" }, "3": { "status": "passing" }, "4": { "status": "passing" }, "5": { "status": "passing" },
     "6": { "status": "passing" }, "7": { "status": "passing" }, "8": { "status": "passing" }, "9": { "status": "passing" }, "10": { "status": "passing" },
     "11": { "status": "passing" }, "12": { "status": "passing" }, "13": { "status": "passing" }, "14": { "status": "passing" }, "15": { "status": "passing" },
-    "16": { "status": "passing" }, "17": { "status": "passing" }, "18": { "status": "passing" }, "19": { "status": "passing" }, "20": { "status": "passing" }
+    "16": { "status": "passing" }, "17": { "status": "passing" }, "18": { "status": "passing" }, "19": { "status": "passing" }, "20": { "status": "passing" },
+    "26": { "status": "passing", "testName": "CSV mit Sonderzeichen korrekt maskiert", "file": "core/domain/src/test/.../CsvExportTest.kt" },
+    "27": { "status": "passing", "testName": "Export bei 0 Events liefert Header", "file": "core/domain/src/test/.../CsvExportTest.kt" },
+    "28": { "status": "passing", "testName": "Verlustfreier JSON-Roundtrip (Export -> Import)", "file": "core/domain/src/test/.../JsonExportTest.kt" }
   },
   "featureFlags": {
     "FEATURE_RESEARCH_MODE": {
@@ -144,12 +141,12 @@
     }
   ],
   "openQuestions": [
-    { "id": "Q1", "question": "Wer ist die verantwortliche Stelle fuer die Forschungsdaten, und existiert ein Ethikvotum?", "blocks": ["M11"], "status": "open" },
+    { "id": "Q1", "question": "Wer ist die verantwortliche Stelle fuer die Forschungsdaten, and existiert ein Ethikvotum?", "blocks": ["M11"], "status": "open" },
     { "id": "Q2", "question": "Wohin gehen die Forschungsdaten technisch (Endpunkt, Betreiber, Standort)?", "blocks": ["M11"], "status": "open" },
-    { "id": "Q3", "question": "Wer verfasst und prueft Datenschutzerklaerung und Einwilligungstext?", "blocks": ["M11"], "status": "open" },
+    { "id": "Q3", "question": "Wer verfasst and prueft Datenschutzerklaerung und Einwilligungstext?", "blocks": ["M11"], "status": "open" },
     { "id": "Q4", "question": "Play-Entwicklerkonto vorhanden, Abo-Produkt circadia_pro angelegt?", "blocks": ["T-702"], "status": "open" },
-    { "id": "Q5", "question": "Finaler App-Name und Paket-ID?", "status": "answered", "answer": "ch.circadia.tracker", "answeredAt": "2026-09-01T07:30:00Z" },
-    { "id": "Q6", "question": "Umfang und Fragen des Forschungsfragebogens?", "blocks": ["M11"], "status": "open" },
+    { "id": "Q5", "question": "Finaler App-Name and Paket-ID?", "status": "answered", "answer": "ch.circadia.tracker", "answeredAt": "2026-09-01T07:30:00Z" },
+    { "id": "Q6", "question": "Umfang and Fragen des Forschungsfragebogens?", "blocks": ["M11"], "status": "open" },
     { "id": "Q7", "question": "Tagesgrenze einstellbar oder fest bei 18:00?", "blocks": ["T-108"], "status": "open" }
   ],
   "constraints": [
@@ -167,15 +164,15 @@
   ],
   "sessionLog": [
     {
-      "at": "2026-09-07T14:15:00Z",
-      "tasksCompleted": [ "T-401", "T-402", "T-403", "T-404", "T-405", "T-406", "T-407", "T-408", "T-409" ],
-      "summary": "M4 abgeschlossen. WheelPickerActivity mit Compose Rädern und HELD-Modus im Widget implementiert.",
-      "problems": ""
-    },
-    {
       "at": "2026-09-07T18:55:00Z",
       "tasksCompleted": [ "T-501", "T-502", "T-503", "T-504", "T-505", "T-506", "T-507", "T-508", "T-509", "T-510", "T-511" ],
       "summary": "M5 abgeschlossen. In-App-Auswertung mit Aktogramm (Single/Double Plot, Overlay/Side-by-side) implementiert. Korrektur-Workflow und Kennzahlen berechnet.",
+      "problems": ""
+    },
+    {
+      "at": "2026-09-09T11:45:00Z",
+      "tasksCompleted": [ "T-601", "T-602", "T-603", "T-604", "T-605", "T-606" ],
+      "summary": "M6 abgeschlossen. Export-Funktionalität implementiert. CSV-Export für Events und Intervalle, JSON-Backup (Export/Import) via SAF integriert.",
       "problems": ""
     }
   ],
